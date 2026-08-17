@@ -1,0 +1,9 @@
+Group:Switch DeviceStatuses
+
+Number  Item1Sensor1 (DeviceStatuses) { expire="10m" }
+Contact Item1Sensor2 (DeviceStatuses) { expire="10m" }
+Switch  Item1Sensor3 (DeviceStatuses) { expire="10m" }
+
+Number  Item2Sensor1 (DeviceStatuses) { expire="6m" }
+Contact Item2Sensor2 (DeviceStatuses) { expire="6m" }
+Switch  Item2Sensor3 (DeviceStatuses) { expire="6m" }

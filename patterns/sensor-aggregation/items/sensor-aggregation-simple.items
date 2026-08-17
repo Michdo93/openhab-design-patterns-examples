@@ -1,0 +1,5 @@
+Group:Switch:AND(OFF,ON) gPresent "Presence [%s]"
+
+Switch Sensor1 (gPresent)
+Switch Sensor2 (gPresent)
+Switch Sensor3 (gPresent)

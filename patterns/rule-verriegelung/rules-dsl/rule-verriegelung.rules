@@ -1,0 +1,12 @@
+var DateTime until = null
+
+rule "Latched Rule"
+when
+    Item MyItem received update
+then
+    if(until !== null && until.isAfter(now)) return // Skip event if timer exists
+
+    until = now.plusDays(1)
+
+    // Regelcode ausfuehren
+end

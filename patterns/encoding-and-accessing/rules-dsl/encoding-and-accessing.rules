@@ -1,0 +1,20 @@
+val Map<String, Number> presentTargets = newHashMap
+val Map<String, Number> awayTargets = newHashMap
+
+rule "Werte initialisieren"
+when
+    System started
+then
+    presentTargets.put("Room1_Thermostat", 21)
+    presentTargets.put("Room2_Thermostat", 22)
+    awayTargets.put("Room1_Thermostat", 17)
+    awayTargets.put("Room2_Thermostat", 18)
+end
+
+rule "Zieltemperaturen anwenden"
+when
+    Item vPresent changed
+then
+    val targets = if(vPresent.state == ON) presentTargets else awayTargets
+    targets.forEach[ name, temp | sendCommand(name, temp.toString) ]
+end

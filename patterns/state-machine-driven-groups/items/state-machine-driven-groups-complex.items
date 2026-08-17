@@ -1,0 +1,17 @@
+Group:Switch:OR(ON, OFF) gLights
+Group gSettings
+
+Switch aFrontLamp "Front Room Lamp" (gLights)
+Switch aFrontLamp_MORNING (gSettings)
+Switch aFrontLamp_DAY (gSettings)
+// ... weitere Tageszeiten analog
+
+Dimmer aFamilyLamp "Family Room Lamp" (gLights)
+Dimmer aFamilyLamp_MORNING (gSettings)
+Dimmer aFamilyLamp_DAY (gSettings)
+// ... weitere Tageszeiten analog
+
+Color aPorchLight "Front Porch" (gLights)
+Color aPorchLight_MORNING (gSettings)
+Color aPorchLight_DAY (gSettings)
+// ... weitere Tageszeiten analog

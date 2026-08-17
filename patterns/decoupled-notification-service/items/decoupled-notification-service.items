@@ -1,0 +1,5 @@
+String VT_Notify_Info
+String VT_Notify_Warn
+String VT_Notify_Alert
+
+Switch SomeCondition

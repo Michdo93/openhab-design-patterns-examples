@@ -1,0 +1,11 @@
+rule "GLSM - Garage Door Up Event Handler"
+when
+    Item LeftGarageDoor changed to OPEN or
+    Item RightGarageDoor changed to OPEN
+then
+    val afterSunset = Sun_Set.state !== NULL && (Sun_Set.state as DateTimeType).zonedDateTime.isBefore(now)
+    if (afterSunset && (GLSM.state == GLSM_OFF ||
+        GLSM.state == GLSM_TIMED_ON || GLSM.state == GLSM_TIMED_BLINK)) {
+        GLSM.postUpdate(GLSM_TIMED_ON)
+    }
+end

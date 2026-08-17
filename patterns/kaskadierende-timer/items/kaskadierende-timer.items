@@ -1,0 +1,16 @@
+String Irrigation_Curr "Die aktuell aktive Zone ist [%s]"
+Switch Irrigation_Auto "Automatische Bewaesserung ist [%s]"
+Switch Irrigation_Manual "Bewaesserungsstatus [%s]"
+
+Group:Switch:OR(ON,OFF) gIrrigation "Bewaesserung ist aktuell [%s]"
+Group:Number:SUM gIrrigation_Times "Gesamtdauer der Bewaesserung [%d Minuten]"
+
+Switch Irrigation_Zone_1      (gIrrigation)
+Number Irrigation_Zone_1_Time (gIrrigation_Times)
+
+Switch Irrigation_Zone_2      (gIrrigation)
+Number Irrigation_Zone_2_Time (gIrrigation_Times)
+
+Switch Irrigation_Zone_3      (gIrrigation)
+Number Irrigation_Zone_3_Time (gIrrigation_Times)
+// ... weitere Zonen nach Bedarf

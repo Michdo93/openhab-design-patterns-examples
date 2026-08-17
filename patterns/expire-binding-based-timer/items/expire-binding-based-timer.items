@@ -1,0 +1,2 @@
+// Item mit Expire Binding: nach 5 Minuten automatisch OFF
+Switch MyTimer { expire="5m,command=OFF" }

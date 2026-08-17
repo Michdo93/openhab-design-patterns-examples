@@ -1,0 +1,6 @@
+rule "Expire-Timer neu starten"
+when
+    System started
+then
+    gResetExpire.members.forEach[ timer | timer.sendCommand(timer.state) ]
+end

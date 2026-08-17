@@ -1,0 +1,8 @@
+Switch GarageLightsProxy "Garage Lights Proxy"
+Switch GarageLights      "Garage Lights"
+       { zwave="15:command=SWITCH_BINARY,refresh_interval=60" }
+
+Number GLSM "Garage Lights State Machine State [%d]"
+
+Contact LeftGarageDoor  "Left Garage Door [%s]"
+Contact RightGarageDoor "Right Garage Door [%s]"

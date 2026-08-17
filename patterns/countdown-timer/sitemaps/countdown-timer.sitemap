@@ -1,0 +1,10 @@
+sitemap countdown_timer label="Countdown-Demo" {
+    Frame label="Countdown-Demo" {
+        Text   item=myCounter
+        Text   item=testLamp
+        Switch item=test3
+        Switch item=test6
+        Switch item=test2
+        Switch item=testabort
+    }
+}

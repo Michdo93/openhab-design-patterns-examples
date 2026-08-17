@@ -1,0 +1,2 @@
+var name = transform("MAP", "admin.map", MyItem.name)
+if(name == "") name = MyItem.name

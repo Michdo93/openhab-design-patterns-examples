@@ -1,0 +1,17 @@
+// Anzahl der Sensoren die ON melden
+Group:Number:SUM gPresent
+
+Switch vPresent "Presence [MAP(en.map):%s]" <presence>
+Switch tPresent { expire="5m,command=OFF" }
+Switch aPresenceOverride "Override Presence Detection" <presence> (gPresent)
+
+Group:Switch:AND(OFF,ON) gPersonOnePresent "Person One is Present [%s]" <present>
+Group:Switch:AND(OFF,ON) gPersonTwoPresent "Person Two is Present [%s]" <present>
+
+Switch PersonOneSensorOne (gPresent, gPersonOnePresent)
+Switch PersonOneSensorTwo (gPresent, gPersonOnePresent)
+Switch PersonOneSensorThree (gPresent, gPersonOnePresent)
+
+Switch PersonTwoSensorOne (gPresent, gPersonTwoPresent)
+Switch PersonTwoSensorTwo (gPresent, gPersonTwoPresent)
+Switch PersonTwoSensorThree (gPresent, gPersonTwoPresent)

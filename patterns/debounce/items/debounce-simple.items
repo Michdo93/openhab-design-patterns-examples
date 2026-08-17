@@ -1,0 +1,4 @@
+// Rohsensor
+Switch Person1PresenceSensor
+// Proxy fuer die entprellte Information
+Switch Person1Presence

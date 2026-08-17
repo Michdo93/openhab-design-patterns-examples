@@ -1,0 +1,67 @@
+import java.util.LinkedHashMap
+import java.util.Map
+import java.util.regex.Pattern
+import java.util.regex.Matcher
+import java.time.Duration
+
+val Map<String, Timer> timers = new LinkedHashMap()
+
+// Relative Zeitangaben (+1h5m30s)
+val Pattern timeOffset = Pattern.compile("^(?i)\\+((?:\\d+[hms])+)->(.*)")
+
+// Absolute Zeitangaben (ISO8601)
+val Pattern timeSpecific = Pattern.compile("^(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})->(.*)")
+
+rule "Timer setzen"
+when
+    Member of gDeferredAction changed
+then
+    if (triggeringItem instanceof StringItem && triggeringItem.state.toString != "") {
+        val String target = triggeringItem.name.replaceAll("(?i)_Timer$", "")
+        val targetItem = itemRegistry.getItem(target)
+
+        var ZonedDateTime triggerTime
+        var Matcher matcher
+        matcher = timeOffset.matcher(triggeringItem.state.toString)
+        if (matcher.matches()) {
+            triggerTime = now.plus(Duration.parse("PT" + matcher.group(1).toUpperCase()))
+        } else {
+            matcher = timeSpecific.matcher(triggeringItem.state.toString)
+            if (matcher.matches()) {
+                triggerTime = ZonedDateTime.parse(matcher.group(1) + now.getOffset().getId())
+            } else {
+                throw new RuntimeException("Ungueltiges Timerformat [" + triggeringItem.state + "]")
+            }
+        }
+        val String command = matcher.group(matcher.groupCount())
+
+        if (triggerTime.isBefore(now))
+            throw new RuntimeException("Zielzeit liegt in der Vergangenheit")
+
+        var Timer timer = timers.get(target)
+        if (timer !== null) {
+            logInfo("DeferredAction", "Bestehenden Timer abbrechen [{}]", timer)
+            timer.cancel()
+        }
+
+        timer = createTimer(triggerTime, [|
+            logInfo("DeferredAction", "Ausfuehren verzoegerter Aktion {} auf {}", command, targetItem)
+            timers.remove(target)
+            targetItem.sendCommand(command)
+        ])
+        timers.put(target, timer)
+        triggeringItem.postUpdate("")
+    }
+end
+
+rule "Timer entfernen"
+when
+    Member of gDeferredAction changed
+then
+    val timer = timers.get(triggeringItem.name)
+    if (timer !== null) {
+        logInfo("DeferredAction", "Timer fuer {} entfernen [{}]", triggeringItem.name, timer)
+        timer.cancel()
+        timers.remove(triggeringItem.name)
+    }
+end

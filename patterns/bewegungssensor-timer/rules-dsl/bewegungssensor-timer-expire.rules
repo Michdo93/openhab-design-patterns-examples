@@ -1,0 +1,6 @@
+rule "Motion sensor triggered"
+when
+    Item MotionDetector1 received update ON
+then
+    Occupancy1.sendCommand(ON)
+end

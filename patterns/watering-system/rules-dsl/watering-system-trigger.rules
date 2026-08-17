@@ -1,0 +1,6 @@
+rule "Start Zone 1 Watering"
+when
+    Item SomeCondition changed to ON
+then
+    VT_Watering_Zone1.postUpdate("START")
+end

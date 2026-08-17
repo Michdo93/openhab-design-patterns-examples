@@ -1,0 +1,7 @@
+Switch Large_Garagedoor_Opener
+Switch Small_Garagedoor_Opener
+Switch Large_Garagedoor_Opener_Linked { channel="binding:thing:largeDoor" }
+Switch Small_Garagedoor_Opener_Linked { channel="binding:thing:smallDoor" }
+Switch GarageControllerComputer
+Switch GarageControllerService
+String AlertItem

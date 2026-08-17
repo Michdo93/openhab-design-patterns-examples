@@ -1,0 +1,47 @@
+val Map<String, Map<String, Double>> SENSOR_CONFIDENCE = newHashMap(
+    "MotionSensor" -> newHashMap("tp" -> 0.9, "fp" -> 0.1),
+    "WindowSensor" -> newHashMap("tp" -> 0.8, "fp" -> 0.2),
+    "LightSensor"  -> newHashMap("tp" -> 0.7, "fp" -> 0.3)
+)
+val Double PRIOR_PRESENCE = 0.5
+
+rule "Bayesian Multi-Sensor Aggregation"
+when
+    Item MotionSensor changed or
+    Item WindowSensor changed or
+    Item LightSensor changed
+then
+    val Map<String, Boolean> states = newHashMap(
+        "MotionSensor" -> (MotionSensor.state == ON),
+        "WindowSensor" -> (WindowSensor.state == CLOSED),
+        "LightSensor"  -> ((LightSensor.state as Number) > 100)
+    )
+
+    var Double probPresence = PRIOR_PRESENCE
+    var Double probAbsence = 1 - PRIOR_PRESENCE
+
+    for (sensor : states.keySet) {
+        val tp = SENSOR_CONFIDENCE.get(sensor).get("tp")
+        val fp = SENSOR_CONFIDENCE.get(sensor).get("fp")
+        val detected = states.get(sensor)
+
+        if (detected) {
+            probPresence = probPresence * tp
+            probAbsence = probAbsence * fp
+        } else {
+            probPresence = probPresence * (1 - tp)
+            probAbsence = probAbsence * (1 - fp)
+        }
+    }
+
+    val total = probPresence + probAbsence
+    probPresence = probPresence / total
+
+    logInfo("MultiSensorBayes", "Bayes Anwesenheitswahrscheinlichkeit: " + probPresence)
+
+    if (probPresence > 0.6) {
+        logInfo("MultiSensorBayes", "Anwesenheit erkannt!")
+    } else {
+        logInfo("MultiSensorBayes", "Keine Anwesenheit.")
+    }
+end

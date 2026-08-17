@@ -1,0 +1,20 @@
+val Double PRIOR = 0.5
+val Double THRESHOLD = 0.85
+
+rule "Bayesian Sleep Sensor"
+when
+    Item myObservation1 changed or
+    Item myObservation2 changed or
+    Item myObservation3 changed or
+    Item myObservation4 changed
+then
+    var Double prob = PRIOR
+
+    if (myObservation1.state.toString == "OFF") prob = (0.99 * prob) / (0.99 * prob + 0.5 * (1 - prob))
+    if (myObservation2.state.toString == "NIGHT") prob = (0.75 * prob) / (0.75 * prob + 0.3 * (1 - prob))
+    if (myObservation3.state.toString == "OFF") prob = (0.9 * prob) / (0.9 * prob + 0.4 * (1 - prob))
+    if (myObservation4.state.toString == "ON") prob = (0.95 * prob) / (0.95 * prob + 0.5 * (1 - prob))
+
+    mySleepProbability.postUpdate(prob * 100)
+    mySleepSensor.sendCommand(if(prob >= THRESHOLD) ON else OFF)
+end

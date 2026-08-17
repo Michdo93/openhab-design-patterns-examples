@@ -1,0 +1,70 @@
+var Timer irrigationTimer = null
+
+rule "Irrigation Reset bei Systemstart"
+when
+    System started
+then
+    gIrrigation.members.filter[valve|valve.state != OFF].forEach[
+        valve| valve.sendCommand(OFF)
+    ]
+    Irrigation_Curr.postUpdate("OFF")
+end
+
+rule "Irrigation Start um 08:00"
+when
+    Time cron "0 0 8 * * ?" or
+    Item Irrigation_Manual received command ON
+then
+    if(Irrigation_Auto.state == ON || receivedCommand == ON){
+        Irrigation_Manual.postUpdate(ON)
+        logInfo("Irrigation", "Bewaesserung gestartet, Zone 1 aktiv")
+        Irrigation_Curr.sendCommand(Irrigation_Zone_1.name)
+    }
+end
+
+rule "Irrigation Cascade"
+when
+    Item Irrigation_Curr received command
+then
+    val currValve = gIrrigation.members.findFirst[
+        valve | valve.name == receivedCommand.toString
+    ]
+    val currValveNum = Integer::parseInt(currValve.name.split("_").get(2))
+    val currValveMins = gIrrigation_Times.members.findFirst[
+        t | t.name == currValve.name+"_Time"
+    ].state as Number
+
+    val nextValveNum = currValveNum + 1
+    val nextValve = gIrrigation.members.findFirst[
+        valve | valve.name == "Irrigation_Zone_" + nextValveNum
+    ]
+
+    currValve.sendCommand(ON)
+
+    irrigationTimer = createTimer(now.plusMinutes(currValveMins.intValue), [ |
+        logInfo("Irrigation", "Zone " + currValve.name + " aus")
+        currValve.sendCommand(OFF)
+
+        if(nextValve !== null) {
+            logInfo("Irrigation", "Zone " + nextValve.name + " an")
+            Irrigation_Curr.sendCommand(nextValve.name)
+        } else {
+            logInfo("Irrigation", "Bewaesserung abgeschlossen")
+            Irrigation_Manual.sendCommand(OFF)
+        }
+        irrigationTimer = null
+    ])
+end
+
+rule "Irrigation Cancel"
+when
+    Item Irrigation_Manual received command OFF
+then
+    irrigationTimer?.cancel
+    irrigationTimer = null
+
+    gIrrigation.members.filter[valve | valve.state != OFF].forEach[
+        valve | valve.sendCommand(OFF)
+    ]
+    Irrigation_Curr.postUpdate("OFF")
+end

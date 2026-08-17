@@ -1,0 +1,12 @@
+rule "Set lights based on Time of Day"
+when
+    Item vTimeOfDay changed
+then
+    gLights_WEATHER_OVERRIDE.postUpdate(OFF)
+
+    val GroupItem offItems = gLights_OFF.members.filter[ g | g.name == "gLights_OFF_" + vTimeOfDay.state.toString ].head as GroupItem
+    offItems.members.filter[ l | l.state != OFF ].forEach[ SwitchItem l | l.sendCommand(OFF) ]
+
+    val GroupItem onItems = gLights_ON.members.filter[ g | g.name == "gLights_ON_" + vTimeOfDay.state.toString ].head as GroupItem
+    onItems.members.filter[ l | l.state != ON ].forEach[ SwitchItem l | l.sendCommand(ON) ]
+end

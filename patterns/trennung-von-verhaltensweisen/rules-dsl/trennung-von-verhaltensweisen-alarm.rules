@@ -1,0 +1,11 @@
+rule "Send message"
+when
+    Item Notification_Proxy_Info received command or
+    Item Notification_Proxy_Alert received command
+then
+    if (triggeringItem.name == "Notification_Proxy_Info") {
+        // Info-Benachrichtigung senden
+    } else {
+        // Alarm-Benachrichtigung senden
+    }
+end

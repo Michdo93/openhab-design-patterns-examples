@@ -1,0 +1,5 @@
+Group WirelessDevices
+Switch WirelessDevice_xxxxx_1 (WirelessDevices)
+Switch WirelessDevice_xxxxx_2 (WirelessDevices)
+Switch Outlet_A
+String WirelessController

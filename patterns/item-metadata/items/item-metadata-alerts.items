@@ -1,0 +1,9 @@
+Group:Switch:AND(ON, OFF) gSensorStatus "Sensor's Status [MAP(admin.map):%s]" <network>
+
+Switch vNetwork_cerberos "cerberos Network [MAP(admin.map):%s]"
+    <network> (gSensorStatus, gResetExpire)
+    { channel="network:servicedevice:cerberos:online", expire="2m", name="cerberos" }
+
+Switch vCerberos_SensorReporter_Online "Cerberos sensorReporter [MAP(admin.map):%s]"
+    <network> (gSensorStatus, gResetExpire, sensorReporters)
+    { expire="2m,command=OFF", name="cerberos sensorReporter" }

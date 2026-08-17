@@ -1,0 +1,22 @@
+rule "Example rule"
+when
+    // Trigger der Beispielregel
+then
+    isRunningExampleRule.sendCommand(ON)
+
+    // Teil 1
+    if (isRunningExampleRule.state == ON) {
+        // Teil 1 der Regel
+    } else {
+        // Aenderungen rueckgaengig machen
+    }
+
+    // Teil 2
+    if (isRunningExampleRule.state == ON) {
+        // Teil 2 der Regel
+    } else {
+        // Aenderungen rueckgaengig machen
+    }
+
+    isRunningExampleRule.sendCommand(OFF)
+end

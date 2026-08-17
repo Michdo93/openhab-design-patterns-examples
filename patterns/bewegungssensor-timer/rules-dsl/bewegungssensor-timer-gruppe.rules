@@ -1,0 +1,18 @@
+val Map<String, Timer> timers = newHashMap
+
+rule "A Motion Detector triggered"
+when
+    Member of gMotionDetectors received command ON
+then
+    val timeoutMinutes = 5
+
+    if(timers.get(triggeringItem.name) === null || timers.get(triggeringItem.name).hasTerminated()){
+        timers.put(triggeringItem.name, createTimer(now.plusMinutes(timeoutMinutes), [|
+            triggeringItem.sendCommand(OFF)
+            timers.put(triggeringItem.name, null)
+        ]))
+    }
+    else {
+        timers.get(triggeringItem.name).reschedule(now.plusMinutes(timeoutMinutes))
+    }
+end

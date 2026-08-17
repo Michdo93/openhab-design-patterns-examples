@@ -1,0 +1,15 @@
+rule "ProxySwitch received command"
+when
+    Item ProxySwitch received command
+then
+    if(BoundSwitch.state != receivedCommand)
+        BoundSwitch.sendCommand(receivedCommand)
+end
+
+rule "BoundSwitchUpdates received update"
+when
+    Item BoundSwitchUpdates received update
+then
+    if(ProxySwitch.state != BoundSwitchUpdates.state)
+        ProxySwitch.postUpdate(BoundSwitchUpdates.state)
+end

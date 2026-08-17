@@ -1,0 +1,11 @@
+rule "Button gedrueckt (mit Fallback)"
+when
+    Item ButtonState changed from OFF to ON
+then
+    pressStart = now
+    createTimer(now.plusSeconds(5), [ |
+        if (ButtonState.state == ON) {
+            ButtonState.postUpdate(OFF)
+        }
+    ])
+end

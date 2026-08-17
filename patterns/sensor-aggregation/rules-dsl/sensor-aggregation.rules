@@ -1,0 +1,36 @@
+rule "Reset vPresent to OFF on startup"
+when
+    System started
+then
+    vPresent.sendCommand(OFF)
+    gPresent.members.forEach[ SwitchItem s | s.sendCommand(OFF)]
+end
+
+rule "A presence sensor updated"
+when
+    Item gPresent changed
+then
+    logDebug("presence", "gPresent changed to " + gPresent.state.toString)
+    if(gPresent.state > 0 && (vPresent.state != ON || tPresent.state == ON)) {
+        logDebug("presence", "Someone came home")
+        if(tPresent.state != OFF) tPresent.postUpdate(OFF)
+        if(vPresent.state != ON)  vPresent.sendCommand(ON)
+    }
+    else if(gPresent.state == 0 && vPresent.state != OFF && tPresent.state != ON) {
+        logDebug("presence", "Everyone is away, setting timer")
+        tPresent.sendCommand(ON)
+    }
+end
+
+rule "Present timer expired, no one is home"
+when
+    Item tPresent received command OFF
+then
+    if(gPresent.state == 0) {
+        logInfo("presence", "Everyone is away, setting house to away")
+        vPresent.sendCommand(OFF)
+    }
+    else {
+        logWarn("presence", "Presence Timer expired but gPresent is " + gPresent.state.toString)
+    }
+end

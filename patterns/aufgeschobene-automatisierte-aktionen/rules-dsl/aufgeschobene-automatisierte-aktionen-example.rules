@@ -1,0 +1,6 @@
+rule "Rollladen nach Sonnenaufgang oeffnen"
+when
+    Item DayNight changed from NIGHT to DAY
+then
+    LoungeBlind_Timer.sendCommand("+15m->UP")
+end

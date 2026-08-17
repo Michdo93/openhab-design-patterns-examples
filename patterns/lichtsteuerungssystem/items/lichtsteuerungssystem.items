@@ -1,0 +1,9 @@
+Group gLights
+Switch Light1 (gLights)
+Switch Light2 (gLights)
+Number Light1_Dimmer
+Number Light2_Dimmer
+Switch MotionSensor1
+Switch MotionSensor2
+Number PresetDimLevel
+Switch UpdateLightLevels

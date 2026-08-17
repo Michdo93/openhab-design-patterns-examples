@@ -1,0 +1,28 @@
+var Timer dimTimer = null
+var Boolean continueDimming = true
+
+rule "Start Dimming"
+when
+    Item StartDimTrigger received command ON
+then
+    continueDimming = true
+
+    dimTimer = createTimer(now, [ |
+        var currLevel = (DimLamp.state as Number).intValue
+
+        if (currLevel >= DimTarget.state as Number || !continueDimming) {
+            logInfo("CancelActivity", "Dimmen beendet")
+            dimTimer = null
+        } else {
+            DimLamp.sendCommand(currLevel + 1)
+            dimTimer.reschedule(now.plusSeconds(1))
+        }
+    ])
+end
+
+rule "Cancel Dimming"
+when
+    Item CancelDimTrigger received command ON
+then
+    continueDimming = false
+end

@@ -1,0 +1,6 @@
+Group RuleManager "Rule Manager"
+
+Switch exampleRule "Enable/Disable example rule" (RuleManager)
+Switch isRunningExampleRule "Is example rule running?" (RuleManager)
+Switch secondExampleRule "Enable/Disable second example rule" (RuleManager)
+Switch isRunningSecondExampleRule "Is second example rule running?" (RuleManager)

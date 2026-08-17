@@ -1,0 +1,7 @@
+rule "Set lights based on Time of Day"
+when
+    Item vTimeOfDay changed
+then
+    sendCommand("gLights_OFF_" + vTimeOfDay.state.toString, "OFF")
+    sendCommand("gLights_ON_"  + vTimeOfDay.state.toString, "ON")
+end

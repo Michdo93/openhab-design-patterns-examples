@@ -1,0 +1,44 @@
+import java.time.LocalTime
+
+val week = newArrayList(
+    newArrayList("MORNING",   "07:05", "12:00"),
+    newArrayList("AFTERNOON", "12:00", "19:00"),
+    newArrayList("EVENING",   "19:00", "23:00"),
+    newArrayList("NIGHT",     "23:00", "23:59")
+)
+val saturday = newArrayList(
+    newArrayList("MORNING",   "08:00", "12:00"),
+    newArrayList("AFTERNOON", "12:00", "19:00"),
+    newArrayList("EVENING",   "19:00", "23:30"),
+    newArrayList("NIGHT",     "23:30", "23:59")
+)
+val sunday = newArrayList(
+    newArrayList("MORNING",   "08:30", "12:00"),
+    newArrayList("AFTERNOON", "12:00", "18:00"),
+    newArrayList("EVENING",   "18:00", "22:30"),
+    newArrayList("NIGHT",     "22:30", "23:59")
+)
+
+rule "Set vTimeOfDay"
+when
+    System started or
+    Time cron "0 * * * * ?"
+then
+    val nowTime = LocalTime.now
+    val weekday = now.dayOfWeek.value // 1=Montag ... 7=Sonntag
+    val table = if (weekday == 7) sunday else if (weekday == 6) saturday else week
+
+    var curr = "UNKNOWN"
+    for (row : table) {
+        val start = LocalTime.parse(row.get(1))
+        val end = LocalTime.parse(row.get(2))
+        if (!nowTime.isBefore(start) && nowTime.isBefore(end)) {
+            curr = row.get(0)
+        }
+    }
+
+    if (curr != vTimeOfDay.state.toString) {
+        vTimeOfDay.sendCommand(curr)
+        logInfo("TimeOfDay", "vTimeOfDay -> " + curr)
+    }
+end

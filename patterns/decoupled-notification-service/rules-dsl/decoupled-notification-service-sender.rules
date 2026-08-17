@@ -1,0 +1,6 @@
+rule "Info Notification"
+when
+    Item SomeCondition changed to ON
+then
+    VT_Notify_Info.postUpdate("Information: Zustand geaendert")
+end

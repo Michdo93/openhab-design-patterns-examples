@@ -1,0 +1,26 @@
+rule "System Started"
+when
+    System started
+then
+    DeadMansSwitch.sendCommand("STARTUP")
+end
+
+rule "Rule that changes a gWatchItem"
+when
+    // Trigger
+then
+    DeadMansSwitch.sendCommand("RULE")
+    Thread::sleep(50)
+    // Aktionen ausfuehren
+    Thread::sleep(200)
+    DeadMansSwitch.sendCommand("MANUAL")
+end
+
+rule "Is Manually Triggered?"
+when
+    Member of gWatchItems received update
+then
+    if(DeadMansSwitch.state.toString == "MANUAL") {
+        // Element wurde manuell ausgeloest
+    }
+end

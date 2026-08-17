@@ -1,0 +1,22 @@
+var String MyColorLightCommand = "INCREASE"
+
+rule "MyColorLight_OnOff"
+when
+    Item MySwitch1UpShortPress received command ON
+then
+    val color = MyColorLight.state as HSBType
+    if (color.brightness == 0) {
+        MyColorLightCommand = "INCREASE"
+        MyColorLight.sendCommand(ON)
+    } else {
+        MyColorLightCommand = "DECREASE"
+        MyColorLight.sendCommand(OFF)
+    }
+end
+
+rule "MyColorLight_Dimmer"
+when
+    Item MySwitch1UpLongPress received command ON
+then
+    MyColorLight.sendCommand(MyColorLightCommand)
+end

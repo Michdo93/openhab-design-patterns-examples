@@ -1,0 +1,2 @@
+val statusItem = itemRegistry.getItem(triggeringItem.name + "_Status")
+statusItem.postUpdate(ON)

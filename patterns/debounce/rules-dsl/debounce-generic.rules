@@ -1,0 +1,19 @@
+val Map<String, Timer> timers = newHashMap
+
+rule "Presence detection debounce"
+when
+    Item Person1_PresenceSensors changed or
+    Item Person2_PresenceSensors changed
+then
+    timers.get(triggeringItem.name)?.cancel
+
+    val delay = if(triggeringItem.state == ON) 0 else 2
+    timers.put(triggeringItem.name, createTimer(now.plusMinutes(delay), [ |
+        val proxyName = triggeringItem.name.split("_").get(0) + "_Present"
+        val proxyItem = itemRegistry.getItem(proxyName)
+        if(proxyItem.state != triggeringItem.state) {
+            proxyItem.sendCommand(triggeringItem.state)
+        }
+        timers.put(triggeringItem.name, null)
+    ]))
+end

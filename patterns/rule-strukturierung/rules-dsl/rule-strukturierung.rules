@@ -1,0 +1,22 @@
+rule "1-2-3 Rule Structure"
+when
+    Item Foo changed or
+    Item Bar changed or
+    Item Baz changed
+then
+    // 1. Pruefen, ob Regel laufen muss
+    if(Foo.state == NULL || Bar.state == NULL || Baz.state == NULL){
+        logWarn("Test", "One of the Items is NULL")
+        return;
+    }
+
+    // 2. Berechnen
+    var onCount = 0
+    if(Foo.state == ON) onCount = onCount + 1
+    if(Bar.state == ON) onCount = onCount + 1
+    if(Baz.state == ON) onCount = onCount + 1
+    val newState = if(onCount >= 2) ON else OFF
+
+    // 3. Ausfuehren
+    Buzz.sendCommand(newState)
+end

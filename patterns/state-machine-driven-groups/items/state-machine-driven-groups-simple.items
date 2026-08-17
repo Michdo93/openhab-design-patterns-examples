@@ -1,0 +1,24 @@
+Group:Switch:OR(ON, OFF) gLights_ON_MORNING
+Group:Switch:OR(ON, OFF) gLights_OFF_MORNING
+Group:Switch:OR(ON, OFF) gLights_ON_DAY
+Group:Switch:OR(ON, OFF) gLights_OFF_DAY
+Group:Switch:OR(ON, OFF) gLights_ON_AFTERNOON
+Group:Switch:OR(ON, OFF) gLights_OFF_AFTERNOON
+Group:Switch:OR(ON, OFF) gLights_ON_EVENING
+Group:Switch:OR(ON, OFF) gLights_OFF_EVENING
+Group:Switch:OR(ON, OFF) gLights_ON_NIGHT
+Group:Switch:OR(ON, OFF) gLights_OFF_NIGHT
+
+Switch aFrontLamp   "Front Room Lamp"
+       (gLights_ON_MORNING, gLights_OFF_DAY, gLights_ON_AFTERNOON,
+        gLights_ON_EVENING, gLights_OFF_NIGHT)
+
+Switch aFamilyLamp  "Family Room Lamp"
+       (gLights_ON_MORNING, gLights_OFF_DAY, gLights_ON_AFTERNOON,
+        gLights_ON_EVENING, gLights_OFF_NIGHT)
+
+Switch aPorchLight  "Front Porch"
+       (gLights_OFF_MORNING, gLights_OFF_DAY, gLights_ON_AFTERNOON,
+        gLights_ON_EVENING, gLights_OFF_NIGHT)
+
+Switch aMBR_Lights  "Master Bedroom Lights" (gLights_ON_EVENING)

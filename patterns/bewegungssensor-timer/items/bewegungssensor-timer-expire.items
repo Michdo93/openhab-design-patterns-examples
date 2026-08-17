@@ -1,0 +1,3 @@
+// Belegungsschalter mit Expire-Binding
+Switch Occupancy1 { expire="5m,command=OFF" }
+Switch MotionDetector1 { expire="5m,command=OFF" }

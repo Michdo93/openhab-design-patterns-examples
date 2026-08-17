@@ -1,0 +1,5 @@
+Group WirelessDevices
+Switch WirelessDevice_xxxxx_1 (WirelessDevices)
+Switch WirelessDevice_xxxxx_1_Proxy // an Kanal gebunden
+Switch WirelessDevice_xxxxx_2 (WirelessDevices)
+Switch WirelessDevice_xxxxx_2_Proxy // an Kanal gebunden

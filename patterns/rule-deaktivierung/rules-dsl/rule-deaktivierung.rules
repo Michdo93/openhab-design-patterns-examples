@@ -1,0 +1,16 @@
+rule "Christmas lights"
+when
+    Item vTimeOfDay changed to EVENING or
+    Item vTimeOfDay changed to NIGHT
+then
+    if(vChristmas.state != ON) return;
+    // Lichtsteuerung
+end
+
+rule "MBR Humidifier"
+when
+    Item vMBR_Humidity changed
+then
+    if(vChristmas.state == ON) return;
+    // Luftbefeuchtersteuerung
+end

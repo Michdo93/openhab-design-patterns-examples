@@ -1,0 +1,15 @@
+rule "Warnings and alerts for temperature"
+when
+    Member of TemperatureRooms changed
+then
+    if (now.getHour >= 9 && now.getHour < 21) { // 9 bis 21 Uhr
+        TemperatureRooms.members.filter[t | (t.state as DecimalType) >= 25 && (t.state as DecimalType) < 30].forEach[r |
+            logInfo("tempRoom", "Temp warn " + r.name + ": " + r.state + " Grad C")
+            // Weitere Benachrichtigungen
+        ]
+    }
+    TemperatureRooms.members.filter[t | (t.state as DecimalType) >= 30].forEach[r |
+        logInfo("tempRoom", "Temp alert " + r.name + ": " + r.state + " Grad C")
+        // Weitere Benachrichtigungen
+    ]
+end

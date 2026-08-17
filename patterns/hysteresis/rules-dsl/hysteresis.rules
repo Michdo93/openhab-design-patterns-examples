@@ -1,0 +1,12 @@
+rule "Heizung mit Hysterese"
+when
+    Item MyTemp changed
+then
+    if(MyTemp.state < 68) {
+        MyHeater.sendCommand(ON)
+    }
+    else if(MyTemp.state >= 70) {
+        MyHeater.sendCommand(OFF)
+    }
+    // sonst: Zustand beibehalten
+end

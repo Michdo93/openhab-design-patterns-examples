@@ -1,0 +1,4 @@
+// Totmannschalter
+String DeadMansSwitch { expire="30s,state=MANUAL" }
+
+Group:Switch gWatchItems

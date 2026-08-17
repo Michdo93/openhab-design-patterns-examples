@@ -1,0 +1,23 @@
+rule "Eine Regel, die den Timer startet"
+when
+    // irgendein Trigger
+then
+    // Arbeitsschritte ausfuehren
+
+    if(MyTimer.state == ON) {
+        // Aktion, falls Timer aktiv ist
+    }
+
+    // Timer abbrechen
+    MyTimer.postUpdate(OFF)
+
+    // Timer starten
+    MyTimer.sendCommand(ON)
+end
+
+rule "MyTimer abgelaufen"
+when
+    Item MyTimer received command OFF
+then
+    // Code, der nach Ablauf ausgefuehrt werden soll
+end

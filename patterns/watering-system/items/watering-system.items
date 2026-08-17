@@ -1,0 +1,6 @@
+String VT_Watering_Zone1
+String VT_Watering_Zone2
+Number VT_Watering_Duration "Bewaesserungsdauer [%d s]"
+Number VT_Watering_Interval "Bewaesserungsintervall [%d Tage]"
+
+Switch SomeCondition

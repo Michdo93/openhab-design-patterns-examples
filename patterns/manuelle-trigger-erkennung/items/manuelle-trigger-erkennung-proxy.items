@@ -1,0 +1,5 @@
+Group:Switch LightControls
+Switch HallLight_Proxy (LightControls)
+Switch HallLight_Device (LightControls)
+Switch HallLight_UI (LightControls)
+Switch HallLight_Rules (LightControls)

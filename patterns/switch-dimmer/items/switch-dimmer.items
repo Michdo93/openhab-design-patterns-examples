@@ -1,0 +1,10 @@
+// Realer Schalter
+Switch MySwitch1 "Intelligent Switch 1" <switch> {channel="enocean:rockerSwitch:xxxxxxxx:xxxxxxxx:rockerswitchA"}
+
+// Virtuelle Items
+Switch MySwitch1Up "Switch 1 Up" <switch>
+Switch MySwitch1UpShortPress "Switch 1 Up: Short Press" <switch>
+Switch MySwitch1UpLongPress "Switch 1 Up: Long Press" <switch>
+Switch MySwitch1Down "Switch 1 Down" <switch>
+Switch MySwitch1DownShortPress "Switch 1 Down: Short Press" <switch>
+Switch MySwitch1DownLongPress "Switch 1 Down: Long Press" <switch>

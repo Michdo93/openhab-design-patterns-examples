@@ -1,0 +1,3 @@
+Group gMotionDetectors
+Switch MotionDetector1 (gMotionDetectors)
+Switch MotionDetector2 (gMotionDetectors)

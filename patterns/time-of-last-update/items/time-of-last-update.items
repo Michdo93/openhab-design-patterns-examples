@@ -1,0 +1,9 @@
+String Pumprum_BatteryLevel
+  "Pumprum [%s]"
+  <battery> (gBattery)
+  { channel="mqtt:topic:mybroker:pumprum:battery" }
+
+DateTime Pumprum_BatteryLevel_LastUpdate
+  "Pumprum [%1$tF %1$tR]"
+  <battery> (gTimestamps)
+  { channel="mqtt:topic:mybroker:pumprum:battery" [profile="timestamp-update"] }

@@ -1,0 +1,11 @@
+// Zaehler in Minuten, autoupdate deaktiviert, jede Minute -1
+Number myCounter "Minuten-Zaehler [%s]" <clock>
+    { expire="1m,command=-1", autoupdate="false" }
+
+Switch testLamp "Beispiel-Lampe [%s]" <light>
+
+// Taster zur Simulation
+Switch test6      "6 Minuten starten"    <button> { expire="2s,state=OFF" }
+Switch test3      "3 Minuten starten"    <button> { expire="2s,state=OFF" }
+Switch test2      "auf 2 Minuten setzen" <button> { expire="2s,state=OFF" }
+Switch testabort  "Countdown abbrechen"  <button> { expire="2s,state=OFF" }

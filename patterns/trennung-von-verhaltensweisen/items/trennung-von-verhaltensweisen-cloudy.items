@@ -1,0 +1,2 @@
+Switch vIsCloudy "Conditions are Cloudy [%s]"
+Number vCloudiness "Cloudiness [%d %%]"

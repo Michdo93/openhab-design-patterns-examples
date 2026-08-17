@@ -1,0 +1,17 @@
+rule "Enable example rule"
+when
+    Item exampleRule changed from OFF to ON
+then
+    executeCommandLine("/usr/bin/sshpass", "-p", "habopen",
+        "/usr/bin/ssh", "-p", "8101", "openhab@localhost",
+        "openhab:automation", "enableRule", "<uid>", "true")
+end
+
+rule "Disable example rule"
+when
+    Item exampleRule changed from ON to OFF
+then
+    executeCommandLine("/usr/bin/sshpass", "-p", "habopen",
+        "/usr/bin/ssh", "-p", "8101", "openhab@localhost",
+        "openhab:automation", "enableRule", "<uid>", "false")
+end

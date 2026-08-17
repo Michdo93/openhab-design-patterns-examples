@@ -1,0 +1,14 @@
+var Timer timer = null
+
+rule "Debounce Person1"
+when
+    Item Person1PresenceSensor changed
+then
+    timer?.cancel
+    timer = createTimer(now.plusMinutes(2), [ |
+        if(Person1Presence.state != Person1PresenceSensor.state) {
+            Person1Presence.postUpdate(Person1PresenceSensor.state)
+        }
+        timer = null
+    ])
+end

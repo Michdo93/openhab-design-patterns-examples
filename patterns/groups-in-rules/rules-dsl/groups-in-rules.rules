@@ -1,0 +1,56 @@
+rule "A Door Sensor Changed"
+when
+    Member of gDoorsSensors changed
+then
+    val door = triggeringItem
+
+    val timer = gDoorsTimers.members.findFirst[
+        t | t.name == door.name + "_Timer"
+    ] as SwitchItem
+
+    if(door.state == OPEN) timer.sendCommand(ON)
+    else timer.postUpdate(OFF)
+
+    val lastUpdate = gDoorsLast.members.findFirst[
+        dt | dt.name == door.name + "_LastUpdate"
+    ] as DateTimeItem
+    lastUpdate.postUpdate(new DateTimeType)
+
+    val StringBuilder msg = new StringBuilder
+    msg.append(door.name)
+    if(door.state == OPEN) msg.append(" was opened")
+    else msg.append(" was closed")
+
+    var alert = false
+    if(vTimeOfDay.state == "NIGHT" || vTimeOfDay.state == "BED") {
+        alert = true
+        msg.append(" at night")
+    }
+    if(vPresent.state == OFF) {
+        alert = true
+        msg.append(" and no one is home")
+    }
+
+    if(alert) aAlerts.sendCommand(msg.toString)
+    logInfo("Entry", msg.toString)
+end
+
+rule "Timer expired for a door"
+when
+    Member of gDoorsTimers received command OFF
+then
+    val doorName = triggeringItem.name.split("_").get(0)
+
+    val openDoors = gDoorsSensors.members.filter[ d | d.state == OPEN ]
+        .map[ name ].reduce[ s, n | s + ", " + n ]
+
+    var msg = doorName + " has been open for over an hour"
+    if(openDoors !== null) msg = msg + " and also open: " + openDoors
+
+    aAlerts.sendCommand(msg)
+    logInfo("Entry", msg)
+
+    if(vTimeOfDay.state == "NIGHT" || vTimeOfDay.state == "BED") {
+        triggeringItem.sendCommand(ON)
+    }
+end

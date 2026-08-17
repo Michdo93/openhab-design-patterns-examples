@@ -1,0 +1,11 @@
+rule "Motion detected"
+when
+    Item MotionSensor1 received update ON
+then
+    if (Light1.state == OFF) {
+        Light1.sendCommand(ON)
+        createTimer(now.plusMinutes(10), [ |
+            Light1.sendCommand(OFF)
+        ])
+    }
+end

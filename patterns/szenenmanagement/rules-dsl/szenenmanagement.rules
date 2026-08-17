@@ -1,0 +1,9 @@
+val String logger = "callScript"
+
+rule "call script"
+when
+    Item callScriptItem received command
+then
+    logInfo(logger, "command: " + callScriptItem.state + ".script")
+    callScript(callScriptItem.state + ".script")
+end

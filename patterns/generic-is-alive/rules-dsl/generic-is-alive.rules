@@ -1,0 +1,6 @@
+rule "A sensor stopped reporting"
+when
+    Member of DeviceStatuses changed to UNDEF
+then
+    // Meldung oder Alarm ausloesen
+end

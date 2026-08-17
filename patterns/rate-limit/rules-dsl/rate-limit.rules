@@ -1,0 +1,6 @@
+val lastAction = privateCache.get("LastAction", [ | now ])
+
+if (lastAction.isBefore(now.minusHours(24))) {
+    logInfo("RateLimit", "Rate-limited action")
+    privateCache.put("LastAction", now)
+}

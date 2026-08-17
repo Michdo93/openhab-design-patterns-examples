@@ -1,0 +1,23 @@
+var Timer ceilingTimer = null
+
+rule "Ceiling fan control"
+when
+    Item MotionSensor changed to ON
+then
+    if (ceilingTimer !== null) return
+
+    ceilingTimer = createTimer(now, [ |
+        if (vTimeOfDay.state.toString == "NIGHT") {
+            var newState = "STAY"
+            if (CurrentTemp.state > TargetTemp.state) newState = "ON"
+            else if (CurrentTemp.state < TargetTemp.state - 1) newState = "OFF"
+
+            if (newState != "STAY" && Fan.state.toString != newState)
+                Fan.sendCommand(newState)
+
+            ceilingTimer.reschedule(now.plusMillis(60000))
+        } else {
+            ceilingTimer = null
+        }
+    ])
+end

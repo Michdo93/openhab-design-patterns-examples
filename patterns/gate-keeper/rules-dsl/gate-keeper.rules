@@ -1,0 +1,36 @@
+import java.util.concurrent.ConcurrentLinkedQueue
+
+val Queue<String> commands = new ConcurrentLinkedQueue()
+var Timer timer = null
+var lastCommand = now.minusSeconds(1)
+
+rule "433MHz Controller"
+when
+    Item WirelessController received command
+then
+    commands.add(receivedCommand.toString)
+
+    if(timer === null) {
+        timer = createTimer(now, [ |
+            if(commands.peek !== null) {
+                val cmd = commands.poll
+                val results = executeCommandLine(cmd, 5000)
+                logDebug("433", results)
+                lastCommand = now
+            }
+
+            val deltaTime = Duration.between(lastCommand, now).toMillis
+            timer.reschedule(now.plusMillis(if(deltaTime < 100) 100 - deltaTime else 0))
+        ])
+    }
+end
+
+rule "Outlet A"
+when
+    Item Outlet_A received command
+then
+    if(receivedCommand == ON)
+        WirelessController.sendCommand("433-send xxxxx 1 1")
+    else
+        WirelessController.sendCommand("433-send xxxxx 1 0")
+end

@@ -1,0 +1,58 @@
+rule "Countdown-Verwaltung"
+when
+    Item myCounter received command
+then
+    var cmmd = (receivedCommand as Number).intValue
+    var count = 0
+    if (myCounter.state != NULL) {
+        count = (myCounter.state as Number).intValue
+    }
+
+    if (cmmd == -1 && count > 0) {
+        if (count == 1) {
+            testLamp.sendCommand(OFF)
+        }
+        myCounter.postUpdate(count - 1)
+
+    } else if (cmmd >= count || cmmd < -1) {
+        if (cmmd < -1) {
+            cmmd = 0 - cmmd
+        }
+        myCounter.postUpdate(cmmd)
+        if (testLamp.state != ON) {
+            testLamp.sendCommand(ON)
+        }
+
+    } else if (cmmd == 0) {
+        myCounter.postUpdate(0)
+        testLamp.sendCommand(OFF)
+    }
+end
+
+rule "6 Minuten starten"
+when
+    Item test6 received command
+then
+    myCounter.sendCommand(6)
+end
+
+rule "3 Minuten starten"
+when
+    Item test3 received command
+then
+    myCounter.sendCommand(3)
+end
+
+rule "auf 2 Minuten setzen"
+when
+    Item test2 received command
+then
+    myCounter.sendCommand(-2)
+end
+
+rule "Countdown abbrechen"
+when
+    Item testabort received command
+then
+    myCounter.sendCommand(0)
+end

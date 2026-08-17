@@ -1,0 +1,21 @@
+rule "Multi-Sensor Confidence Aggregation"
+when
+    Item MotionSensor changed or
+    Item WindowSensor changed or
+    Item LightSensor changed
+then
+    var Number motionConfidence = if(MotionSensor.state == ON) 0.7 else 0.0
+    var Number windowConfidence = if(WindowSensor.state == CLOSED) 0.5 else 0.0
+    var Number lightConfidence  = if((LightSensor.state as Number) > 100) 0.3 else 0.0
+
+    var Number aggregatedConfidence = motionConfidence + windowConfidence + lightConfidence
+
+    logInfo("MultiSensor", "Aggregierte Konfidenz: " + aggregatedConfidence)
+
+    if(aggregatedConfidence > 0.6) {
+        logInfo("MultiSensor", "Anwesenheit erkannt!")
+        // LightSwitch.sendCommand(ON)
+    } else {
+        logInfo("MultiSensor", "Keine Anwesenheit.")
+    }
+end

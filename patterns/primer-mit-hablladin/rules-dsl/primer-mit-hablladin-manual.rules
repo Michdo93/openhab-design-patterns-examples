@@ -1,0 +1,13 @@
+rule "Garage Lights Commanded On"
+when
+    Item GarageLightsProxy changed to ON
+then
+    GLSM.postUpdate(GLSM_ON)
+end
+
+rule "Garage Lights Commanded Off"
+when
+    Item GarageLightsProxy changed to OFF
+then
+    GLSM.postUpdate(GLSM_OFF)
+end

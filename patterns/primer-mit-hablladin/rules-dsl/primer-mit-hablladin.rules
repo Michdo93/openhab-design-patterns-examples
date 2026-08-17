@@ -1,0 +1,39 @@
+var Timer GLSMtimer = null
+var Lock GLSMlock = new java.util.concurrent.locks.ReentrantLock()
+
+val Number GLSM_OFF         = 0
+val Number GLSM_ON          = 1
+val Number GLSM_TIMED_ON    = 2
+val Number GLSM_TIMED_BLINK = 3
+
+rule "GLSM - Garage Lights State Machine Events Handler"
+when
+    Item GLSM received update
+then
+    GLSMlock.lock()
+    try {
+        if (GLSM.state == NULL) {
+            GarageLights.sendCommand(OFF)
+            GLSM.postUpdate(GLSM_OFF)
+        } else if (GLSM.state == GLSM_OFF) {
+            GarageLights.sendCommand(OFF)
+            if (GLSMtimer !== null) { GLSMtimer.cancel(); GLSMtimer = null }
+        } else if (GLSM.state == GLSM_ON) {
+            GarageLights.sendCommand(ON)
+            if (GLSMtimer !== null) { GLSMtimer.cancel(); GLSMtimer = null }
+        } else if (GLSM.state == GLSM_TIMED_ON) {
+            GarageLights.sendCommand(ON)
+            GLSMtimer = createTimer(now.plusMinutes(5)) [|
+                GLSM.postUpdate(GLSM_TIMED_BLINK)
+            ]
+        } else if (GLSM.state == GLSM_TIMED_BLINK) {
+            GarageLights.sendCommand(OFF)
+            GarageLights.sendCommand(ON)
+            GLSMtimer = createTimer(now.plusMinutes(1)) [|
+                GLSM.postUpdate(GLSM_OFF)
+            ]
+        }
+    } finally {
+        GLSMlock.unlock()
+    }
+end

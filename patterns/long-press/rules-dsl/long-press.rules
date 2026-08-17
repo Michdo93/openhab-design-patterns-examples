@@ -1,0 +1,28 @@
+import java.time.Duration
+
+var ZonedDateTime pressStart = null
+
+rule "Button gedrueckt"
+when
+    Item ButtonState changed from OFF to ON
+then
+    pressStart = now
+end
+
+rule "Button losgelassen"
+when
+    Item ButtonState changed from ON to OFF
+then
+    if (pressStart === null) return
+
+    val pressDuration = Duration.between(pressStart, now).toMillis
+
+    if (pressDuration < 500) {
+        // kurzer Druck
+        TargetLight.sendCommand(if(TargetLight.state == ON) OFF else ON)
+    } else {
+        // langer Druck
+        TargetLight.sendCommand(INCREASE)
+    }
+    ButtonPressTime.postUpdate(pressDuration)
+end

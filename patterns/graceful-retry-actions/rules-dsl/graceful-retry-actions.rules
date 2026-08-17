@@ -1,0 +1,46 @@
+val Map<String, Timer> retryTimers = newHashMap
+val Map<String, Integer> retryCounts = newHashMap
+
+rule "Configurable Multi-Device Retry"
+when
+    Item RetryTrigger changed to ON
+then
+    val int maxRetries = RetryMaxAttempts.state as Number
+    val int initialInterval = RetryInitialInterval.state as Number
+    val int maxInterval = RetryMaxInterval.state as Number
+    val String altAction = RetryAlternativeAction.state.toString
+
+    val devices = RetryDevices.members.map[i | i.name]
+
+    devices.forEach [ device |
+        retryCounts.put(device, 0)
+
+        val Timer t = createTimer(now, [ |
+            try {
+                if(itemRegistry.getItem(device).state != NULL) {
+                    sendCommand(device, ON)
+                    logInfo("DynamicRetryDSL", device + " command sent successfully!")
+                    retryTimers.get(device)?.cancel()
+                } else {
+                    throw new IllegalStateException("Device " + device + " is offline")
+                }
+            } catch(Throwable ex) {
+                val int count = retryCounts.get(device) + 1
+                retryCounts.put(device, count)
+                logWarn("DynamicRetryDSL", device + " attempt #" + count + " failed: " + ex.message)
+
+                if(count < maxRetries) {
+                    val int nextInterval = Math.min(initialInterval * Math.pow(2, count).intValue, maxInterval)
+                    logInfo("DynamicRetryDSL", "Next attempt for " + device + " in " + nextInterval + " seconds")
+                    retryTimers.get(device)?.reschedule(now.plusSeconds(nextInterval))
+                } else {
+                    logError("DynamicRetryDSL", device + " max retries reached!")
+                    val message = if(altAction != "") device + ": " + altAction
+                                   else device + " could not be switched ON!"
+                    sendNotification("admin@example.com", message)
+                }
+            }
+        ])
+        retryTimers.put(device, t)
+    ]
+end

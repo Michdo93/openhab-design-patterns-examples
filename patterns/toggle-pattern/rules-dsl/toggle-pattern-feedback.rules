@@ -1,0 +1,10 @@
+rule "Toggle Lampe mit Feedback"
+when
+    Item mqttSwitchIn2 received command OFF
+then
+    if (modbusSwitchOut1.state != ON)
+        modbusSwitchOut1.sendCommand(ON)
+    else
+        modbusSwitchOut1.sendCommand(OFF)
+    modbusSwitchOut1.postUpdate(modbusSwitchOut1.state)
+end

@@ -1,0 +1,31 @@
+var Timer retryTimer = null
+var int retryCount = 0
+val int MAX_RETRIES = 5
+var int retryInterval = 5 // Startintervall in Sekunden
+val int MAX_INTERVAL = 60
+
+rule "Graceful Retry LightSwitch with Backoff"
+when
+    Item SomeTrigger changed to ON
+then
+    retryCount = 0
+    retryInterval = 5
+    retryTimer = createTimer(now, [ |
+        try {
+            LightSwitch.sendCommand(ON)
+            logInfo("RetryBackoff", "Command erfolgreich gesendet!")
+            if(retryTimer !== null) retryTimer.cancel()
+        } catch(Throwable t) {
+            retryCount = retryCount + 1
+            logWarn("RetryBackoff", "Fehlversuch #" + retryCount)
+            if(retryCount < MAX_RETRIES) {
+                retryInterval = Math.min(retryInterval * 2, MAX_INTERVAL)
+                logInfo("RetryBackoff", "Naechster Versuch in " + retryInterval + " Sekunden")
+                retryTimer.reschedule(now.plusSeconds(retryInterval))
+            } else {
+                logError("RetryBackoff", "Maximale Anzahl an Versuchen erreicht!")
+                sendNotification("admin@example.com", "LightSwitch konnte nicht eingeschaltet werden")
+            }
+        }
+    ])
+end

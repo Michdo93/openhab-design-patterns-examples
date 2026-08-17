@@ -1,0 +1,4 @@
+Switch vCerberos_SensorReporter_Online "Cerberos sensorReporter [MAP(admin.map):%s]"
+    <network> (gSensorStatus, gResetExpire, sensorReporters)
+    { expire="2m,command=OFF",
+      Static="meta"[name="cerberos sensorReporter", timeout=10] }

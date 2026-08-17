@@ -1,0 +1,5 @@
+Group:Number:SUM MyGroup
+Switch Foo (MyGroup)
+Switch Bar (MyGroup)
+Switch Baz (MyGroup)
+Switch Buzz

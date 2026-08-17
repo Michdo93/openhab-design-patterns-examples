@@ -1,0 +1,12 @@
+rule "Garagentor Controller"
+when
+    Item Large_Garagedoor_Opener received command or
+    Item Small_Garagedoor_Opener received command
+then
+    if (GarageControllerComputer.state != ON || GarageControllerService.state != ON) {
+        AlertItem.sendCommand("Garagentor-Controller offline!")
+    }
+    val linkedItemName = triggeringItem.name + "_Linked"
+    val linkedItem = itemRegistry.getItem(linkedItemName)
+    linkedItem.sendCommand(receivedCommand)
+end

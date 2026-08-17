@@ -1,0 +1,21 @@
+val Map<String, Timer> wateringTimers = newHashMap
+
+rule "Watering Service"
+when
+    Item VT_Watering_Zone1 changed or
+    Item VT_Watering_Zone2 changed
+then
+    val zone = triggeringItem.name
+    val duration = VT_Watering_Duration.state as Number
+
+    if(triggeringItem.state.toString == "START") {
+        logInfo("Watering", "Starte Bewaesserung fuer Zone " + zone + " fuer " + duration + " Sekunden")
+        sendCommand(zone.replace("VT_Watering_", "") + "_Relay", ON)
+
+        wateringTimers.put(zone, createTimer(now.plusSeconds(duration.intValue), [|
+            logInfo("Watering", "Beende Bewaesserung fuer Zone " + zone)
+            sendCommand(zone.replace("VT_Watering_", "") + "_Relay", OFF)
+            wateringTimers.remove(zone)
+        ]))
+    }
+end

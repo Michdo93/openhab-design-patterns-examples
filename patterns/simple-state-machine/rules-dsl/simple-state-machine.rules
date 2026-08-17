@@ -1,0 +1,8 @@
+rule "TimeOfDay MORNING (nur Wochentage)"
+when
+    Time cron "0 0 6 * * ?"
+then
+    if (Ephemeris.isWeekday()) {
+        TimeOfDay.sendCommand("MORNING")
+    }
+end

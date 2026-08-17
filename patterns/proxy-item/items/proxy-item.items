@@ -1,0 +1,8 @@
+// kein Binding, fuer Sitemap
+Switch ProxySwitch "Schalter" <light>
+
+// sendet Befehle an das Geraet
+Switch BoundSwitch { channel="binding:thing:sendChannel" }
+
+// empfaengt Statusupdates
+Switch BoundSwitchUpdates { channel="binding:thing:receiveChannel" }

@@ -1,0 +1,3 @@
+Switch RFID_12345 "Bobs Karte" (Authorized)
+Switch RFID_67890 "Anns Karte" (Authorized)
+Switch RFID_09876 "Gastkarte"  (Unauthorized)

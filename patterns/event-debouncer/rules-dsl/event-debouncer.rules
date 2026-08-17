@@ -1,0 +1,18 @@
+var Timer debounceTimer = null
+
+rule "Debounced Motion Sensor"
+when
+    Item motionSensor changed
+then
+    if(debounceTimer === null) {
+        logInfo("Debounce", "Bewegung erkannt - Licht einschalten")
+        light.sendCommand(ON)
+
+        debounceTimer = createTimer(now.plusSeconds(2), [|
+            debounceTimer = null
+            logInfo("Debounce", "Debounce beendet - neue Events moeglich")
+        ])
+    } else {
+        logInfo("Debounce", "Event ignoriert - Timer laeuft noch")
+    }
+end

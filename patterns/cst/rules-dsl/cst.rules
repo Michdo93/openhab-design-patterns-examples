@@ -1,0 +1,16 @@
+rule "Conditional Sequence Trigger"
+when
+    Member of gCST changed
+then
+    val hour = now.getHour
+
+    if(motionSensor.state == ON && presenceSensor.state == ON && hour >= 18 && hour <= 22) {
+        logInfo("CST", "Alle Bedingungen erfuellt - starte Sequenz")
+        light.sendCommand(ON)
+        // Weitere Aktionen in definierter Reihenfolge
+    } else {
+        logInfo("CST", "Bedingungen nicht erfuellt - Sequenz zuruecksetzen")
+        light.sendCommand(OFF)
+        // optional: alle Zwischenschritte abbrechen
+    }
+end

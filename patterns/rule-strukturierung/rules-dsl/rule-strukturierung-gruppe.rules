@@ -1,0 +1,11 @@
+rule "Group Approach"
+when
+    Member of MyGroup changed
+then
+    if(MyGroup.members.filter[i | i.state == NULL].size != 0) {
+        logWarn("Test", "One of the Items is NULL")
+        return;
+    }
+    val newState = if(MyGroup.state >= 2) ON else OFF
+    Buzz.sendCommand(newState)
+end

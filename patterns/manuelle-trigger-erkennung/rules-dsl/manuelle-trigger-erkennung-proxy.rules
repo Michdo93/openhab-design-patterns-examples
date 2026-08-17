@@ -1,0 +1,19 @@
+rule "Light control received command"
+when
+    Member of LightControls received command
+then
+    val lightName = triggeringItem.name.split("_").get(0)
+    val source = triggeringItem.name.split("_").get(1)
+
+    val proxy = LightControls.members.findFirst[ l | l.name == lightName + "_Proxy" ]
+    val device = LightControls.members.findFirst[ l | l.name == lightName + "_Device" ]
+    val ui = LightControls.members.findFirst[ l | l.name == lightName + "_UI" ]
+    val rulesItem = LightControls.members.findFirst[ l | l.name == lightName + "_Rules" ]
+
+    if(source == "Proxy") return
+
+    if(proxy.state != receivedCommand) proxy.postUpdate(receivedCommand)
+    if(ui.state != receivedCommand) ui.postUpdate(receivedCommand)
+    if(rulesItem.state != receivedCommand) rulesItem.postUpdate(receivedCommand)
+    if(device.state != receivedCommand) device.sendCommand(receivedCommand)
+end

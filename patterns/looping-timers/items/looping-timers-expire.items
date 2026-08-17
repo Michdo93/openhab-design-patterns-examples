@@ -1,0 +1,1 @@
+Switch CeilingFanTimer { expire="1m,command=OFF" }

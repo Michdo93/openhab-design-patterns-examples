@@ -1,0 +1,10 @@
+rule "Adjust light brightness based on time of day"
+when
+    Time cron "0 0 18 ? * * *" // Jeden Tag um 18:00 Uhr
+then
+    if (now.getHour >= 18 && now.getHour < 22) {
+        Light1_Dimmer.sendCommand(80) // Helligkeit auf 80%
+    } else {
+        Light1_Dimmer.sendCommand(20) // Helligkeit auf 20%
+    }
+end

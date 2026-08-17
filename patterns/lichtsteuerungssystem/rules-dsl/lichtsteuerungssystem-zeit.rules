@@ -1,0 +1,7 @@
+rule "Adjust light levels based on time"
+when
+    Time cron "0 30 6 ? * * *" // Jeden Tag um 6:30 Uhr
+then
+    PresetDimLevel.postUpdate(20)
+    UpdateLightLevels.sendCommand(ON)
+end

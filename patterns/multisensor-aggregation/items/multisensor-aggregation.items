@@ -1,0 +1,4 @@
+Switch MotionSensor "Bewegungsmelder" <motion>
+Contact WindowSensor "Fenster" <contact>
+Number LightSensor "Licht" <light>
+Switch LightSwitch "Licht schalten"

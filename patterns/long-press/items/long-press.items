@@ -1,0 +1,3 @@
+Switch ButtonState      "Button Zustand [%s]"
+Switch TargetLight      "Ziellicht" <light>
+Number ButtonPressTime  "Dauer Knopfdruck [ms]"

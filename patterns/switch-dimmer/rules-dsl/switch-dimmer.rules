@@ -1,0 +1,43 @@
+import java.util.Map
+
+val Map<String, Timer> Timers = newHashMap
+val Map<String, DateTime> Timestamps = newHashMap
+
+val switchPressed = [ String id |
+    Timestamps.put(id, now)
+    sendCommand(id, "ON")
+
+    Timers.put(id, createTimer(now.plusMillis(500), [|
+        sendCommand(id + "LongPress", "ON")
+        sendCommand(id + "LongPress", "OFF")
+        if (now.isBefore(Timestamps.get(id)?.plusSeconds(5))) {
+            Timers.get(id)?.reschedule(now.plusMillis(500))
+        }
+    ]))
+]
+
+val switchReleased = [ String id |
+    Timers.get(id)?.cancel()
+    Timers.remove(id)
+    var pressed = Timestamps.get(id)
+    Timestamps.remove(id)
+
+    if (pressed !== null && now.isBefore(pressed.plusMillis(500))) {
+        sendCommand(id + "ShortPress", "ON")
+        sendCommand(id + "ShortPress", "OFF")
+    }
+
+    sendCommand(id, "OFF")
+]
+
+rule "Switch1Events"
+when
+    Channel "enocean:rockerSwitch:xxxxxxxx:xxxxxxxx:rockerswitchA" triggered
+then
+    switch (receivedEvent.event) {
+        case "DIR1_PRESSED"  : { switchPressed.apply("MySwitch1Up") }
+        case "DIR1_RELEASED" : { switchReleased.apply("MySwitch1Up") }
+        case "DIR2_PRESSED"  : { switchPressed.apply("MySwitch1Down") }
+        case "DIR2_RELEASED" : { switchReleased.apply("MySwitch1Down") }
+    }
+end

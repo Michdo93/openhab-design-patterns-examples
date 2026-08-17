@@ -1,0 +1,8 @@
+rule "Is it cloudy outside?"
+when
+    Item vCloudiness changed
+then
+    val newState = if(vCloudiness.state > 50) ON else OFF
+    if(newState != vIsCloudy.state)
+        vIsCloudy.postUpdate(newState)
+end

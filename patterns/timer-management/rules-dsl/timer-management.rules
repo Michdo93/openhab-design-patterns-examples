@@ -1,0 +1,20 @@
+import java.util.Map
+
+val Map<String, Timer> timers = newHashMap
+
+rule "Alert if door open for over 60 minutes"
+when
+    Member of Doors changed
+then
+    // Bestehenden Timer abbrechen
+    val timer = timers.get(triggeringItem.name)
+    timer?.cancel
+    timers.put(triggeringItem.name, null)
+
+    // Timer neu erstellen, wenn Tuer geoeffnet wurde
+    if(triggeringItem.state == OPEN) {
+        timers.put(triggeringItem.name, createTimer(now.plusMinutes(60))[ |
+            Alert.sendCommand(triggeringItem.name + " is still open!")
+        ])
+    }
+end

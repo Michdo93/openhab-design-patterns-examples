@@ -1,0 +1,11 @@
+rule "Set lights based on Time of Day"
+when
+    Item vTimeOfDay changed
+then
+    gLights.members.forEach[ light |
+        val setting = gSettings.members.findFirst[
+            s | s.name == light.name + "_" + vTimeOfDay.state.toString
+        ]
+        if(setting !== null) light.sendCommand(setting.state)
+    ]
+end

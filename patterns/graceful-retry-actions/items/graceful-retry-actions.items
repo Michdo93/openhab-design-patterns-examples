@@ -1,0 +1,11 @@
+Switch RetryTrigger "Retry Trigger"
+
+Group RetryDevices "Devices to Retry"
+Switch LightSwitch  "Living Room Light" (RetryDevices)
+Switch HeaterSwitch "Heater"            (RetryDevices)
+Switch FanSwitch    "Fan"               (RetryDevices)
+
+Number RetryMaxAttempts      "Max Retries"          <number>
+Number RetryInitialInterval  "Initial Interval (s)" <time>
+Number RetryMaxInterval      "Max Interval (s)"      <time>
+String RetryAlternativeAction "Alternative Action"
