@@ -1,3 +1,4 @@
-Switch RFID_12345 "Bobs Karte" (Authorized)
-Switch RFID_67890 "Anns Karte" (Authorized)
-Switch RFID_09876 "Gastkarte"  (Unauthorized)
+Switch vPresent "Anwesenheit [%s]"
+
+Number Room1_Thermostat "Thermostat Raum 1 [%d %%]"
+Number Room2_Thermostat "Thermostat Raum 2 [%d %%]"
