@@ -1,10 +1,25 @@
-from openhab import rule, Registry
+from openhab import rule, Registry, logger
 from openhab.triggers import GroupStateChangeTrigger
 
 
 @rule(triggers=[GroupStateChangeTrigger("gSensors")])
 class ZugehoerigesItemUeberNamenskonventionFinden:
     def execute(self, module, input):
-        item_name = input["itemName"]
-        status_item = Registry.getItem(item_name + "_Status")
+        event = input.get("event")
+        if not event:
+            return
+
+        item_name = event.getItemName()
+
+        # Status-Items selbst nicht weiterverarbeiten, sonst würde nach
+        # "Sensor1_Status_Status" gesucht, das es nicht gibt
+        if item_name.endswith("_Status"):
+            return
+
+        try:
+            status_item = Registry.getItem(item_name + "_Status")
+        except Exception:
+            logger.warn("Kein zugehoeriges Status-Item fuer " + item_name + " gefunden")
+            return
+
         status_item.postUpdate("ON")
