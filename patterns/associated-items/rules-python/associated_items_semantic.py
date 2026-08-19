@@ -11,8 +11,6 @@ class SensorHatEinUpdate:
 
         sensor = Registry.getItem(event.getItemName())
 
-        # Ueber Item.getSemantic() statt eines Imports aus openhab.actions,
-        # da der exakte Klassenname dort je nach Add-on-Version variiert.
         equipment = sensor.getSemantic().getEquipment()
         if not equipment:
             self.logger.warn("Kein Equipment fuer " + sensor.getName() + " gefunden")
@@ -20,19 +18,18 @@ class SensorHatEinUpdate:
 
         members = equipment.getAllMembers()
 
-        # Ansatz: Equipment-Name
-        by_name = Registry.getItem(equipment.getName() + "_Status")
-
-        # Ansatz: Item-Typ
-        by_type = next((i for i in members if i.getType() == "Switch"), None)
-
-        # Ansatz: Item-Tag
-        by_tag = next((i for i in members if "Status" in i.getTags()), None)
-
-        # Ansatz: mehrere Kriterien
-        by_multi = next(
+        # Robuster Ansatz: Tag "Status" + Namenskonvention kombiniert,
+        # unabhaengig davon, wie das Equipment selbst benannt ist
+        status_item = next(
             (i for i in members if "Status" in i.getTags() and i.getName().endswith("_Status")),
             None,
         )
 
-        by_name.postUpdate(sensor.getState())
+        if not status_item:
+            self.logger.warn("Kein Status-Item im Equipment " + equipment.getName() + " gefunden")
+            return
+
+        status_item.postUpdate(sensor.getState())
+        self.logger.info(
+            "{} -> {} = {}".format(sensor.getName(), status_item.getName(), sensor.getState())
+        )
