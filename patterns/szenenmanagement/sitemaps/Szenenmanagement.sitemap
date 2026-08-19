@@ -1,7 +1,5 @@
-sitemap scenes label="scenes"
-{
-   Frame label="Scenes"
-   {
+sitemap Szenenmanagement label="Szenenmanagement" {
+   Frame label="Scenes" {
       Switch item=callScriptItem label="Lights Stairs"
         mappings=["SwitchOff_LightsStairs"="Off",
                   "SwitchOn_LightsStairs025"="25",
