@@ -1,5 +1,4 @@
 from openhab import rule, Registry
-from openhab.actions import Semantic
 from openhab.triggers import ItemStateChangeTrigger
 
 
@@ -11,7 +10,10 @@ class SensorHatEinUpdate:
             return
 
         sensor = Registry.getItem(event.getItemName())
-        equipment = Semantic.getEquipment(sensor)
+
+        # Ueber Item.getSemantic() statt eines Imports aus openhab.actions,
+        # da der exakte Klassenname dort je nach Add-on-Version variiert.
+        equipment = sensor.getSemantic().getEquipment()
         if not equipment:
             self.logger.warn("Kein Equipment fuer " + sensor.getName() + " gefunden")
             return
