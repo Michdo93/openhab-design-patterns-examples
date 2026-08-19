@@ -1,2 +1,7 @@
+Group:Switch gResetExpire
+
 // Item mit Expire Binding: nach 5 Minuten automatisch OFF
-Switch MyTimer { expire="5m,command=OFF" }
+Switch MyTimer (gResetExpire) { expire="5m,command=OFF" }
+
+// Konkreter Ausloeser fuer den Test (im Buch nur als "irgendein Trigger" skizziert)
+Switch StartMyTimerTrigger "Timer manuell starten"
