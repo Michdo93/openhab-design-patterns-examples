@@ -8,7 +8,7 @@ Ein Item, eine generische Regel, mehrere Szenen-Funktionen statt Item/Regel pro 
 - `szenenmanagement.items`
 
 **Sitemap** (`sitemaps/`):
-- `szenenmanagement.sitemap`
+- `Szenenmanagement.sitemap`
 
 **Regeln** – bitte nur EINE der drei Varianten verwenden:
 
