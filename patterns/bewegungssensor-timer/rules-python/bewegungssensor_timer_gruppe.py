@@ -10,7 +10,11 @@ timers = {}
 @rule(triggers=[GroupCommandTrigger("gMotionDetectors", "ON")])
 class AMotionDetectorTriggered:
     def execute(self, module, input):
-        item_name = input["itemName"]
+        event = input.get("event")
+        if not event:
+            return
+
+        item_name = event.getItemName()
 
         if item_name in timers:
             timers[item_name].cancel()
@@ -22,3 +26,4 @@ class AMotionDetectorTriggered:
         t = threading.Timer(TIMEOUT_SECONDS, turn_off)
         t.start()
         timers[item_name] = t
+        self.logger.info(item_name + ": Timer gestartet (" + str(TIMEOUT_SECONDS) + "s)")
