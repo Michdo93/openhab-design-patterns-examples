@@ -1,0 +1,9 @@
+// Rohsensor Person 1
+Switch Person1_PresenceSensors
+// entprellte Anwesenheit Person 1
+Switch Person1_Present
+
+// Rohsensor Person 2
+Switch Person2_PresenceSensors
+// entprellte Anwesenheit Person 2
+Switch Person2_Present
