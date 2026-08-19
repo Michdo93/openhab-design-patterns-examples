@@ -1,7 +1,7 @@
 Group gSensors
 
-Switch Sensor1 (gSensors) { channel="binding:thing:sensor1" }
+Switch Sensor1 (gSensors)
 Switch Sensor1_Status (gSensors) ["Status"]
 
-Switch Sensor2 (gSensors) { channel="binding:thing:sensor2" }
+Switch Sensor2 (gSensors)
 Switch Sensor2_Status (gSensors) ["Status", "Power"]
