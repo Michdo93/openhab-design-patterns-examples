@@ -1,4 +1,4 @@
-sitemap countdown_timer label="Countdown-Demo" {
+sitemap CountdownTimer label="Countdown-Timer" {
     Frame label="Countdown-Demo" {
         Text   item=myCounter
         Text   item=testLamp
