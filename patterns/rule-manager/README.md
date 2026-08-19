@@ -8,7 +8,7 @@ Regeln per Enable/Disable- und Running-Switch zentral steuern und kooperativ abb
 - `rule-manager.items`
 
 **Sitemap** (`sitemaps/`):
-- `rule-manager.sitemap`
+- `RuleManager.sitemap`
 
 **Regeln** – bitte nur EINE der drei Varianten verwenden:
 
