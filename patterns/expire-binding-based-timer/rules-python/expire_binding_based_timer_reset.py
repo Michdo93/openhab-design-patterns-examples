@@ -10,5 +10,6 @@ from openhab.triggers import SystemStartlevelTrigger
 class ExpireTimerNeuStarten:
     def execute(self, module, input):
         self.logger.info("Expire-Timer werden neu gestartet")
-        for timer in Registry.getItem("gResetExpire").members:
-            timer.sendCommand(str(timer.state))
+        for timer in Registry.getItem("gResetExpire").getAllMembers():
+            self.logger.info(timer.getName() + " -> " + str(timer.getState()))
+            timer.sendCommand(str(timer.getState()))
