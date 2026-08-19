@@ -1,4 +1,4 @@
-sitemap rulemanager label="Rule Manager" {
+sitemap RuleManager label="Rule Manager" {
     Frame label="Rule Manager" {
         Switch item=exampleRule label="Enable/Disable example rule"
         Switch item=isRunningExampleRule label="Is example rule running?"
