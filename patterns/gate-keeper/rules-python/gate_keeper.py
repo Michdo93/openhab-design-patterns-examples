@@ -2,7 +2,7 @@ import queue
 import threading
 from datetime import datetime, timedelta
 
-from openhab import rule, Registry
+from openhab import rule, Registry, logger
 from openhab.actions import Exec
 from openhab.triggers import ItemCommandTrigger
 
@@ -15,8 +15,8 @@ def process_queue():
     global gate_timer, last_command
     if not commands.empty():
         cmd = commands.get()
-        results = Exec.executeCommandLine(cmd, 5000)
-        print("433: " + str(results))
+        results = Exec.executeCommandLine(timedelta(seconds=5), cmd)
+        logger.info("433: " + str(results))
         last_command = datetime.now().astimezone()
 
     delta_millis = (datetime.now().astimezone() - last_command).total_seconds() * 1000
@@ -29,7 +29,12 @@ def process_queue():
 class Controller433MHz:
     def execute(self, module, input):
         global gate_timer
-        commands.put(str(input["command"]))
+        event = input.get("event")
+        if not event:
+            return
+
+        commands.put(str(event.getItemCommand()))
+        self.logger.info("Befehl in Warteschlange eingereiht: " + str(event.getItemCommand()))
 
         if gate_timer is None:
             process_queue()
@@ -38,7 +43,11 @@ class Controller433MHz:
 @rule(triggers=[ItemCommandTrigger("Outlet_A")])
 class OutletA:
     def execute(self, module, input):
-        if str(input["command"]) == "ON":
+        event = input.get("event")
+        if not event:
+            return
+
+        if str(event.getItemCommand()) == "ON":
             Registry.getItem("WirelessController").sendCommand("433-send xxxxx 1 1")
         else:
             Registry.getItem("WirelessController").sendCommand("433-send xxxxx 1 0")
