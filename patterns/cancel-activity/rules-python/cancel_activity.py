@@ -1,6 +1,6 @@
 import threading
 
-from openhab import rule, Registry
+from openhab import rule, Registry, logger
 from openhab.triggers import ItemCommandTrigger
 
 dim_timer = None
@@ -9,11 +9,14 @@ continue_dimming = True
 
 def step():
     global dim_timer, continue_dimming
-    curr_level = int(str(Registry.getItem("DimLamp").state))
-    target = int(str(Registry.getItem("DimTarget").state))
+
+    lamp_state = str(Registry.getItem("DimLamp").getState())
+    target_state = str(Registry.getItem("DimTarget").getState())
+    curr_level = int(lamp_state) if lamp_state not in ("NULL", "UNDEF") else 0
+    target = int(target_state) if target_state not in ("NULL", "UNDEF") else 0
 
     if curr_level >= target or not continue_dimming:
-        print("Dimmen beendet")
+        logger.info("Dimmen beendet bei {}%".format(curr_level))
         dim_timer = None
         return
 
@@ -27,6 +30,7 @@ class StartDimming:
     def execute(self, module, input):
         global continue_dimming
         continue_dimming = True
+        self.logger.info("Dimmen gestartet")
         step()
 
 
@@ -35,3 +39,4 @@ class CancelDimming:
     def execute(self, module, input):
         global continue_dimming
         continue_dimming = False
+        self.logger.info("Dimmen wird abgebrochen")
