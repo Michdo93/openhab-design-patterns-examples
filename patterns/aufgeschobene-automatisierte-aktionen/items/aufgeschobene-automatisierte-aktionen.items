@@ -1,4 +1,4 @@
 Group gDeferredAction
 
 String LoungeBlind_Timer (gDeferredAction)
-Switch LoungeBlind "Rollladen Wohnzimmer" (gDeferredAction)
+Rollershutter LoungeBlind "Rollladen Wohnzimmer" (gDeferredAction)
