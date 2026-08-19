@@ -8,7 +8,7 @@ Timer-basierter Countdown auf Basis eines Number-Items mit Expire Binding: Start
 - `countdown-timer.items`
 
 **Sitemap** (`sitemaps/`):
-- `countdown-timer.sitemap`
+- `CountdownTimer.sitemap`
 
 **Regeln** – bitte nur EINE der drei Varianten verwenden:
 
