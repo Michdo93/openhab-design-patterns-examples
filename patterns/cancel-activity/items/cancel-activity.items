@@ -1,0 +1,5 @@
+Switch StartDimTrigger "Dimmen starten"
+Switch CancelDimTrigger "Dimmen abbrechen"
+
+Dimmer DimLamp "Lampe [%d %%]"
+Number DimTarget "Zielwert [%d %%]"
