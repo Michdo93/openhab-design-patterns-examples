@@ -8,6 +8,9 @@ Mehrere Praesenzsensoren zu einem Gesamtstatus aggregieren, inkl. Anti-Flapping-
 - `sensor-aggregation-complex.items`
 - `sensor-aggregation-simple.items`
 
+**Transformationen** (`transform/`) – benötigt das Add-on „Map Transformation“:
+- `en.map`
+
 **Regeln** – bitte nur EINE der drei Varianten verwenden:
 
 - Rules DSL (`rules-dsl/`): `sensor-aggregation.rules`
@@ -24,7 +27,15 @@ Voraussetzung: openHAB läuft bereits und die gewünschte Rule-Engine ist instal
    bestehende Datei oder als neue Datei ablegen), Item-Namen bei Bedarf an die
    eigene Installation anpassen.
 
-2. **EINE Rule-Variante wählen und kopieren:**
+2. **Transformationsdatei(en) kopieren:** Inhalt der Datei(en) unter
+   `transform/` nach `$OPENHAB_CONF/transform/` kopieren. Voraussetzung dafür ist
+   das Add-on **„Map Transformation“** (`Einstellungen → Add-ons → Transformations`).
+   Ohne dieses Add-on bzw. ohne die kopierte(n) Datei(en) meldet openHAB beim
+   Anzeigen des Items eine Warnung wie `Transformation service of type 'MAP' is
+   not available` – die Automatisierung selbst funktioniert davon unabhängig,
+   nur die lesbare Anzeige des Zustands fehlt dann.
+
+3. **EINE Rule-Variante wählen und kopieren:**
 
    - **Rules DSL:** Datei(en) aus `rules-dsl/` nach `$OPENHAB_CONF/rules/` kopieren.
    - **JavaScript Scripting:** Datei(en) aus `rules-js/` nach `$OPENHAB_CONF/automation/js/` kopieren.
@@ -38,7 +49,7 @@ Voraussetzung: openHAB läuft bereits und die gewünschte Rule-Engine ist instal
    openHAB überwacht diese Verzeichnisse automatisch (File Watcher) und lädt neue
    bzw. geänderte Dateien innerhalb weniger Sekunden selbstständig nach.
 
-3. **Testen:** Über die openHAB-UI (`Einstellungen → Items` bzw. das BasicUI)
+4. **Testen:** Über die openHAB-UI (`Einstellungen → Items` bzw. das BasicUI)
    den/die Auslöser des Beispiels manuell schalten und in
    `Einstellungen → System → Log Viewer` bzw. `openhab.log` die Ausgaben der Regel
    verfolgen.

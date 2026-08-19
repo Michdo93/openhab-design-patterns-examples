@@ -28,13 +28,14 @@ openHAB-Installation übernommen werden können.
 1. [Voraussetzungen](#voraussetzungen)
 2. [openHAB installieren](#openhab-installieren)
 3. [Die drei Rule-Engines einrichten](#die-drei-rule-engines-einrichten)
-4. [Dieses Repository herunterladen](#dieses-repository-herunterladen)
-5. [Ein Beispiel installieren (Kurzfassung)](#ein-beispiel-installieren-kurzfassung)
-6. [Struktur eines Pattern-Ordners](#struktur-eines-pattern-ordners)
-7. [Alle Design Patterns in diesem Repository](#alle-design-patterns-in-diesem-repository)
-8. [Fehlersuche](#fehlersuche)
-9. [Neues Pattern hinzufügen](#neues-pattern-hinzufügen)
-10. [Lizenz](#lizenz)
+4. [Map Transformation (optional)](#map-transformation-optional)
+5. [Dieses Repository herunterladen](#dieses-repository-herunterladen)
+6. [Ein Beispiel installieren (Kurzfassung)](#ein-beispiel-installieren-kurzfassung)
+7. [Struktur eines Pattern-Ordners](#struktur-eines-pattern-ordners)
+8. [Alle Design Patterns in diesem Repository](#alle-design-patterns-in-diesem-repository)
+9. [Fehlersuche](#fehlersuche)
+10. [Neues Pattern hinzufügen](#neues-pattern-hinzufügen)
+11. [Lizenz](#lizenz)
 
 ---
 
@@ -112,6 +113,28 @@ verwendet werden. Für ein einzelnes Beispiel aus diesem Repository sollte
 aber immer **nur eine** der drei Rule-Varianten gleichzeitig aktiv sein,
 um doppelte Ausführung derselben Logik zu vermeiden.
 
+## Map Transformation (optional)
+
+Einige wenige Beispiele (`human-readable-names`, `item-metadata`,
+`sensor-aggregation`) zeigen zusätzlich lesbare Zustandsanzeigen über
+`[MAP(datei.map):%s]`-Formatierungen in Item-Labels. Dafür wird das Add-on
+**„Map Transformation“** benötigt: **Einstellungen → Add-ons →
+Transformations → „Map Transformation“**.
+
+Ohne dieses Add-on funktioniert die eigentliche Regel-Logik trotzdem – es
+erscheint lediglich eine Log-Warnung wie
+
+```
+Transformation service of type 'MAP' is not available
+```
+
+und der Item-Zustand wird unformatiert (z. B. `ON` statt `online`)
+angezeigt.
+
+Die passenden `.map`-Dateien liegen bei den jeweiligen Beispielen im
+Unterordner `transform/` und müssen nach `$OPENHAB_CONF/transform/` kopiert
+werden.
+
 ## Dieses Repository herunterladen
 
 ```bash
@@ -156,6 +179,7 @@ patterns/<pattern-name>/
 ├── items/*.items          Item-Definitionen (fuer alle 3 Varianten identisch)
 ├── things/*.things        Thing-Definitionen (nur wenn benoetigt)
 ├── sitemaps/*.sitemap     Beispiel-Sitemap fuer das BasicUI (falls sinnvoll)
+├── transform/*.map        MAP-Transformationsdateien (nur wenn benoetigt)
 ├── rules-dsl/*.rules      Variante 1: Rules DSL
 ├── rules-js/*.js          Variante 2: JavaScript Scripting (GraalJS)
 │   └── lib/*.js           ggf. wiederverwendbares Modul, per require() eingebunden
@@ -167,55 +191,55 @@ patterns/<pattern-name>/
 
 | Pattern | Kurzbeschreibung |
 |---|---|
-| [`associated-items`](patterns/associated-items/) | Zugehörige Items zur Laufzeit finden: semantisches Modell, Gruppenzugehörigkeit oder Namenskonvention. |
-| [`aufgeschobene-automatisierte-aktionen`](patterns/aufgeschobene-automatisierte-aktionen/) | Verzögerte Befehle per Proxy-Item, die durch erneute Interaktion automatisch abgebrochen werden, inkl. wiederverwendbarem Timer-Modul. |
+| [`associated-items`](patterns/associated-items/) | Zugehoerige Items zur Laufzeit finden: semantisches Modell, Gruppenzugehoerigkeit oder Namenskonvention. |
+| [`aufgeschobene-automatisierte-aktionen`](patterns/aufgeschobene-automatisierte-aktionen/) | Verzoegerte Befehle per Proxy-Item, die durch erneute Interaktion automatisch abgebrochen werden, inkl. wiederverwendbarem Timer-Modul. |
 | [`bayes`](patterns/bayes/) | Bayessche Sensor-Aggregation: mehrere unsichere Beobachtungen zu einer Wahrscheinlichkeit kombinieren (Schlaferkennung). |
-| [`bewegungssensor-timer`](patterns/bewegungssensor-timer/) | Gerät für X Minuten nach letzter Bewegung eingeschaltet halten, per Expire Binding oder Timer, auch für mehrere Sensoren. |
-| [`cancel-activity`](patterns/cancel-activity/) | Abbrechbare lang laufende Schleifen-Aktion (z.B. Dimmen) über ein Cancel-Flag. |
-| [`countdown-timer`](patterns/countdown-timer/) | Timer-basierter Countdown auf Basis eines Number-Items mit Expire Binding: Start, Verlängerung, Abbruch und Ablauf über Kommandos steuern. |
-| [`cst`](patterns/cst/) | Aktionssequenz nur bei gleichzeitig erfüllten Mehrfachbedingungen auslösen (Conditional Sequence Trigger). |
-| [`debounce`](patterns/debounce/) | Rohsignal über ein Proxy-Item entprellen, einzeln und generisch für mehrere Items. |
-| [`decoupled-notification-service`](patterns/decoupled-notification-service/) | Benachrichtigungslogik von Automatisierungsregeln entkoppeln über zentrale Notify-Items und eine Sammel-Regel. |
+| [`bewegungssensor-timer`](patterns/bewegungssensor-timer/) | Geraet fuer X Minuten nach letzter Bewegung eingeschaltet halten, per Expire Binding oder Timer, auch fuer mehrere Sensoren. |
+| [`cancel-activity`](patterns/cancel-activity/) | Abbrechbare lang laufende Schleifen-Aktion (z.B. Dimmen) ueber ein Cancel-Flag. |
+| [`countdown-timer`](patterns/countdown-timer/) | Timer-basierter Countdown auf Basis eines Number-Items mit Expire Binding: Start, Verlaengerung, Abbruch und Ablauf ueber Kommandos steuern. |
+| [`cst`](patterns/cst/) | Aktionssequenz nur bei gleichzeitig erfuellten Mehrfachbedingungen ausloesen (Conditional Sequence Trigger). |
+| [`debounce`](patterns/debounce/) | Rohsignal ueber ein Proxy-Item entprellen, einzeln und generisch fuer mehrere Items. |
+| [`decoupled-notification-service`](patterns/decoupled-notification-service/) | Benachrichtigungslogik von Automatisierungsregeln entkoppeln ueber zentrale Notify-Items und eine Sammel-Regel. |
 | [`encoding-and-accessing`](patterns/encoding-and-accessing/) | Konstanten/Konfigurationswerte in Regeln speichern: Maps, Item-Namen, Metadaten, Konfigurationsmodule. |
 | [`event-debouncer`](patterns/event-debouncer/) | Schnelle Mehrfach-Events per Timer-Sperre entprellen, um Doppelaktionen zu vermeiden. |
-| [`expire-binding-based-timer`](patterns/expire-binding-based-timer/) | Timer-Ersatz über das Expire Binding statt klassischer createTimer-Objekte. |
-| [`gate-keeper`](patterns/gate-keeper/) | Befehls-Warteschlange mit Mindestabstand für story-sensitive Technologien (433MHz/Insteon). |
-| [`generic-is-alive`](patterns/generic-is-alive/) | Geräte-Ausfallerkennung über Expire Binding statt aktiver Abfrage. |
-| [`graceful-retry-actions`](patterns/graceful-retry-actions/) | Befehle mit Wiederholung (fest/exponentiell) und optionalem Online-Check erneut senden, konfigurierbar für beliebig viele Geräte über eine Gruppe. |
-| [`groups-in-rules`](patterns/groups-in-rules/) | Generische, gruppenbasierte Regel für mehrere Türsensoren statt Code-Duplikation pro Item. |
-| [`gruppenbasierte-persistenz`](patterns/gruppenbasierte-persistenz/) | Persistenz-Engine (mapdb/rrd4j/influxdb) über Gruppenzugehörigkeit statt Einzel-Item-Konfiguration steuern. |
-| [`human-readable-names`](patterns/human-readable-names/) | Technische Item-Namen per MAP-Transformation in lesbare Namen für Alarme/Logs umwandeln. |
+| [`expire-binding-based-timer`](patterns/expire-binding-based-timer/) | Timer-Ersatz ueber das Expire Binding statt klassischer createTimer-Objekte. |
+| [`gate-keeper`](patterns/gate-keeper/) | Befehls-Warteschlange mit Mindestabstand fuer story-sensitive Technologien (433MHz/Insteon). |
+| [`generic-is-alive`](patterns/generic-is-alive/) | Geraete-Ausfallerkennung ueber Expire Binding statt aktiver Abfrage. |
+| [`graceful-retry-actions`](patterns/graceful-retry-actions/) | Befehle mit Wiederholung (fest/exponentiell) und optionalem Online-Check erneut senden, konfigurierbar fuer beliebig viele Geraete ueber eine Gruppe. |
+| [`groups-in-rules`](patterns/groups-in-rules/) | Generische, gruppenbasierte Regel fuer mehrere Tuersensoren statt Code-Duplikation pro Item. |
+| [`gruppenbasierte-persistenz`](patterns/gruppenbasierte-persistenz/) | Persistenz-Engine (mapdb/rrd4j/influxdb) ueber Gruppenzugehoerigkeit statt Einzel-Item-Konfiguration steuern. |
+| [`human-readable-names`](patterns/human-readable-names/) | Technische Item-Namen per MAP-Transformation in lesbare Namen fuer Alarme/Logs umwandeln. |
 | [`hysteresis`](patterns/hysteresis/) | Pufferzone um einen Schwellwert, um Flattern beim Schalten zu vermeiden. |
-| [`item-metadata`](patterns/item-metadata/) | Konfigurationswerte und Alert-Flags als Item-Metadaten statt zusätzlicher Items. Kein DSL-Beispiel (DSL kann Metadaten nicht lesen/schreiben). |
-| [`kaskadierende-timer`](patterns/kaskadierende-timer/) | Sequenzielle Mehrzonen-Bewässerung mit zeitversetzten Timern (Kaskade). |
+| [`item-metadata`](patterns/item-metadata/) | Konfigurationswerte und Alert-Flags als Item-Metadaten statt zusaetzlicher Items. Kein DSL-Beispiel (DSL kann Metadaten nicht lesen/schreiben). |
+| [`kaskadierende-timer`](patterns/kaskadierende-timer/) | Sequenzielle Mehrzonen-Bewaesserung mit zeitversetzten Timern (Kaskade). |
 | [`konfigurationsverwaltung`](patterns/konfigurationsverwaltung/) | Systemweite Einstellungen zentral als Map/Dictionary bzw. Konfigurationsmodul statt verstreut im Regelcode. |
 | [`lichtsteuerungssystem`](patterns/lichtsteuerungssystem/) | Kombiniertes Lichtsteuerungssystem: zeitgesteuerte Helligkeit, Bewegungsaktivierung, dynamische Tageszeit-Anpassung. |
-| [`long-press`](patterns/long-press/) | Kurzen vs. langen Tastendruck unterscheiden über Zeitmessung, inkl. Fallback-Timer. |
+| [`long-press`](patterns/long-press/) | Kurzen vs. langen Tastendruck unterscheiden ueber Zeitmessung, inkl. Fallback-Timer. |
 | [`looping-timers`](patterns/looping-timers/) | Nicht-blockierende Schleifen-Timer (Deckenventilator-Beispiel) statt while-Schleifen, inkl. Expire-Binding-Alternative. |
-| [`manuelle-trigger-erkennung`](patterns/manuelle-trigger-erkennung/) | Manuelle vs. regelgesteuerte Item-Änderungen unterscheiden: Totmannschalter, Zeitstempel, Proxy-Items. |
-| [`mqtt-state-supervision`](patterns/mqtt-state-supervision/) | überwachen, ob ein gesendeter MQTT-Befehl innerhalb einer Frist bestätigt wird, sonst Alarm. |
-| [`multisensor-aggregation`](patterns/multisensor-aggregation/) | Mehrere unsichere Sensoren zu einer zuverlässigen Entscheidung kombinieren: Weighted-Sum- und Bayes-Variante. |
-| [`notifications-in-groups`](patterns/notifications-in-groups/) | Warn-/Alarmschwellen für eine ganze Gruppe gleichartiger Sensoren (z.B. Temperaturen) statt Regel pro Sensor. |
-| [`primer-mit-hablladin`](patterns/primer-mit-hablladin/) | Vollständiges Zustandsmaschinen-Beispiel: Garagenlicht mit Timer, Vorwarn-Blinken und manueller überschreibung. |
-| [`proxy-item`](patterns/proxy-item/) | Virtuelles Steuer-Item zwischen Sitemap/Benutzer und dem eigentlich gebundenen Gerät-Item, inkl. Garagentor-Beispiel mit Alert. |
-| [`rate-limit`](patterns/rate-limit/) | Aktion höchstens einmal pro Zeitfenster ausführen, über den eingebauten Script-Cache. |
+| [`manuelle-trigger-erkennung`](patterns/manuelle-trigger-erkennung/) | Manuelle vs. regelgesteuerte Item-Aenderungen unterscheiden: Totmannschalter, Zeitstempel, Proxy-Items. |
+| [`mqtt-state-supervision`](patterns/mqtt-state-supervision/) | Ueberwachen, ob ein gesendeter MQTT-Befehl innerhalb einer Frist bestaetigt wird, sonst Alarm. |
+| [`multisensor-aggregation`](patterns/multisensor-aggregation/) | Mehrere unsichere Sensoren zu einer zuverlaessigen Entscheidung kombinieren: Weighted-Sum- und Bayes-Variante. |
+| [`notifications-in-groups`](patterns/notifications-in-groups/) | Warn-/Alarmschwellen fuer eine ganze Gruppe gleichartiger Sensoren (z.B. Temperaturen) statt Regel pro Sensor. |
+| [`primer-mit-hablladin`](patterns/primer-mit-hablladin/) | Vollstaendiges Zustandsmaschinen-Beispiel: Garagenlicht mit Timer, Vorwarn-Blinken und manueller Ueberschreibung. |
+| [`proxy-item`](patterns/proxy-item/) | Virtuelles Steuer-Item zwischen Sitemap/Benutzer und dem eigentlich gebundenen Geraet-Item, inkl. Garagentor-Beispiel mit Alert. |
+| [`rate-limit`](patterns/rate-limit/) | Aktion hoechstens einmal pro Zeitfenster ausfuehren, ueber den eingebauten Script-Cache. |
 | [`rule-deaktivierung`](patterns/rule-deaktivierung/) | Regeln zur Laufzeit aktivieren/deaktivieren (Weihnachtsmodus-Beispiel); DSL nur mit if-return-Workaround. |
 | [`rule-manager`](patterns/rule-manager/) | Regeln per Enable/Disable- und Running-Switch zentral steuern und kooperativ abbrechen. |
-| [`rule-refresh`](patterns/rule-refresh/) | Dynamisch generierte Rule-Trigger (z.B. aus Metadaten), nur JS/Python möglich. |
-| [`rule-strukturierung`](patterns/rule-strukturierung/) | 1-2-3-Regelstruktur (Prüfen/Berechnen/Handeln) statt verschachtelter if-Ketten, plus Gruppen-Variante. |
+| [`rule-refresh`](patterns/rule-refresh/) | Dynamisch generierte Rule-Trigger (z.B. aus Metadaten), nur JS/Python moeglich. |
+| [`rule-strukturierung`](patterns/rule-strukturierung/) | 1-2-3-Regelstruktur (Pruefen/Berechnen/Handeln) statt verschachtelter if-Ketten, plus Gruppen-Variante. |
 | [`rule-verriegelung`](patterns/rule-verriegelung/) | Zeitstempel-basierte Entprellung/Latching einer Regel. |
-| [`sensor-aggregation`](patterns/sensor-aggregation/) | Mehrere Präsenzsensoren zu einem Gesamtstatus aggregieren, inkl. Anti-Flapping-Timer und Personenerkennung. |
-| [`simple-state-machine`](patterns/simple-state-machine/) | Ereignis-zu-Zustand-übergänge, optional mit Ephemeris-Bedingung (Wochentag/Feiertag). |
-| [`state-machine-driven-groups`](patterns/state-machine-driven-groups/) | Tageszeit-abhängige Zustände über benannte Gruppen (gLights_ON_MORNING etc.) statt if-else-Ketten. |
-| [`switch-dimmer`](patterns/switch-dimmer/) | Kurzer/langer Tastendruck eines Rocker-Switches getrennt über virtuelle Items, inkl. Lichtsteuerung. |
+| [`sensor-aggregation`](patterns/sensor-aggregation/) | Mehrere Praesenzsensoren zu einem Gesamtstatus aggregieren, inkl. Anti-Flapping-Timer und Personenerkennung. |
+| [`simple-state-machine`](patterns/simple-state-machine/) | Ereignis-zu-Zustand-Uebergaenge, optional mit Ephemeris-Bedingung (Wochentag/Feiertag). |
+| [`state-machine-driven-groups`](patterns/state-machine-driven-groups/) | Tageszeit-abhaengige Zustaende ueber benannte Gruppen (gLights_ON_MORNING etc.) statt if-else-Ketten. |
+| [`switch-dimmer`](patterns/switch-dimmer/) | Kurzer/langer Tastendruck eines Rocker-Switches getrennt ueber virtuelle Items, inkl. Lichtsteuerung. |
 | [`szenenmanagement`](patterns/szenenmanagement/) | Ein Item, eine generische Regel, mehrere Szenen-Funktionen statt Item/Regel pro Szene. |
 | [`time-of-day`](patterns/time-of-day/) | Tageszeit-Zustandsautomat (String-Item vTimeOfDay) auf Basis einer Zeitfenster-Tabelle. |
-| [`time-of-last-update`](patterns/time-of-last-update/) | Zeitstempel-Item per openHAB-Profil (timestamp-update/-change). Kein Rule-Beispiel nötig. |
-| [`timer-management`](patterns/timer-management/) | Zentrale Timer-Verwaltung über eine Map/ein Dictionary für generische, item-übergreifende Regeln. |
-| [`toggle-pattern`](patterns/toggle-pattern/) | Zustand eines Geräts per Tastendruck umschalten (Toggle), inkl. UI-Feedback-Variante. |
-| [`trennung-von-verhaltensweisen`](patterns/trennung-von-verhaltensweisen/) | Proxy-Item als zentrale Schnittstelle für geteilte Logik (Alarme, Bewölkung). |
-| [`unbound-item`](patterns/unbound-item/) | Virtuelles Item ohne Binding/Thing zur Speicherung von regelinternem Zustand. Kein Rule-Beispiel nötig. |
-| [`watering-system`](patterns/watering-system/) | Konfigurierbares Mehrzonen-Bewässerungssystem mit entkoppeltem zentralem Service und Timer pro Zone. |
+| [`time-of-last-update`](patterns/time-of-last-update/) | Zeitstempel-Item per openHAB-Profil (timestamp-update/-change). Kein Rule-Beispiel noetig. |
+| [`timer-management`](patterns/timer-management/) | Zentrale Timer-Verwaltung ueber eine Map/ein Dictionary fuer generische, item-uebergreifende Regeln. |
+| [`toggle-pattern`](patterns/toggle-pattern/) | Zustand eines Geraets per Tastendruck umschalten (Toggle), inkl. UI-Feedback-Variante. |
+| [`trennung-von-verhaltensweisen`](patterns/trennung-von-verhaltensweisen/) | Proxy-Item als zentrale Schnittstelle fuer geteilte Logik (Alarme, Bewoelkung). |
+| [`unbound-item`](patterns/unbound-item/) | Virtuelles Item ohne Binding/Thing zur Speicherung von regelinternem Zustand. Kein Rule-Beispiel noetig. |
+| [`watering-system`](patterns/watering-system/) | Konfigurierbares Mehrzonen-Bewaesserungssystem mit entkoppeltem zentralem Service und Timer pro Zone. |
 
 ## Fehlersuche
 
@@ -232,6 +256,18 @@ patterns/<pattern-name>/
 - Die Items aus `items/` wurden noch nicht angelegt oder falsch benannt.
   Item-Namen im Beispiel ggf. an die eigene Installation anpassen – dann
   aber konsistent in Items- **und** Regel-Datei.
+
+**`Transformation service of type 'MAP' is not available`**
+- Das Add-on „Map Transformation“ ist nicht installiert, oder die `.map`-Datei
+  aus `transform/` wurde nicht nach `$OPENHAB_CONF/transform/` kopiert.
+  Siehe Abschnitt [Map Transformation](#map-transformation-optional). Betrifft
+  nur die Anzeige, nicht die Regel-Logik selbst.
+
+**Sitemap erscheint als leer / „cannot be parsed correctly“**
+- Meist ein Tippfehler oder eine fehlende `sitemap <name> label="..." { }`-
+  Klammer in der `.sitemap`-Datei. Die Datei muss immer mit `sitemap <name>
+  label="..." {` beginnen und mit `}` enden; einzelne Elemente stehen meist
+  zusätzlich in einem `Frame { ... }`-Block.
 
 **Python-Regel lädt nicht, „Module not found“**
 - Prüfen, ob evtl. mitgelieferte Zusatzmodule (z. B. `deferred.py`,

@@ -1,0 +1,7 @@
+ON=online
+OFF=offline
+NULL=unbekannt
+-=unbekannt
+
+vNetwork_cerberos=cerberos
+vCerberos_SensorReporter_Online=cerberos sensorReporter
