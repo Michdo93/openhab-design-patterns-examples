@@ -1,4 +1,10 @@
-from openhab import Registry
+from openhab import rule, Registry
+from openhab.triggers import GroupStateChangeTrigger
 
-status_item = Registry.getItem(item_name + "_Status")
-status_item.postUpdate("ON")
+
+@rule(triggers=[GroupStateChangeTrigger("gSensors")])
+class ZugehoerigesItemUeberNamenskonventionFinden:
+    def execute(self, module, input):
+        item_name = input["itemName"]
+        status_item = Registry.getItem(item_name + "_Status")
+        status_item.postUpdate("ON")
