@@ -8,8 +8,8 @@ from openhab.triggers import GroupStateChangeTrigger
 class ConditionalSequenceTrigger:
     def execute(self, module, input):
         hour = datetime.now().hour
-        motion_on = str(Registry.getItem("motionSensor").state) == "ON"
-        presence_on = str(Registry.getItem("presenceSensor").state) == "ON"
+        motion_on = str(Registry.getItem("motionSensor").getState()) == "ON"
+        presence_on = str(Registry.getItem("presenceSensor").getState()) == "ON"
 
         if motion_on and presence_on and 18 <= hour <= 22:
             self.logger.info("Alle Bedingungen erfuellt - starte Sequenz")
