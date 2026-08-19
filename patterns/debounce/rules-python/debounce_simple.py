@@ -15,9 +15,9 @@ class DebouncePerson1:
 
         def on_expire():
             global timer
-            sensor_state = Registry.getItem("Person1PresenceSensor").state
+            sensor_state = str(Registry.getItem("Person1PresenceSensor").getState())
             proxy = Registry.getItem("Person1Presence")
-            if str(proxy.state) != str(sensor_state):
+            if str(proxy.getState()) != sensor_state:
                 proxy.postUpdate(sensor_state)
             timer = None
 
