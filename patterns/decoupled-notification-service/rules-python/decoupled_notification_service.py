@@ -9,7 +9,11 @@ from openhab.triggers import ItemStateChangeTrigger
 ])
 class Benachrichtigungsservice:
     def execute(self, module, input):
-        item_name = input["itemName"]
-        message = str(Registry.getItem(item_name).state)
+        event = input.get("event")
+        if not event:
+            return
+
+        item_name = event.getItemName()
+        message = str(Registry.getItem(item_name).getState())
         # Logik zum Versenden der Nachricht, z. B. per Mail oder Push-Notification
         self.logger.info("[" + item_name + "] " + message)
