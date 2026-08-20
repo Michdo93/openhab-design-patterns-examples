@@ -1,0 +1,6 @@
+Group:Contact:OR(OPEN, CLOSED) Doors
+
+Contact FrontDoor "Haustuer [%s]" (Doors)
+Contact BackDoor "Hintertuer [%s]" (Doors)
+
+String Alert "Alarme [%s]"
