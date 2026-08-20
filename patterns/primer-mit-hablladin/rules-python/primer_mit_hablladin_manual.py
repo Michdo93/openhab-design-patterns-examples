@@ -1,6 +1,9 @@
 from openhab import rule, Registry
 from openhab.triggers import ItemStateChangeTrigger
 
+GLSM_ON = "1"
+GLSM_OFF = "0"
+
 
 @rule(triggers=[ItemStateChangeTrigger("GarageLightsProxy", state="ON")])
 class GarageLightsCommandedOn:
