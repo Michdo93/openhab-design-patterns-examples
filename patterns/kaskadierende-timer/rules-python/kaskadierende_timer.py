@@ -20,8 +20,8 @@ def item_exists(name):
 @rule(triggers=[SystemStartlevelTrigger(100)])
 class IrrigationResetBeiSystemstart:
     def execute(self, module, input):
-        for valve in Registry.getItem("gIrrigation").members:
-            if str(valve.state) != "OFF":
+        for valve in Registry.getItem("gIrrigation").getAllMembers():
+            if str(valve.getState()) != "OFF":
                 valve.sendCommand("OFF")
         Registry.getItem("Irrigation_Curr").postUpdate("OFF")
 
@@ -32,8 +32,10 @@ class IrrigationResetBeiSystemstart:
 ])
 class IrrigationStartUm0800:
     def execute(self, module, input):
-        received = input.get("command")
-        if str(Registry.getItem("Irrigation_Auto").state) == "ON" or received == "ON":
+        event = input.get("event")
+        received = str(event.getItemCommand()) if event and hasattr(event, "getItemCommand") else None
+
+        if str(Registry.getItem("Irrigation_Auto").getState()) == "ON" or received == "ON":
             Registry.getItem("Irrigation_Manual").postUpdate("ON")
             self.logger.info("Bewaesserung gestartet, Zone 1 aktiv")
             Registry.getItem("Irrigation_Curr").sendCommand("Irrigation_Zone_1")
@@ -43,13 +45,18 @@ class IrrigationStartUm0800:
 class IrrigationCascade:
     def execute(self, module, input):
         global irrigation_timer
-        curr_valve_name = input["command"]
+        event = input.get("event")
+        if not event:
+            return
+
+        curr_valve_name = str(event.getItemCommand())
         curr_valve = Registry.getItem(curr_valve_name)
         curr_valve_num = int(curr_valve_name.split("_")[2])
-        curr_valve_mins = int(str(Registry.getItem(curr_valve_name + "_Time").state))
+        curr_valve_mins = int(str(Registry.getItem(curr_valve_name + "_Time").getState()))
         next_valve_name = "Irrigation_Zone_" + str(curr_valve_num + 1)
 
         curr_valve.sendCommand("ON")
+        self.logger.info("Zone " + curr_valve_name + " an fuer " + str(curr_valve_mins) + " Minuten")
 
         def on_expire():
             global irrigation_timer
@@ -76,7 +83,7 @@ class IrrigationCancel:
             irrigation_timer.cancel()
             irrigation_timer = None
 
-        for valve in Registry.getItem("gIrrigation").members:
-            if str(valve.state) != "OFF":
+        for valve in Registry.getItem("gIrrigation").getAllMembers():
+            if str(valve.getState()) != "OFF":
                 valve.sendCommand("OFF")
         Registry.getItem("Irrigation_Curr").postUpdate("OFF")
