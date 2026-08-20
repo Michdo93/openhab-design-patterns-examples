@@ -5,6 +5,7 @@ from openhab.triggers import ItemStateChangeTrigger
 @rule(triggers=[ItemStateChangeTrigger("vTimeOfDay")])
 class SetLightsBasedOnTimeOfDay:
     def execute(self, module, input):
-        time_of_day = str(Registry.getItem("vTimeOfDay").state)
+        time_of_day = str(Registry.getItem("vTimeOfDay").getState())
         Registry.getItem("gLights_OFF_" + time_of_day).sendCommand("OFF")
         Registry.getItem("gLights_ON_" + time_of_day).sendCommand("ON")
+        self.logger.info("vTimeOfDay=" + time_of_day + " -> Lichtgruppen angesteuert")
