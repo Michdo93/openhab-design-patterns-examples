@@ -9,3 +9,4 @@ Number RetryMaxAttempts      "Max Retries"          <number>
 Number RetryInitialInterval  "Initial Interval (s)" <time>
 Number RetryMaxInterval      "Max Interval (s)"      <time>
 String RetryAlternativeAction "Alternative Action"
+String NotificationItem "Letzte Alarmmeldung [%s]"
