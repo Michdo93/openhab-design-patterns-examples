@@ -9,9 +9,9 @@ from openhab.triggers import ItemStateChangeTrigger
 ])
 class OneToTwoThreeRuleStructure:
     def execute(self, module, input):
-        foo = str(Registry.getItem("Foo").state)
-        bar = str(Registry.getItem("Bar").state)
-        baz = str(Registry.getItem("Baz").state)
+        foo = str(Registry.getItem("Foo").getState())
+        bar = str(Registry.getItem("Bar").getState())
+        baz = str(Registry.getItem("Baz").getState())
 
         # 1. Pruefen, ob Regel laufen muss
         if "NULL" in (foo, bar, baz):
@@ -24,3 +24,4 @@ class OneToTwoThreeRuleStructure:
 
         # 3. Ausfuehren
         Registry.getItem("Buzz").sendCommand(new_state)
+        self.logger.info("on_count={} -> Buzz={}".format(on_count, new_state))
