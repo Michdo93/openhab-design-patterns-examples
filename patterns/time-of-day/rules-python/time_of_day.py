@@ -48,7 +48,7 @@ class SetVTimeOfDay:
             else TIMES_OF_DAY["week"]
         )
 
-        prev = Registry.getItem("vTimeOfDay").state
+        prev = Registry.getItem("vTimeOfDay").getState()
         curr = "UNKNOWN"
 
         for state, start_str, end_str in table:
