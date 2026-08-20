@@ -27,7 +27,11 @@ SCENES = {
 @rule(triggers=[ItemCommandTrigger("callScriptItem")])
 class CallScene:
     def execute(self, module, input):
-        scene_name = input["command"]
+        event = input.get("event")
+        if not event:
+            return
+
+        scene_name = str(event.getItemCommand())
         self.logger.info("scene: " + scene_name)
         scene = SCENES.get(scene_name)
         if scene:
