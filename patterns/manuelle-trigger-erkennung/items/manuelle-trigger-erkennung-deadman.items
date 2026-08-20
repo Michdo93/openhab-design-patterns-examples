@@ -2,3 +2,7 @@
 String DeadMansSwitch { expire="30s,state=MANUAL" }
 
 Group:Switch gWatchItems
+Switch WatchedItem1 (gWatchItems)
+
+// Konkreter Ausloeser fuer die Demo-Regel (im Buch nur als "Trigger" skizziert)
+Switch SomeRuleTrigger "Ausloeser fuer RuleThatChangesAGWatchItem"
