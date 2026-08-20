@@ -17,9 +17,9 @@ PRIOR_PRESENCE = 0.5
 class BayesianMultiSensorAggregation:
     def execute(self, module, input):
         states = {
-            "MotionSensor": str(Registry.getItem("MotionSensor").state) == "ON",
-            "WindowSensor": str(Registry.getItem("WindowSensor").state) == "CLOSED",
-            "LightSensor": float(str(Registry.getItem("LightSensor").state)) > 100,
+            "MotionSensor": str(Registry.getItem("MotionSensor").getState()) == "ON",
+            "WindowSensor": str(Registry.getItem("WindowSensor").getState()) == "CLOSED",
+            "LightSensor": float(str(Registry.getItem("LightSensor").getState())) > 100,
         }
 
         prob_presence = PRIOR_PRESENCE
