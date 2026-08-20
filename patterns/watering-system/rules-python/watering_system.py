@@ -12,11 +12,20 @@ watering_timers = {}
 ])
 class WateringService:
     def execute(self, module, input):
-        zone = input["itemName"]
-        duration = int(str(Registry.getItem("VT_Watering_Duration").state))
+        event = input.get("event")
+        if not event:
+            return
+
+        zone = event.getItemName()
+        duration_state = str(Registry.getItem("VT_Watering_Duration").getState())
+        if duration_state in ("NULL", "UNDEF"):
+            self.logger.warn("VT_Watering_Duration ist noch nicht gesetzt")
+            return
+        duration = int(duration_state)
+
         relay_name = zone.replace("VT_Watering_", "") + "_Relay"
 
-        if str(Registry.getItem(zone).state) == "START":
+        if str(Registry.getItem(zone).getState()) == "START":
             self.logger.info("Starte Bewaesserung fuer Zone {} fuer {} Sekunden".format(zone, duration))
             Registry.getItem(relay_name).sendCommand("ON")
 
