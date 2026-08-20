@@ -42,7 +42,11 @@ def switch_released(id_):
 @rule(triggers=[ChannelEventTrigger("enocean:rockerSwitch:xxxxxxxx:xxxxxxxx:rockerswitchA")])
 class Switch1Events:
     def execute(self, module, input):
-        event_name = input.get("event")
+        event = input.get("event")
+        if not event:
+            return
+
+        event_name = event.getEvent()
         if event_name == "DIR1_PRESSED":
             switch_pressed("MySwitch1Up")
         elif event_name == "DIR1_RELEASED":
