@@ -9,9 +9,9 @@ from openhab.triggers import ItemStateChangeTrigger
 ])
 class MultiSensorConfidenceAggregation:
     def execute(self, module, input):
-        motion_conf = 0.7 if str(Registry.getItem("MotionSensor").state) == "ON" else 0.0
-        window_conf = 0.5 if str(Registry.getItem("WindowSensor").state) == "CLOSED" else 0.0
-        light_conf = 0.3 if float(str(Registry.getItem("LightSensor").state)) > 100 else 0.0
+        motion_conf = 0.7 if str(Registry.getItem("MotionSensor").getState()) == "ON" else 0.0
+        window_conf = 0.5 if str(Registry.getItem("WindowSensor").getState()) == "CLOSED" else 0.0
+        light_conf = 0.3 if float(str(Registry.getItem("LightSensor").getState())) > 100 else 0.0
 
         aggregated_conf = motion_conf + window_conf + light_conf
 
