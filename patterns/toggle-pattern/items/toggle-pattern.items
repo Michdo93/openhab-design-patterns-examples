@@ -1,0 +1,2 @@
+Switch mqttSwitchIn2 "Taster (simuliert MQTT-Eingang)"
+Switch modbusSwitchOut1 "Lampe (simuliert Modbus-Ausgang)"
