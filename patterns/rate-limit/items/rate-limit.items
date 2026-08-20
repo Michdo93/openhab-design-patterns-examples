@@ -1,0 +1,3 @@
+// Beispiel-Ausloeser: repraesentiert ein haeufig auftretendes Ereignis,
+// das nur maximal einmal pro 24 Stunden zu einer Aktion fuehren soll
+Switch RateLimitTrigger "Rate-Limit Testschalter"
