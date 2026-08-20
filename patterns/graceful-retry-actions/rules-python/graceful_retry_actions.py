@@ -10,7 +10,7 @@ retry_counts = {}
 
 def attempt(device, max_retries, initial_interval, max_interval, alt_action):
     try:
-        state = Registry.getItem(device).state
+        state = Registry.getItem(device).getState()
         if str(state) != "NULL":
             Registry.getItem(device).sendCommand("ON")
             logger.info(device + " command sent successfully!")
@@ -40,12 +40,12 @@ def attempt(device, max_retries, initial_interval, max_interval, alt_action):
 @rule(triggers=[ItemStateChangeTrigger("RetryTrigger", state="ON")])
 class ConfigurableMultiDeviceRetry:
     def execute(self, module, input):
-        max_retries = int(str(Registry.getItem("RetryMaxAttempts").state))
-        initial_interval = int(str(Registry.getItem("RetryInitialInterval").state))
-        max_interval = int(str(Registry.getItem("RetryMaxInterval").state))
-        alt_action = str(Registry.getItem("RetryAlternativeAction").state)
+        max_retries = int(str(Registry.getItem("RetryMaxAttempts").getState()))
+        initial_interval = int(str(Registry.getItem("RetryInitialInterval").getState()))
+        max_interval = int(str(Registry.getItem("RetryMaxInterval").getState()))
+        alt_action = str(Registry.getItem("RetryAlternativeAction").getState())
 
-        devices = [i.name for i in Registry.getItem("RetryDevices").members]
+        devices = [i.getName() for i in Registry.getItem("RetryDevices").getAllMembers()]
 
         for device in devices:
             retry_counts[device] = 0
