@@ -8,8 +8,13 @@ my_color_light_command = "INCREASE"
 class MyColorLightOnOff:
     def execute(self, module, input):
         global my_color_light_command
-        hsb = str(Registry.getItem("MyColorLight").state)
-        brightness = float(hsb.split(",")[2])
+        hsb = str(Registry.getItem("MyColorLight").getState())
+
+        if hsb in ("NULL", "UNDEF"):
+            brightness = 0
+        else:
+            brightness = float(hsb.split(",")[2])
+
         if brightness == 0:
             my_color_light_command = "INCREASE"
             Registry.getItem("MyColorLight").sendCommand("ON")
