@@ -1,0 +1,5 @@
+Switch MotionSensor "Bewegungssensor"
+String vTimeOfDay "Tageszeit [%s]"
+Number CurrentTemp "Aktuelle Temperatur [%.1f]"
+Number TargetTemp "Zieltemperatur [%.1f]"
+Switch Fan "Deckenventilator [%s]"
