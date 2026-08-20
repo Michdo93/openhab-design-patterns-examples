@@ -22,7 +22,7 @@ class ADoorSensorChanged:
         else:
             timer.postUpdate("OFF")
 
-        last_update.postUpdate(datetime.now().astimezone())
+        last_update.postUpdate(datetime.now().astimezone().isoformat())
 
         msg = door.getName() + (" was opened" if door_state == "OPEN" else " was closed")
 
