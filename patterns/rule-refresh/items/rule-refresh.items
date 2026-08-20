@@ -1,0 +1,4 @@
+// Wird durch die Metadaten "triggerRule" von der dynamischen Regel gefunden
+Switch DynamicTriggerItem1 { triggerRule="watch" }
+
+Switch Reload_Item "Regel-Skript neu laden ausloesen"
