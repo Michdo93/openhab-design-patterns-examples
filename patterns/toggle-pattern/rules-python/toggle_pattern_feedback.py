@@ -6,8 +6,8 @@ from openhab.triggers import ItemCommandTrigger
 class ToggleLampeMitFeedback:
     def execute(self, module, input):
         lamp = Registry.getItem("modbusSwitchOut1")
-        if str(lamp.state) != "ON":
+        if str(lamp.getState()) != "ON":
             lamp.sendCommand("ON")
         else:
             lamp.sendCommand("OFF")
-        lamp.postUpdate(lamp.state)
+        lamp.postUpdate(str(lamp.getState()))
