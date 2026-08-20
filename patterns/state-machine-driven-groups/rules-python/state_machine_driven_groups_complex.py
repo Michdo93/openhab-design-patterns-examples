@@ -14,5 +14,9 @@ class SetLightsBasedOnTimeOfDay:
                 None,
             )
             if setting is not None:
-                light.sendCommand(setting.getState())
-                self.logger.info(light.getName() + " -> " + str(setting.getState()))
+                setting_state = setting.getState()
+                if str(setting_state) in ("NULL", "UNDEF"):
+                    self.logger.warn(light.getName() + ": Sollwert fuer " + time_of_day + " noch nicht gesetzt")
+                    continue
+                light.sendCommand(str(setting_state))
+                self.logger.info(light.getName() + " -> " + str(setting_state))
