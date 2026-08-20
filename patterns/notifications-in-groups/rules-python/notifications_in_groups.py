@@ -8,17 +8,17 @@ from openhab.triggers import GroupStateChangeTrigger
 class WarningsAndAlertsForTemperature:
     def execute(self, module, input):
         hour = datetime.now().hour
-        members = Registry.getItem("TemperatureRooms").members
+        members = Registry.getItem("TemperatureRooms").getAllMembers()
 
         if 9 <= hour < 21:  # 9 bis 21 Uhr
             for r in members:
-                temp = float(str(r.state))
+                temp = float(str(r.getState()))
                 if 25 <= temp < 30:
-                    self.logger.info("Temp warn {}: {} Grad C".format(r.name, temp))
+                    self.logger.info("Temp warn {}: {} Grad C".format(r.getName(), temp))
                     # Weitere Benachrichtigungen
 
         for r in members:
-            temp = float(str(r.state))
+            temp = float(str(r.getState()))
             if temp >= 30:
-                self.logger.info("Temp alert {}: {} Grad C".format(r.name, temp))
+                self.logger.info("Temp alert {}: {} Grad C".format(r.getName(), temp))
                 # Weitere Benachrichtigungen
