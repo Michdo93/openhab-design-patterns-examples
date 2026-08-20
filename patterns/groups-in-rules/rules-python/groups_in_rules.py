@@ -7,25 +7,31 @@ from openhab.triggers import GroupStateChangeTrigger, GroupStateUpdateTrigger
 @rule(triggers=[GroupStateChangeTrigger("gDoorsSensors")])
 class ADoorSensorChanged:
     def execute(self, module, input):
-        door = Registry.getItem(input["itemName"])
-        timer = Registry.getItem(door.name + "_Timer")
-        last_update = Registry.getItem(door.name + "_LastUpdate")
+        event = input.get("event")
+        if not event:
+            return
 
-        if str(door.state) == "OPEN":
+        door = Registry.getItem(event.getItemName())
+        timer = Registry.getItem(door.getName() + "_Timer")
+        last_update = Registry.getItem(door.getName() + "_LastUpdate")
+
+        door_state = str(door.getState())
+
+        if door_state == "OPEN":
             timer.sendCommand("ON")
         else:
             timer.postUpdate("OFF")
 
-        last_update.postUpdate(datetime.now())
+        last_update.postUpdate(datetime.now().astimezone())
 
-        msg = door.name + (" was opened" if str(door.state) == "OPEN" else " was closed")
+        msg = door.getName() + (" was opened" if door_state == "OPEN" else " was closed")
 
         alert = False
-        time_of_day = str(Registry.getItem("vTimeOfDay").state)
+        time_of_day = str(Registry.getItem("vTimeOfDay").getState())
         if time_of_day in ("NIGHT", "BED"):
             alert = True
             msg += " at night"
-        if str(Registry.getItem("vPresent").state) == "OFF":
+        if str(Registry.getItem("vPresent").getState()) == "OFF":
             alert = True
             msg += " and no one is home"
 
@@ -37,12 +43,16 @@ class ADoorSensorChanged:
 @rule(triggers=[GroupStateUpdateTrigger("gDoorsTimers", "OFF")])
 class TimerExpiredForADoor:
     def execute(self, module, input):
-        item_name = input["itemName"]
+        event = input.get("event")
+        if not event:
+            return
+
+        item_name = event.getItemName()
         door_name = item_name.split("_")[0]
 
         open_doors = [
-            d.name for d in Registry.getItem("gDoorsSensors").members
-            if str(d.state) == "OPEN"
+            d.getName() for d in Registry.getItem("gDoorsSensors").getAllMembers()
+            if str(d.getState()) == "OPEN"
         ]
 
         msg = door_name + " has been open for over an hour"
@@ -52,6 +62,6 @@ class TimerExpiredForADoor:
         Registry.getItem("aAlerts").sendCommand(msg)
         self.logger.info(msg)
 
-        time_of_day = str(Registry.getItem("vTimeOfDay").state)
+        time_of_day = str(Registry.getItem("vTimeOfDay").getState())
         if time_of_day in ("NIGHT", "BED"):
             Registry.getItem(item_name).sendCommand("ON")
