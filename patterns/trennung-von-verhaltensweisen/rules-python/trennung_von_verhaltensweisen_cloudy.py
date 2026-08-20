@@ -5,9 +5,10 @@ from openhab.triggers import ItemStateChangeTrigger
 @rule(triggers=[ItemStateChangeTrigger("vCloudiness")])
 class IsItCloudyOutside:
     def execute(self, module, input):
-        cloudiness = float(str(Registry.getItem("vCloudiness").state))
+        cloudiness = float(str(Registry.getItem("vCloudiness").getState()))
         new_state = "ON" if cloudiness > 50 else "OFF"
 
         is_cloudy = Registry.getItem("vIsCloudy")
-        if new_state != str(is_cloudy.state):
+        if new_state != str(is_cloudy.getState()):
             is_cloudy.postUpdate(new_state)
+            self.logger.info("vCloudiness=" + str(cloudiness) + " -> vIsCloudy=" + new_state)
