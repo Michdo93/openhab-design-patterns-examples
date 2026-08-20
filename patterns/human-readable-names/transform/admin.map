@@ -5,3 +5,4 @@ NULL=unbekannt
 
 vNetwork_cerberos=cerberos
 vCerberos_SensorReporter_Online=cerberos sensorReporter
+MyItem=Mein menschenlesbares Item
