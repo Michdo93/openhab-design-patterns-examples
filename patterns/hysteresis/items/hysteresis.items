@@ -1,0 +1,2 @@
+Number MyTemp "Temperatur [%.1f °F]"
+Switch MyHeater "Heizung [%s]"
