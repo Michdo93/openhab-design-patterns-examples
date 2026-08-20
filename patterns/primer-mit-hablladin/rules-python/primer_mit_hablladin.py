@@ -18,7 +18,7 @@ class GLSMGarageLightsStateMachineEventsHandler:
         global glsm_timer
 
         with glsm_lock:
-            state = str(Registry.getItem("GLSM").state)
+            state = str(Registry.getItem("GLSM").getState())
 
             if state in ("NULL", "UNDEF"):
                 Registry.getItem("GarageLights").sendCommand("OFF")
