@@ -9,6 +9,8 @@ Group:Switch:OR(ON, OFF) gLights_OFF_EVENING
 Group:Switch:OR(ON, OFF) gLights_ON_NIGHT
 Group:Switch:OR(ON, OFF) gLights_OFF_NIGHT
 
+String vTimeOfDay "Tageszeit [%s]"
+
 Switch aFrontLamp   "Front Room Lamp"
        (gLights_ON_MORNING, gLights_OFF_DAY, gLights_ON_AFTERNOON,
         gLights_ON_EVENING, gLights_OFF_NIGHT)
