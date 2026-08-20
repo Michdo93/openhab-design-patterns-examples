@@ -14,11 +14,23 @@ def alert(item_name, expected_state):
 @rule(triggers=[ItemCommandTrigger("MySwitch")])
 class MQTTStateSupervision:
     def execute(self, module, input):
-        expected_state = str(input["command"])
-        supervise_state(input["itemName"], expected_state, alert, T_RB_SECONDS)
+        event = input.get("event")
+        if not event:
+            return
+
+        expected_state = str(event.getItemCommand())
+        item_name = event.getItemName()
+        logger.info(item_name + ": Ueberwachung gestartet, erwarte " + expected_state + " innerhalb " + str(T_RB_SECONDS) + "s")
+        supervise_state(item_name, expected_state, alert, T_RB_SECONDS)
 
 
 @rule(triggers=[ItemStateChangeTrigger("MySwitch")])
 class MQTTStateUpdate:
     def execute(self, module, input):
-        cancel_supervision(input["itemName"])
+        event = input.get("event")
+        if not event:
+            return
+
+        item_name = event.getItemName()
+        logger.info(item_name + ": Zustand hat sich geaendert, Ueberwachung wird abgebrochen")
+        cancel_supervision(item_name)
