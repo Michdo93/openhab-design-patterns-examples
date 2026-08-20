@@ -3,3 +3,8 @@ Group:Switch:OR(ON,OFF) gLights_OFF
 Group:Switch:OR(ON,OFF) gLights_ON_DAY (gLights_ON)
 Group:Switch:OR(ON,OFF) gLights_OFF_DAY (gLights_OFF)
 Switch gLights_WEATHER_OVERRIDE
+
+String vTimeOfDay "Tageszeit [%s]"
+
+Switch LightMorningRoom (gLights_ON_DAY)
+Switch LightHallway (gLights_OFF_DAY)
