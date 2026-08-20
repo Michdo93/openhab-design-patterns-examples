@@ -4,11 +4,11 @@ Group:Switch:OR(ON, OFF) gDoorsTimers
 
 Contact vFrontDoor "Front Door [%s]" (gDoorsSensors)
 DateTime vFrontDoor_LastUpdate "Last update [%1$tm/%1$td %1$tH:%1$tM]" (gDoorsLast)
-Switch vFrontDoor_Timer { expire="1h,command=OFF" } (gDoorsTimers)
+Switch vFrontDoor_Timer (gDoorsTimers) { expire="1h,command=OFF" }
 
 Contact vBackDoor "Back Door [%s]" (gDoorsSensors)
 DateTime vBackDoor_LastUpdate "Last update [%1$tm/%1$td %1$tH:%1$tM]" (gDoorsLast)
-Switch vBackDoor_Timer { expire="1h,command=OFF" } (gDoorsTimers)
+Switch vBackDoor_Timer (gDoorsTimers) { expire="1h,command=OFF" }
 
 String vTimeOfDay "Tageszeit [%s]"
 Switch vPresent "Anwesenheit [%s]"
