@@ -4,3 +4,7 @@ Number VT_Watering_Duration "Bewaesserungsdauer [%d s]"
 Number VT_Watering_Interval "Bewaesserungsintervall [%d Tage]"
 
 Switch SomeCondition
+
+// Relais pro Zone, werden von der Watering Service Regel angesteuert
+Switch Zone1_Relay "Ventil Zone 1 [%s]"
+Switch Zone2_Relay "Ventil Zone 2 [%s]"
