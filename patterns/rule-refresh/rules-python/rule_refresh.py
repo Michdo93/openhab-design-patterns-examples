@@ -7,7 +7,7 @@ def build_triggers_from_metadata():
     triggers = []
     for item in Registry.getItems():
         if item.getMetadata().get("triggerRule") is not None:
-            triggers.append(ItemStateChangeTrigger(item.name))
+            triggers.append(ItemStateChangeTrigger(item.getName()))
     return triggers
 
 
@@ -20,7 +20,9 @@ class DynamischeMetadatenRegel:
         return found
 
     def execute(self, module, input):
-        self.logger.info(str(input.get("itemName")) + " hat sich geaendert (dynamischer Trigger)")
+        event = input.get("event")
+        item_name = event.getItemName() if event else "unbekannt"
+        self.logger.info(item_name + " hat sich geaendert (dynamischer Trigger)")
 
 
 @rule(triggers=[ItemCommandTrigger("Reload_Item", "ON")])
