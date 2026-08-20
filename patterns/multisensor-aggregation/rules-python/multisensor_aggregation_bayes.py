@@ -16,10 +16,11 @@ PRIOR_PRESENCE = 0.5
 ])
 class BayesianMultiSensorAggregation:
     def execute(self, module, input):
+        light_state = str(Registry.getItem("LightSensor").getState())
         states = {
             "MotionSensor": str(Registry.getItem("MotionSensor").getState()) == "ON",
             "WindowSensor": str(Registry.getItem("WindowSensor").getState()) == "CLOSED",
-            "LightSensor": float(str(Registry.getItem("LightSensor").getState())) > 100,
+            "LightSensor": light_state not in ("NULL", "UNDEF") and float(light_state) > 100,
         }
 
         prob_presence = PRIOR_PRESENCE

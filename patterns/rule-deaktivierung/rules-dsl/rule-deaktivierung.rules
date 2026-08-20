@@ -1,16 +1,28 @@
-rule "Christmas lights"
-when
-    Item vTimeOfDay changed to EVENING or
-    Item vTimeOfDay changed to NIGHT
-then
-    if(vChristmas.state != ON) return;
-    // Lichtsteuerung
-end
+// Hinweis: Rules DSL hat keinen eingebauten, direkten Zugriff auf den
+// RuleManager-Service (anders als JS "rules.setEnabled(...)" oder Python
+// "getService('org.openhab.core.automation.RuleManager')"). Wir nutzen
+// stattdessen die openHAB REST-API.
+//
+// WICHTIG: Die beiden UIDs unten entsprechen den automatisch vergebenen
+// UIDs der Test-Dummy-Regeln aus _test_dummy_christmas_lights.rules und
+// _test_dummy_mbr_humidifier.rules (Muster: <Dateiname ohne Endung>-<laufende
+// Nummer im File>). Bitte vor dem ersten Test in der UI unter
+// "Einstellungen -> Regeln" die tatsaechlichen UIDs gegenpruefen.
 
-rule "MBR Humidifier"
+rule "Christmas Mode"
 when
-    Item vMBR_Humidity changed
+    Item vChristmas changed or
+    System started
 then
-    if(vChristmas.state == ON) return;
-    // Luftbefeuchtersteuerung
+    val christmasOn = (vChristmas.state == ON)
+
+    sendHttpPostRequest(
+        "http://localhost:8080/rest/rules/_test_dummy_christmas_lights-1/enable",
+        "text/plain", if(christmasOn) "true" else "false"
+    )
+    sendHttpPostRequest(
+        "http://localhost:8080/rest/rules/_test_dummy_mbr_humidifier-1/enable",
+        "text/plain", if(christmasOn) "false" else "true"
+    )
+    logInfo("ChristmasMode", "vChristmas=" + christmasOn + " -> christmas_lights enabled=" + christmasOn + ", mbr_humidifier enabled=" + !christmasOn)
 end

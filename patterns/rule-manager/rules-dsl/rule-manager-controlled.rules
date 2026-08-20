@@ -1,6 +1,6 @@
 rule "Example rule"
 when
-    // Trigger der Beispielregel
+    Item DummyExecTrigger received command
 then
     isRunningExampleRule.sendCommand(ON)
 

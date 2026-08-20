@@ -2,7 +2,9 @@
 Switch ProxySwitch "Schalter" <light>
 
 // sendet Befehle an das Geraet
-Switch BoundSwitch { channel="binding:thing:sendChannel" }
+// Platzhalter-Kanal-UID: <binding-id>:<thing-type-id>:<thing-id>:<channel-id>
+// an das eigene Binding/Thing anpassen!
+Switch BoundSwitch { channel="example:device:mydevice:send" }
 
 // empfaengt Statusupdates
-Switch BoundSwitchUpdates { channel="binding:thing:receiveChannel" }
+Switch BoundSwitchUpdates { channel="example:device:mydevice:receive" }

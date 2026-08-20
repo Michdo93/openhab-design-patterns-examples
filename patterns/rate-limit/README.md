@@ -4,6 +4,9 @@ Aktion hoechstens einmal pro Zeitfenster ausfuehren, ueber den eingebauten Scrip
 
 ## Dateien in diesem Beispiel
 
+**Items** (`items/`):
+- `rate-limit.items`
+
 **Regeln** – bitte nur EINE der drei Varianten verwenden:
 
 - Rules DSL (`rules-dsl/`): `rate-limit.rules`
@@ -15,7 +18,12 @@ Aktion hoechstens einmal pro Zeitfenster ausfuehren, ueber den eingebauten Scrip
 Voraussetzung: openHAB läuft bereits und die gewünschte Rule-Engine ist installiert
 (siehe Haupt-README im Wurzelverzeichnis dieses Repos für die Add-on-Installation).
 
-1. **EINE Rule-Variante wählen und kopieren:**
+1. **Items kopieren:** Inhalt der Datei(en) unter `items/` in eine eigene
+   `.items`-Datei unter `$OPENHAB_CONF/items/` einfügen (z. B. anhängen an eine
+   bestehende Datei oder als neue Datei ablegen), Item-Namen bei Bedarf an die
+   eigene Installation anpassen.
+
+2. **EINE Rule-Variante wählen und kopieren:**
 
    - **Rules DSL:** Datei(en) aus `rules-dsl/` nach `$OPENHAB_CONF/rules/` kopieren.
    - **JavaScript Scripting:** Datei(en) aus `rules-js/` nach `$OPENHAB_CONF/automation/js/` kopieren.
@@ -29,7 +37,7 @@ Voraussetzung: openHAB läuft bereits und die gewünschte Rule-Engine ist instal
    openHAB überwacht diese Verzeichnisse automatisch (File Watcher) und lädt neue
    bzw. geänderte Dateien innerhalb weniger Sekunden selbstständig nach.
 
-2. **Testen:** Über die openHAB-UI (`Einstellungen → Items` bzw. das BasicUI)
+3. **Testen:** Über die openHAB-UI (`Einstellungen → Items` bzw. das BasicUI)
    den/die Auslöser des Beispiels manuell schalten und in
    `Einstellungen → System → Log Viewer` bzw. `openhab.log` die Ausgaben der Regel
    verfolgen.

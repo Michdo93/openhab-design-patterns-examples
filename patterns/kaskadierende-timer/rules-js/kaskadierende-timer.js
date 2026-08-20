@@ -41,7 +41,12 @@ rules.JSRule({
     const currValveName = event.receivedCommand;
     const currValve = items.getItem(currValveName);
     const currValveNum = parseInt(currValveName.split("_")[2]);
-    const currValveMins = parseInt(items.getItem(currValveName + "_Time").state);
+    const timeState = items.getItem(currValveName + "_Time").state;
+    if (timeState === "NULL" || timeState === "UNDEF") {
+      console.warn("Keine Zeit fuer " + currValveName + " gesetzt");
+      return;
+    }
+    const currValveMins = parseInt(timeState);
     const nextValveName = "Irrigation_Zone_" + (currValveNum + 1);
 
     currValve.sendCommand("ON");

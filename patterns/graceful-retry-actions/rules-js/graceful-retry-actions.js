@@ -5,6 +5,13 @@ rules.JSRule({
   name: "Configurable Multi-Device Retry",
   triggers: [triggers.ItemStateChangeTrigger("RetryTrigger", undefined, "ON")],
   execute: (event) => {
+    if (["RetryMaxAttempts", "RetryInitialInterval", "RetryMaxInterval"].some(
+      (n) => items.getItem(n).state === "NULL" || items.getItem(n).state === "UNDEF"
+    )) {
+      console.warn("Konfiguration (RetryMaxAttempts/RetryInitialInterval/RetryMaxInterval) noch nicht gesetzt");
+      return;
+    }
+
     const maxRetries = parseInt(items.getItem("RetryMaxAttempts").state);
     const initialInterval = parseInt(items.getItem("RetryInitialInterval").state);
     const maxInterval = parseInt(items.getItem("RetryMaxInterval").state);
@@ -36,7 +43,18 @@ rules.JSRule({
           } else {
             console.error(device + " max retries reached!");
             const message = altAction ? device + ": " + altAction : device + " could not be switched ON!";
-            actions.NotificationAction.sendNotification("admin@example.com", message);
+            try {
+              items.getItem("NotificationItem").postUpdate(message);
+            } catch (notifyItemEx) {
+              console.warn("Konnte NotificationItem nicht aktualisieren: " + notifyItemEx.message);
+            }
+            try {
+              if (actions.NotificationAction) {
+                actions.NotificationAction.sendNotification("admin@example.com", message);
+              }
+            } catch (notifyEx) {
+              console.warn("Cloud-Benachrichtigung nicht verfuegbar: " + notifyEx.message);
+            }
           }
         }
       };

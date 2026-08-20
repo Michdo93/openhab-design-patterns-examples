@@ -1,6 +1,13 @@
-val lastAction = privateCache.get("LastAction", [ | now ])
+rule "Rate-Limit Beispiel"
+when
+    Item RateLimitTrigger received command ON
+then
+    val lastAction = privateCache.get("LastAction", [ | now.minusDays(1) ])
 
-if (lastAction.isBefore(now.minusHours(24))) {
-    logInfo("RateLimit", "Rate-limited action")
-    privateCache.put("LastAction", now)
-}
+    if (lastAction.isBefore(now.minusHours(24))) {
+        logInfo("RateLimit", "Rate-limited action")
+        privateCache.put("LastAction", now)
+    } else {
+        logInfo("RateLimit", "Ereignis ignoriert, Sperrzeit laeuft noch")
+    }
+end

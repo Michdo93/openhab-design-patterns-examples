@@ -30,9 +30,14 @@ then
         valve | valve.name == receivedCommand.toString
     ]
     val currValveNum = Integer::parseInt(currValve.name.split("_").get(2))
-    val currValveMins = gIrrigation_Times.members.findFirst[
+    val currValveTimeItem = gIrrigation_Times.members.findFirst[
         t | t.name == currValve.name+"_Time"
-    ].state as Number
+    ]
+    if(currValveTimeItem === null || currValveTimeItem.state == NULL) {
+        logWarn("Irrigation", "Keine Zeit fuer " + currValve.name + " gesetzt")
+        return;
+    }
+    val currValveMins = currValveTimeItem.state as Number
 
     val nextValveNum = currValveNum + 1
     val nextValve = gIrrigation.members.findFirst[

@@ -8,8 +8,8 @@ rules.JSRule({
     continueDimming = true;
 
     function step() {
-      const currLevel = parseInt(items.getItem("DimLamp").state);
-      const target = parseInt(items.getItem("DimTarget").state);
+      const currLevel = isNaN(parseInt(items.getItem("DimLamp").state)) ? 0 : parseInt(items.getItem("DimLamp").state);
+      const target = isNaN(parseInt(items.getItem("DimTarget").state)) ? 0 : parseInt(items.getItem("DimTarget").state);
 
       if (currLevel >= target || !continueDimming) {
         console.log("Dimmen beendet");

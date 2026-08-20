@@ -1,7 +1,11 @@
 Switch Large_Garagedoor_Opener
 Switch Small_Garagedoor_Opener
-Switch Large_Garagedoor_Opener_Linked { channel="binding:thing:largeDoor" }
-Switch Small_Garagedoor_Opener_Linked { channel="binding:thing:smallDoor" }
+
+// Platzhalter-Kanal-UIDs: <binding-id>:<thing-type-id>:<thing-id>:<channel-id>
+// an das eigene Binding/Thing anpassen!
+Switch Large_Garagedoor_Opener_Linked { channel="example:device:largedoor:opener" }
+Switch Small_Garagedoor_Opener_Linked { channel="example:device:smalldoor:opener" }
+
 Switch GarageControllerComputer
 Switch GarageControllerService
 String AlertItem

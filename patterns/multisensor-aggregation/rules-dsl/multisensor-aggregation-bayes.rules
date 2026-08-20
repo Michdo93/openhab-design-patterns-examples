@@ -14,7 +14,7 @@ then
     val Map<String, Boolean> states = newHashMap(
         "MotionSensor" -> (MotionSensor.state == ON),
         "WindowSensor" -> (WindowSensor.state == CLOSED),
-        "LightSensor"  -> ((LightSensor.state as Number) > 100)
+        "LightSensor"  -> (LightSensor.state != NULL && (LightSensor.state as Number) > 100)
     )
 
     var Double probPresence = PRIOR_PRESENCE

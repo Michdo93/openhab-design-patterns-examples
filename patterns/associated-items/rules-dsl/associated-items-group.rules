@@ -1,15 +1,22 @@
-// Ansatz: Item-Name
-val status1 = gSensors.members.findFirst[s | s.name == triggeringItem.name + "_Status"]
+rule "Zugehoeriges Item ueber Gruppenzugehoerigkeit finden"
+when
+    Member of gSensors changed
+then
+    // Ansatz: Item-Name
+    val status1 = gSensors.members.findFirst[s | s.name == triggeringItem.name + "_Status"]
 
-// Ansatz: Item-Tag
-val status2 = gSensors.members.findFirst[s | s.tags.contains("Status")]
+    // Ansatz: Item-Tag
+    val status2 = gSensors.members.findFirst[s | s.tags.contains("Status")]
 
-// Ansatz: Item-Tags
-val status3 = gSensors.members.findFirst[s |
-    s.tags.contains("Status") && s.tags.contains("Power")
-]
+    // Ansatz: Item-Tags
+    val status3 = gSensors.members.findFirst[s |
+        s.tags.contains("Status") && s.tags.contains("Power")
+    ]
 
-// Ansatz: mehrere Kriterien
-val status4 = gSensors.members.findFirst[s |
-    s.tags.contains("Status") && s.name.endsWith("_Status") && s instanceof SwitchItem
-]
+    // Ansatz: mehrere Kriterien
+    val status4 = gSensors.members.findFirst[s |
+        s.tags.contains("Status") && s.name.endsWith("_Status") && s instanceof SwitchItem
+    ]
+
+    logInfo("AssociatedItems", "status1=" + status1?.name + " status2=" + status2?.name)
+end

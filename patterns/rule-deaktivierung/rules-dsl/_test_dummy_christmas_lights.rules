@@ -1,0 +1,8 @@
+// Reine Test-Hilfsdatei, um "rule-deaktivierung.rules" testen zu koennen -
+// im echten Einsatz waeren das eure tatsaechlichen Weihnachtslicht-Regeln.
+rule "Christmas Lights (Test-Dummy)"
+when
+    Item DummyRuleTrigger received command
+then
+    // absichtlich leer
+end

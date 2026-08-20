@@ -1,17 +1,24 @@
+// Hinweis: Rules DSL hat keinen eingebauten, direkten Zugriff auf den
+// RuleManager-Service (anders als JS "rules.setEnabled(...)" oder Python
+// "getService('org.openhab.core.automation.RuleManager')"). Wir nutzen
+// stattdessen die openHAB REST-API.
+//
+// WICHTIG: "rule-manager-controlled-1" ist die von openHAB automatisch
+// vergebene UID der einzigen Regel in rule-manager-controlled.rules
+// (Muster: <Dateiname ohne Endung>-<laufende Nummer im File>). Bitte vor dem
+// ersten Test in der UI unter "Einstellungen -> Regeln -> Example rule ->
+// Details" die tatsaechliche UID gegenpruefen und hier ggf. anpassen.
+
 rule "Enable example rule"
 when
     Item exampleRule changed from OFF to ON
 then
-    executeCommandLine("/usr/bin/sshpass", "-p", "habopen",
-        "/usr/bin/ssh", "-p", "8101", "openhab@localhost",
-        "openhab:automation", "enableRule", "<uid>", "true")
+    sendHttpPostRequest("http://localhost:8080/rest/rules/rule-manager-controlled-1/enable", "text/plain", "true")
 end
 
 rule "Disable example rule"
 when
     Item exampleRule changed from ON to OFF
 then
-    executeCommandLine("/usr/bin/sshpass", "-p", "habopen",
-        "/usr/bin/ssh", "-p", "8101", "openhab@localhost",
-        "openhab:automation", "enableRule", "<uid>", "false")
+    sendHttpPostRequest("http://localhost:8080/rest/rules/rule-manager-controlled-1/enable", "text/plain", "false")
 end

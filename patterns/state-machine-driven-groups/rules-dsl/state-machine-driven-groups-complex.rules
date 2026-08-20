@@ -6,6 +6,8 @@ then
         val setting = gSettings.members.findFirst[
             s | s.name == light.name + "_" + vTimeOfDay.state.toString
         ]
-        if(setting !== null) light.sendCommand(setting.state)
+        if(setting !== null && setting.state != NULL) {
+            light.sendCommand(setting.state.toString)
+        }
     ]
 end

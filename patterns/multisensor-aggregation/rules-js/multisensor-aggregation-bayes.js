@@ -13,10 +13,11 @@ rules.JSRule({
     triggers.ItemStateChangeTrigger("LightSensor")
   ],
   execute: (event) => {
+    const lightState = items.getItem("LightSensor").state;
     const states = {
       MotionSensor: items.getItem("MotionSensor").state === "ON",
       WindowSensor: items.getItem("WindowSensor").state === "CLOSED",
-      LightSensor: parseFloat(items.getItem("LightSensor").state) > 100
+      LightSensor: lightState !== "NULL" && lightState !== "UNDEF" && parseFloat(lightState) > 100
     };
 
     let probPresence = PRIOR_PRESENCE;

@@ -1,1 +1,1 @@
-Switch MySwitch "MQTT Switch [%s]" { channel="mqtt:topic:broker:light:state" }
+Switch MySwitch "MQTT Switch [%s]"

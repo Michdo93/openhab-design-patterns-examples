@@ -6,7 +6,7 @@ when
 then
     var Number motionConfidence = if(MotionSensor.state == ON) 0.7 else 0.0
     var Number windowConfidence = if(WindowSensor.state == CLOSED) 0.5 else 0.0
-    var Number lightConfidence  = if((LightSensor.state as Number) > 100) 0.3 else 0.0
+    var Number lightConfidence  = if(LightSensor.state != NULL && (LightSensor.state as Number) > 100) 0.3 else 0.0
 
     var Number aggregatedConfidence = motionConfidence + windowConfidence + lightConfidence
 

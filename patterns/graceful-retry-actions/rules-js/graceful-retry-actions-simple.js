@@ -20,7 +20,18 @@ rules.JSRule({
           retryTimer.reschedule(time.ZonedDateTime.now().plusSeconds(RETRY_INTERVAL));
         } else {
           console.error("Maximale Anzahl an Versuchen erreicht!");
-          actions.NotificationAction.sendNotification("admin@example.com", "LightSwitch konnte nicht eingeschaltet werden");
+          try {
+            items.getItem("NotificationItem").postUpdate("LightSwitch konnte nicht eingeschaltet werden");
+          } catch (notifyItemEx) {
+            console.warn("Konnte NotificationItem nicht aktualisieren: " + notifyItemEx.message);
+          }
+          try {
+            if (actions.NotificationAction) {
+              actions.NotificationAction.sendNotification("admin@example.com", "LightSwitch konnte nicht eingeschaltet werden");
+            }
+          } catch (notifyEx) {
+            console.warn("Cloud-Benachrichtigung nicht verfuegbar: " + notifyEx.message);
+          }
         }
       }
     };

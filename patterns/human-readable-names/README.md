@@ -5,6 +5,7 @@ Technische Item-Namen per MAP-Transformation in lesbare Namen fuer Alarme/Logs u
 ## Dateien in diesem Beispiel
 
 **Items** (`items/`):
+- `human-readable-names-simple.items`
 - `human-readable-names.items`
 
 **Transformationen** (`transform/`) – benötigt das Add-on „Map Transformation“:

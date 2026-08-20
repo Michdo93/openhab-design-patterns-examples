@@ -1,6 +1,6 @@
 rule "Eine Regel, die den Timer startet"
 when
-    // irgendein Trigger
+    Item StartMyTimerTrigger received command ON
 then
     // Arbeitsschritte ausfuehren
 

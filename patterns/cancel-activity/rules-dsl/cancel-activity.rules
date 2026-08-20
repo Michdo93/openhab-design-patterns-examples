@@ -8,9 +8,10 @@ then
     continueDimming = true
 
     dimTimer = createTimer(now, [ |
-        var currLevel = (DimLamp.state as Number).intValue
+        var currLevel = if(DimLamp.state != NULL) (DimLamp.state as Number).intValue else 0
+        var target = if(DimTarget.state != NULL) (DimTarget.state as Number).intValue else 0
 
-        if (currLevel >= DimTarget.state as Number || !continueDimming) {
+        if (currLevel >= target || !continueDimming) {
             logInfo("CancelActivity", "Dimmen beendet")
             dimTimer = null
         } else {

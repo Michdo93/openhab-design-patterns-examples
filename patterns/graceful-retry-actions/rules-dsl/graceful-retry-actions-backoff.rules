@@ -24,7 +24,12 @@ then
                 retryTimer.reschedule(now.plusSeconds(retryInterval))
             } else {
                 logError("RetryBackoff", "Maximale Anzahl an Versuchen erreicht!")
-                sendNotification("admin@example.com", "LightSwitch konnte nicht eingeschaltet werden")
+                postUpdate(NotificationItem, "LightSwitch konnte nicht eingeschaltet werden")
+                try {
+                    sendNotification("admin@example.com", "LightSwitch konnte nicht eingeschaltet werden")
+                } catch(Throwable notifyEx) {
+                    logWarn("RetryBackoff", "Cloud-Benachrichtigung nicht verfuegbar: " + notifyEx.message)
+                }
             }
         }
     ])

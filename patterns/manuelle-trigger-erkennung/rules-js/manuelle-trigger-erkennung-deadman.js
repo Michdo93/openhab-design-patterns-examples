@@ -8,10 +8,11 @@ rules.JSRule({
 
 rules.JSRule({
   name: "Rule that changes a gWatchItem",
-  triggers: [ /* Trigger */ ],
+  triggers: [triggers.ItemCommandTrigger("SomeRuleTrigger", "ON")],
   execute: (event) => {
     items.getItem("DeadMansSwitch").sendCommand("RULE");
     // Aktionen ausfuehren
+    items.getItem("WatchedItem1").sendCommand("ON");
     items.getItem("DeadMansSwitch").sendCommand("MANUAL");
   }
 });

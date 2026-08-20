@@ -1,0 +1,8 @@
+// Reine Test-Hilfsdatei, um "rule-deaktivierung.rules" testen zu koennen -
+// im echten Einsatz waere das eure tatsaechliche Luftbefeuchter-Regel.
+rule "MBR Humidifier (Test-Dummy)"
+when
+    Item DummyRuleTrigger received command
+then
+    // absichtlich leer
+end

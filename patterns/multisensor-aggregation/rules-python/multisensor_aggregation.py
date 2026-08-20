@@ -11,7 +11,8 @@ class MultiSensorConfidenceAggregation:
     def execute(self, module, input):
         motion_conf = 0.7 if str(Registry.getItem("MotionSensor").getState()) == "ON" else 0.0
         window_conf = 0.5 if str(Registry.getItem("WindowSensor").getState()) == "CLOSED" else 0.0
-        light_conf = 0.3 if float(str(Registry.getItem("LightSensor").getState())) > 100 else 0.0
+        light_state = str(Registry.getItem("LightSensor").getState())
+        light_conf = 0.3 if light_state not in ("NULL", "UNDEF") and float(light_state) > 100 else 0.0
 
         aggregated_conf = motion_conf + window_conf + light_conf
 

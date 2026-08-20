@@ -1,11 +1,8 @@
 Group gSensors
 
+// Unbound (virtuelle) Items zur Demonstration - kein echtes Geraet noetig
 Switch Sensor1 (gSensors)
 Switch Sensor1_Status (gSensors) ["Status"]
 
 Switch Sensor2 (gSensors)
 Switch Sensor2_Status (gSensors) ["Status", "Power"]
-
-Group MySensorEquipment "Mein Sensor-Equipment" ["Equipment"]
-Switch SomeSensor "Sensor" (MySensorEquipment) ["Sensor"]
-Switch SomeSensor_Status "Sensor Status" (MySensorEquipment) ["Status"]

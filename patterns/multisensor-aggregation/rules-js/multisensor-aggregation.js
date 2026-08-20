@@ -8,7 +8,8 @@ rules.JSRule({
   execute: (event) => {
     const motionConfidence = items.getItem("MotionSensor").state === "ON" ? 0.7 : 0.0;
     const windowConfidence = items.getItem("WindowSensor").state === "CLOSED" ? 0.5 : 0.0;
-    const lightConfidence = parseFloat(items.getItem("LightSensor").state) > 100 ? 0.3 : 0.0;
+    const lightState = items.getItem("LightSensor").state;
+    const lightConfidence = (lightState !== "NULL" && lightState !== "UNDEF" && parseFloat(lightState) > 100) ? 0.3 : 0.0;
 
     const aggregatedConfidence = motionConfidence + windowConfidence + lightConfidence;
 

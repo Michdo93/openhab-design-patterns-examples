@@ -1,2 +1,9 @@
-var name = transform("MAP", "admin.map", MyItem.name)
-if(name == "") name = MyItem.name
+rule "Menschenlesbarer Name (einfach)"
+when
+    Item MyItem changed
+then
+    var name = transform("MAP", "admin.map", MyItem.name)
+    if(name == "") name = MyItem.name
+
+    logInfo("HumanReadableNames", name + " ist jetzt " + MyItem.state.toString)
+end

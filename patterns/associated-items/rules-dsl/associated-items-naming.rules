@@ -1,2 +1,7 @@
-val statusItem = itemRegistry.getItem(triggeringItem.name + "_Status")
-statusItem.postUpdate(ON)
+rule "Zugehoeriges Item ueber Namenskonvention finden"
+when
+    Member of gSensors changed
+then
+    val statusItem = itemRegistry.getItem(triggeringItem.name + "_Status")
+    statusItem.postUpdate(ON)
+end

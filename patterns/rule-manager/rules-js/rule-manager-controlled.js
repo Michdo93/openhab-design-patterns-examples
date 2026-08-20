@@ -1,6 +1,6 @@
 rules.JSRule({
   name: "Example rule",
-  triggers: [ /* Trigger der Beispielregel */ ],
+  triggers: [triggers.ItemCommandTrigger("DummyExecTrigger")],
   execute: (event) => {
     items.getItem("isRunningExampleRule").sendCommand("ON");
 

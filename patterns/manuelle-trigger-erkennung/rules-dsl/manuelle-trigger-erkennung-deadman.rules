@@ -7,12 +7,11 @@ end
 
 rule "Rule that changes a gWatchItem"
 when
-    // Trigger
+    Item SomeRuleTrigger received command ON
 then
     DeadMansSwitch.sendCommand("RULE")
-    Thread::sleep(50)
     // Aktionen ausfuehren
-    Thread::sleep(200)
+    WatchedItem1.sendCommand(ON)
     DeadMansSwitch.sendCommand("MANUAL")
 end
 

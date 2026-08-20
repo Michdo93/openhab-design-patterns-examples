@@ -9,16 +9,20 @@ ceiling_timer = None
 def loop():
     global ceiling_timer
     if str(Registry.getItem("vTimeOfDay").getState()) == "NIGHT":
-        new_state = "STAY"
-        current = float(str(Registry.getItem("CurrentTemp").getState()))
-        target = float(str(Registry.getItem("TargetTemp").getState()))
-        if current > target:
-            new_state = "ON"
-        elif current < target - 1:
-            new_state = "OFF"
+        current_state = str(Registry.getItem("CurrentTemp").getState())
+        target_state = str(Registry.getItem("TargetTemp").getState())
 
-        if new_state != "STAY" and str(Registry.getItem("Fan").getState()) != new_state:
-            Registry.getItem("Fan").sendCommand(new_state)
+        if current_state not in ("NULL", "UNDEF") and target_state not in ("NULL", "UNDEF"):
+            new_state = "STAY"
+            current = float(current_state)
+            target = float(target_state)
+            if current > target:
+                new_state = "ON"
+            elif current < target - 1:
+                new_state = "OFF"
+
+            if new_state != "STAY" and str(Registry.getItem("Fan").getState()) != new_state:
+                Registry.getItem("Fan").sendCommand(new_state)
 
         ceiling_timer = threading.Timer(60, loop)
         ceiling_timer.start()

@@ -1,6 +1,6 @@
 rules.JSRule({
   name: "Eine Regel, die den Timer startet",
-  triggers: [ /* irgendein Trigger */ ],
+  triggers: [triggers.ItemCommandTrigger("StartMyTimerTrigger", "ON")],
   execute: (event) => {
     // Arbeitsschritte ausfuehren
 
