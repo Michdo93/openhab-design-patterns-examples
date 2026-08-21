@@ -6,8 +6,7 @@ val Map<String, org.openhab.core.model.script.actions.Timer> timers = newHashMap
 
 rule "Presence detection debounce"
 when
-    Item Person1_PresenceSensors changed or
-    Item Person2_PresenceSensors changed
+    Member of gPresenceSensors changed
 then
     val sensorName = triggeringItem.name
     val sensorState = triggeringItem.state

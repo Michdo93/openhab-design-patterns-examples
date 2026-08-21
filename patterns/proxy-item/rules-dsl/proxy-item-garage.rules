@@ -2,13 +2,15 @@ import org.openhab.core.model.script.ScriptServiceUtil
 
 rule "Garagentor Controller"
 when
-    Item Large_Garagedoor_Opener received command or
-    Item Small_Garagedoor_Opener received command
+    Member of gGarageDoorOpeners received command
 then
+    val itemName = triggeringItem.name
+    val command = receivedCommand.toString
+
     if (GarageControllerComputer.state != ON || GarageControllerService.state != ON) {
         AlertItem.sendCommand("Garagentor-Controller offline!")
     }
-    val linkedItemName = triggeringItem.name + "_Linked"
+    val linkedItemName = itemName + "_Linked"
     val linkedItem = ScriptServiceUtil.getItemRegistry().getItem(linkedItemName)
-    linkedItem.sendCommand(receivedCommand)
+    linkedItem.sendCommand(command)
 end

@@ -1,2 +1,4 @@
-String Notification_Proxy_Info
-String Notification_Proxy_Alert
+Group gNotificationProxies
+
+String Notification_Proxy_Info (gNotificationProxies)
+String Notification_Proxy_Alert (gNotificationProxies)

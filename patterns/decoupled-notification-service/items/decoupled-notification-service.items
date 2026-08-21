@@ -1,5 +1,7 @@
-String VT_Notify_Info
-String VT_Notify_Warn
-String VT_Notify_Alert
+Group gNotify
+
+String VT_Notify_Info (gNotify)
+String VT_Notify_Warn (gNotify)
+String VT_Notify_Alert (gNotify)
 
 Switch SomeCondition

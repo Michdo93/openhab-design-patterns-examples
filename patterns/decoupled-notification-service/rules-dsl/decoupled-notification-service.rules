@@ -1,10 +1,9 @@
 rule "Benachrichtigungsservice"
 when
-    Item VT_Notify_Info changed or
-    Item VT_Notify_Warn changed or
-    Item VT_Notify_Alert changed
+    Member of gNotify changed
 then
+    val itemName = triggeringItem.name
     val message = triggeringItem.state.toString
     // Logik zum Versenden der Nachricht, z. B. per Mail oder Push-Notification
-    logInfo("Notify", "[" + triggeringItem.name + "] " + message)
+    logInfo("Notify", "[" + itemName + "] " + message)
 end
