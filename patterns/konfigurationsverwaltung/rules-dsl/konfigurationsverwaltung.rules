@@ -1,20 +1,22 @@
-val Map<String, Map<String, Integer>> HABSettings = #{
-    "RGBW" -> #{
+import java.util.Map
+
+val Map<String, Map<String, Integer>> HABSettings = newHashMap(
+    "RGBW" -> newHashMap(
         "MaxDim" -> 90,
         "DimPeriod" -> 20,
         "DayColor" -> 205,
         "AfternoonColor" -> 58,
         "NightColor" -> 160
-    },
-    "AC" -> #{
+    ),
+    "AC" -> newHashMap(
         "DayTemp" -> 22,
         "NightTemp" -> 24
-    },
-    "Light" -> #{
+    ),
+    "Light" -> newHashMap(
         "EveningDim" -> 70,
         "NightDim" -> 20
-    }
-}
+    )
+)
 
 rule "Beispielregel fuer RGBW-Licht"
 when
