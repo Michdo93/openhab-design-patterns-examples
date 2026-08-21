@@ -2,3 +2,4 @@ Group gDeferredAction
 
 String LoungeBlind_Timer (gDeferredAction)
 Rollershutter LoungeBlind "Rollladen Wohnzimmer" (gDeferredAction)
+String DayNight "Tageszeit [%s]" <sun_moon>
