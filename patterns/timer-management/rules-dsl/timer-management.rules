@@ -6,15 +6,21 @@ rule "Alert if door open for over 60 minutes"
 when
     Member of Doors changed
 then
+    val itemName = triggeringItem.name
+    val itemState = triggeringItem.state
+
     // Bestehenden Timer abbrechen
-    val timer = timers.get(triggeringItem.name)
+    val timer = timers.get(itemName)
     timer?.cancel
-    timers.put(triggeringItem.name, null)
+    timers.put(itemName, null)
 
     // Timer neu erstellen, wenn Tuer geoeffnet wurde
-    if(triggeringItem.state == OPEN) {
-        timers.put(triggeringItem.name, createTimer(now.plusMinutes(60))[ |
-            Alert.sendCommand(triggeringItem.name + " is still open!")
+    if(itemState == OPEN) {
+        logInfo("TimerManagement", itemName + ": Timer gestartet (1h)")
+        timers.put(itemName, createTimer(now.plusMinutes(60))[ |
+            Alert.sendCommand(itemName + " is still open!")
         ])
+    } else {
+        logInfo("TimerManagement", itemName + ": geschlossen, kein Timer noetig")
     }
 end

@@ -2,5 +2,9 @@ rule "Expire-Timer neu starten"
 when
     System started
 then
-    gResetExpire.members.forEach[ timer | timer.sendCommand(timer.state) ]
+    logInfo("ExpireReset", "Expire-Timer werden neu gestartet")
+    gResetExpire.members.forEach[ timer |
+        logInfo("ExpireReset", timer.name + " -> " + timer.state.toString)
+        timer.sendCommand(timer.state.toString)
+    ]
 end

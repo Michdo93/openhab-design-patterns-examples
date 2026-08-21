@@ -1,0 +1,53 @@
+import java.util.Map
+import org.openhab.core.model.script.ScriptServiceUtil
+import org.openhab.core.items.MetadataRegistry
+import org.openhab.core.items.Metadata
+import org.openhab.core.items.MetadataKey
+
+val Map<String, Timer> alertTimers = newHashMap
+
+rule "Device online/offline"
+when
+    Member of gSensorStatus changed
+then
+    val itemName = triggeringItem.name
+    val item = triggeringItem
+
+    if (previousState === null) {
+        return;
+    }
+    // MetadataRegistry über OSGi FrameworkUtil abrufen
+    val bundleContext = org.osgi.framework.FrameworkUtil.getBundle(ScriptServiceUtil).bundleContext
+    val serviceRef = bundleContext.getServiceReference(MetadataRegistry)
+    val MetadataRegistry metadataRegistry = bundleContext.getService(serviceRef)
+
+    // Metadaten lesen
+    val Metadata alertMeta = metadataRegistry.get(new MetadataKey("Alert", itemName))
+    val alerted = if (alertMeta !== null && alertMeta.configuration.containsKey("alerted")) alertMeta.configuration.get("alerted").toString else "OFF"
+
+    val Metadata nameMeta = metadataRegistry.get(new MetadataKey("name", itemName))
+    val name = if (nameMeta !== null && nameMeta.value !== null) nameMeta.value else itemName
+    // Flapping-Erkennung
+    if (alertTimers.containsKey(itemName)) {
+        alertTimers.get(itemName)?.cancel()
+        alertTimers.remove(itemName)
+        return;
+    }
+    val currentState = item.state.toString
+    if (alerted == currentState) {
+        val Timer t = createTimer(now.plusSeconds(60), [|
+            alertTimers.remove(itemName)
+
+            if (item.state.toString == currentState) {
+                val displayValue = transform("MAP", "admin.map", item.state.toString)
+                logInfo("admin", name + " is now " + displayValue)
+
+                // Metadaten schreiben
+                val newMeta = new Metadata(new MetadataKey("Alert", itemName), "alerted", newHashMap("alerted" -> "ON"))
+                metadataRegistry.add(newMeta)
+            }
+        ])
+
+        alertTimers.put(itemName, t)
+    }
+end

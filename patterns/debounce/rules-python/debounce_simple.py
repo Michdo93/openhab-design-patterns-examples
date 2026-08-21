@@ -1,6 +1,6 @@
 import threading
 
-from openhab import rule, Registry
+from openhab import rule, Registry, logger
 from openhab.triggers import ItemStateChangeTrigger
 
 timer = None
@@ -13,13 +13,18 @@ class DebouncePerson1:
         if timer is not None:
             timer.cancel()
 
+        sensor_state = str(Registry.getItem("Person1PresenceSensor").getState())
+        delay_seconds = 0 if sensor_state == "ON" else 120
+
         def on_expire():
             global timer
-            sensor_state = str(Registry.getItem("Person1PresenceSensor").getState())
             proxy = Registry.getItem("Person1Presence")
             if str(proxy.getState()) != sensor_state:
                 proxy.postUpdate(sensor_state)
+                logger.info(
+                    "Person1Presence uebernimmt {} (Verzoegerung={}s)".format(sensor_state, delay_seconds)
+                )
             timer = None
 
-        timer = threading.Timer(120, on_expire)
+        timer = threading.Timer(delay_seconds, on_expire)
         timer.start()

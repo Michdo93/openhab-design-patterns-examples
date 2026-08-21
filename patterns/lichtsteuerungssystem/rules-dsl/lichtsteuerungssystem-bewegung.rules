@@ -4,8 +4,11 @@ when
 then
     if (Light1.state == OFF) {
         Light1.sendCommand(ON)
+        logInfo("Lichtsteuerung", "Bewegung erkannt - Light1 eingeschaltet (10 Min. Timer)")
         createTimer(now.plusMinutes(10), [ |
             Light1.sendCommand(OFF)
         ])
+    } else {
+        logInfo("Lichtsteuerung", "Bewegung erkannt, Light1 war aber bereits an")
     }
 end

@@ -7,14 +7,17 @@ rule "MQTT State Supervision"
 when
     Item MySwitch received command
 then
+    val itemName = triggeringItem.name
     val expectedState = receivedCommand.toString
 
-    supervisionTimers.get(triggeringItem.name)?.cancel
+    supervisionTimers.get(itemName)?.cancel
 
-    supervisionTimers.put(triggeringItem.name, createTimer(now.plusSeconds(T_RB), [|
-        logWarn("MQTTSupervision", triggeringItem.name + " hat den Zustand " + expectedState + " nicht erreicht")
+    logInfo("MQTTSupervision", itemName + ": Ueberwachung gestartet, erwarte " + expectedState + " innerhalb " + T_RB + "s")
+
+    supervisionTimers.put(itemName, createTimer(now.plusSeconds(T_RB), [|
+        logWarn("MQTTSupervision", itemName + " hat den Zustand " + expectedState + " nicht erreicht")
         // z. B. Benachrichtigung senden
-        supervisionTimers.remove(triggeringItem.name)
+        supervisionTimers.remove(itemName)
     ]))
 end
 
@@ -22,6 +25,8 @@ rule "MQTT State Update"
 when
     Item MySwitch changed
 then
-    supervisionTimers.get(triggeringItem.name)?.cancel
-    supervisionTimers.remove(triggeringItem.name)
+    val itemName = triggeringItem.name
+    logInfo("MQTTSupervision", itemName + ": Zustand hat sich geaendert, Ueberwachung wird abgebrochen")
+    supervisionTimers.get(itemName)?.cancel
+    supervisionTimers.remove(itemName)
 end

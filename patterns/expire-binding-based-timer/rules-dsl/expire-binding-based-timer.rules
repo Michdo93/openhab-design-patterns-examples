@@ -5,6 +5,7 @@ then
     // Arbeitsschritte ausfuehren
 
     if(MyTimer.state == ON) {
+        logInfo("ExpireTimer", "Timer ist bereits aktiv - wird neu gestartet")
         // Aktion, falls Timer aktiv ist
     }
 
@@ -13,11 +14,13 @@ then
 
     // Timer starten
     MyTimer.sendCommand(ON)
+    logInfo("ExpireTimer", "MyTimer gestartet (5 Minuten)")
 end
 
 rule "MyTimer abgelaufen"
 when
     Item MyTimer received command OFF
 then
+    logInfo("ExpireTimer", "MyTimer abgelaufen - Code nach Ablauf wird ausgefuehrt")
     // Code, der nach Ablauf ausgefuehrt werden soll
 end

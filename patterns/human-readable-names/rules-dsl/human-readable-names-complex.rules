@@ -1,5 +1,7 @@
 import java.util.Map
 
+import org.openhab.core.model.script.ScriptServiceUtil
+
 val Map<String, org.openhab.core.model.script.actions.Timer> alertTimers = newHashMap()
 
 rule "Status Alert"
@@ -8,18 +10,22 @@ when
 then
     if(previousState == NULL || previousState == UNDEF) return
 
-    alertTimers.get(triggeringItem.name)?.cancel
+    val itemName = triggeringItem.name
+    val origStateStr = triggeringItem.state.toString
 
-    alertTimers.put(triggeringItem.name, createTimer(now.plusMinutes(1), [ |
-        alertTimers.remove(triggeringItem.name)
-        if(triggeringItem.state.toString == previousState.toString) {
-            var name = transform("MAP", "admin.map", triggeringItem.name)
-            if(name == "") name = triggeringItem.name
-            var stateName = transform("MAP", "admin.map", triggeringItem.state.toString)
-            if(stateName == "") stateName = triggeringItem.state.toString
+    alertTimers.get(itemName)?.cancel
+
+    alertTimers.put(itemName, createTimer(now.plusMinutes(1), [ |
+        alertTimers.remove(itemName)
+        val currentItem = ScriptServiceUtil.getItemRegistry().getItem(itemName)
+        if(origStateStr == currentItem.state.toString) {
+            var name = transform("MAP", "admin.map", itemName)
+            if(name == "") name = itemName
+            var stateName = transform("MAP", "admin.map", origStateStr)
+            if(stateName == "") stateName = origStateStr
 
             logInfo("StatusAlert", name + " ist jetzt " + stateName)
-            postUpdate(triggeringItem.name + "_Alerted", ON)
+            postUpdate(itemName + "_Alerted", ON)
         }
     ]))
 end

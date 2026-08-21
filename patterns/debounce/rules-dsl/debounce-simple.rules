@@ -5,9 +5,14 @@ when
     Item Person1PresenceSensor changed
 then
     timer?.cancel
-    timer = createTimer(now.plusMinutes(2), [ |
-        if(Person1Presence.state != Person1PresenceSensor.state) {
-            Person1Presence.postUpdate(Person1PresenceSensor.state)
+
+    val sensorState = Person1PresenceSensor.state
+    val delaySeconds = if(sensorState == ON) 0 else 120
+
+    timer = createTimer(now.plusSeconds(delaySeconds), [ |
+        if(Person1Presence.state != sensorState) {
+            Person1Presence.postUpdate(sensorState)
+            logInfo("Debounce", "Person1Presence uebernimmt " + sensorState.toString + " (Verzoegerung=" + delaySeconds + "s)")
         }
         timer = null
     ])

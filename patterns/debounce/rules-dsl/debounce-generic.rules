@@ -9,15 +9,19 @@ when
     Item Person1_PresenceSensors changed or
     Item Person2_PresenceSensors changed
 then
-    timers.get(triggeringItem.name)?.cancel
+    val sensorName = triggeringItem.name
+    val sensorState = triggeringItem.state
 
-    val delay = if(triggeringItem.state == ON) 0 else 2
-    timers.put(triggeringItem.name, createTimer(now.plusMinutes(delay), [ |
-        val proxyName = triggeringItem.name.split("_").get(0) + "_Present"
+    timers.get(sensorName)?.cancel
+
+    val delay = if(sensorState == ON) 0 else 2
+    logInfo("Debounce", sensorName + ": Debounce-Timer gestartet, Verzoegerung=" + (delay * 60) + "s")
+    timers.put(sensorName, createTimer(now.plusMinutes(delay), [ |
+        val proxyName = sensorName.split("_").get(0) + "_Present"
         val proxyItem = ScriptServiceUtil.getItemRegistry().getItem(proxyName)
-        if(proxyItem.state != triggeringItem.state) {
-            proxyItem.sendCommand(triggeringItem.state)
+        if(proxyItem.state != sensorState) {
+            proxyItem.sendCommand(sensorState)
         }
-        timers.put(triggeringItem.name, null)
+        timers.put(sensorName, null)
     ]))
 end

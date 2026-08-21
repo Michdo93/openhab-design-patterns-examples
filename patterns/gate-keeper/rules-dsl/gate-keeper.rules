@@ -9,13 +9,14 @@ when
     Item WirelessController received command
 then
     commands.add(receivedCommand.toString)
+    logInfo("433", "Befehl in Warteschlange eingereiht: " + receivedCommand.toString)
 
     if(timer === null) {
         timer = createTimer(now, [ |
             if(commands.peek !== null) {
                 val cmd = commands.poll
                 val results = executeCommandLine(cmd, 5000)
-                logDebug("433", results)
+                logInfo("433", cmd + " -> " + results)
                 lastCommand = now
             }
 
@@ -29,8 +30,12 @@ rule "Outlet A"
 when
     Item Outlet_A received command
 then
-    if(receivedCommand == ON)
+    if(receivedCommand == ON) {
         WirelessController.sendCommand("433-send xxxxx 1 1")
-    else
+        logInfo("433", "Outlet_A ON -> 433-send xxxxx 1 1")
+    }
+    else {
         WirelessController.sendCommand("433-send xxxxx 1 0")
+        logInfo("433", "Outlet_A OFF -> 433-send xxxxx 1 0")
+    }
 end
