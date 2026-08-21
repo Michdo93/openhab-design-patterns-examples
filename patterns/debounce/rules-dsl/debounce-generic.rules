@@ -11,17 +11,26 @@ when
 then
     val sensorName = triggeringItem.name
     val sensorState = triggeringItem.state
+    val proxyName = sensorName.split("_").get(0) + "_Present"
 
     timers.get(sensorName)?.cancel
+    timers.put(sensorName, null)
 
-    val delay = if(sensorState == ON) 0 else 2
-    logInfo("Debounce", sensorName + ": Debounce-Timer gestartet, Verzoegerung=" + (delay * 60) + "s")
-    timers.put(sensorName, createTimer(now.plusMinutes(delay), [ |
-        val proxyName = sensorName.split("_").get(0) + "_Present"
+    if(sensorState == ON) {
+        // Sofort uebernehmen, kein Timer noetig (vermeidet Timer mit 0 Verzoegerung)
+        logInfo("Debounce", sensorName + ": Debounce-Timer gestartet, Verzoegerung=0s")
         val proxyItem = ScriptServiceUtil.getItemRegistry().getItem(proxyName)
         if(proxyItem.state != sensorState) {
-            proxyItem.sendCommand(sensorState)
+            proxyItem.sendCommand(sensorState.toString)
         }
-        timers.put(sensorName, null)
-    ]))
+    } else {
+        logInfo("Debounce", sensorName + ": Debounce-Timer gestartet, Verzoegerung=120s")
+        timers.put(sensorName, createTimer(now.plusSeconds(120), [ |
+            val proxyItem = ScriptServiceUtil.getItemRegistry().getItem(proxyName)
+            if(proxyItem.state != sensorState) {
+                proxyItem.sendCommand(sensorState.toString)
+            }
+            timers.put(sensorName, null)
+        ]))
+    }
 end
