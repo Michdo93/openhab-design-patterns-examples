@@ -1,3 +1,5 @@
+import org.openhab.core.model.script.ScriptServiceUtil
+
 rule "Sensor hat ein Update"
 when
     Item SomeSensor changed
@@ -5,7 +7,7 @@ then
     val equipment = Semantics.getEquipment(SomeSensor)
 
     // Ansatz: Equipment-Name
-    val byName = itemRegistry.getItem(equipment.name + "_Status")
+    val byName = ScriptServiceUtil.getItemRegistry().getItem(equipment.name + "_Status")
 
     // Ansatz: Item-Typ
     val byType = equipment.members.findFirst[i | i instanceof SwitchItem]

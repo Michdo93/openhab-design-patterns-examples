@@ -1,3 +1,5 @@
+import org.openhab.core.model.script.ScriptServiceUtil
+
 val Map<String, Timer> timers = newHashMap
 
 rule "Presence detection debounce"
@@ -10,7 +12,7 @@ then
     val delay = if(triggeringItem.state == ON) 0 else 2
     timers.put(triggeringItem.name, createTimer(now.plusMinutes(delay), [ |
         val proxyName = triggeringItem.name.split("_").get(0) + "_Present"
-        val proxyItem = itemRegistry.getItem(proxyName)
+        val proxyItem = ScriptServiceUtil.getItemRegistry().getItem(proxyName)
         if(proxyItem.state != triggeringItem.state) {
             proxyItem.sendCommand(triggeringItem.state)
         }

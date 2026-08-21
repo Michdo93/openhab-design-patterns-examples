@@ -1,3 +1,5 @@
+import org.openhab.core.model.script.ScriptServiceUtil
+
 val Map<String, Timer> retryTimers = newHashMap
 val Map<String, Integer> retryCounts = newHashMap
 
@@ -21,7 +23,7 @@ then
 
         val Timer t = createTimer(now, [ |
             try {
-                if(itemRegistry.getItem(device).state != NULL) {
+                if(ScriptServiceUtil.getItemRegistry().getItem(device).state != NULL) {
                     sendCommand(device, ON)
                     logInfo("DynamicRetryDSL", device + " command sent successfully!")
                     retryTimers.get(device)?.cancel()

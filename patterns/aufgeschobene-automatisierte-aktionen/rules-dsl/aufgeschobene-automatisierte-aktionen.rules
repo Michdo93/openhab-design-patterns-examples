@@ -1,3 +1,5 @@
+import org.openhab.core.model.script.ScriptServiceUtil
+
 import java.util.LinkedHashMap
 import java.util.Map
 import java.util.regex.Pattern
@@ -18,7 +20,7 @@ when
 then
     if (triggeringItem instanceof StringItem && triggeringItem.state.toString != "") {
         val String target = triggeringItem.name.replaceAll("(?i)_Timer$", "")
-        val targetItem = itemRegistry.getItem(target)
+        val targetItem = ScriptServiceUtil.getItemRegistry().getItem(target)
 
         var ZonedDateTime triggerTime
         var Matcher matcher
