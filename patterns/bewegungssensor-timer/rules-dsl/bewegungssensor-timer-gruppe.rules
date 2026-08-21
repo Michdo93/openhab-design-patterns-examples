@@ -1,20 +1,22 @@
-import java.util.HashMap
+import java.util.Map
 
-val Map<String, Timer> timers = new HashMap<String, Timer>()
+val Map<String, org.openhab.core.model.script.actions.Timer> timers = newHashMap()
 
 rule "A Motion Detector triggered"
 when
     Member of gMotionDetectors received command ON
 then
+    val itemName = triggeringItem.name
+    val itemObj = triggeringItem
     val timeoutMinutes = 5
+    val currentTimer = timers.get(itemName)
 
-    if(timers.get(triggeringItem.name) === null || timers.get(triggeringItem.name).hasTerminated()){
-        timers.put(triggeringItem.name, createTimer(now.plusMinutes(timeoutMinutes), [|
-            triggeringItem.sendCommand(OFF)
-            timers.put(triggeringItem.name, null)
+    if (currentTimer === null || currentTimer.hasTerminated()) {
+        timers.put(itemName, createTimer(now.plusMinutes(timeoutMinutes), [|
+            itemObj.sendCommand(OFF)
+            timers.remove(itemName)
         ]))
-    }
-    else {
-        timers.get(triggeringItem.name).reschedule(now.plusMinutes(timeoutMinutes))
+    } else {
+        currentTimer.reschedule(now.plusMinutes(timeoutMinutes))
     }
 end
