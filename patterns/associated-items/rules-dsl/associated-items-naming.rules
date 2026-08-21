@@ -4,6 +4,9 @@ rule "Zugehoeriges Item ueber Namenskonvention finden"
 when
     Member of gSensors changed
 then
+    if(triggeringItem.name.endsWith("_Status")) {
+        return;
+    }
     val statusItem = ScriptServiceUtil.getItemRegistry().getItem(triggeringItem.name + "_Status")
     statusItem.postUpdate(ON)
 end

@@ -5,9 +5,14 @@ when
     Item SomeSensor changed
 then
     val equipment = Semantics.getEquipment(SomeSensor)
+    if(equipment === null) {
+        logWarn("AssociatedItems", "Kein Equipment fuer SomeSensor gefunden")
+        return;
+    }
 
-    // Ansatz: Equipment-Name
-    val byName = ScriptServiceUtil.getItemRegistry().getItem(equipment.name + "_Status")
+    // Ansatz: Equipment-Name (nur als Beispiel, nicht robust: setzt voraus,
+    // dass ein Item exakt "<Equipmentname>_Status" existiert)
+    // val byName = ScriptServiceUtil.getItemRegistry().getItem(equipment.name + "_Status")
 
     // Ansatz: Item-Typ
     val byType = equipment.members.findFirst[i | i instanceof SwitchItem]
@@ -15,10 +20,14 @@ then
     // Ansatz: Item-Tag
     val byTag = equipment.members.findFirst[i | i.tags.contains("Status")]
 
-    // Ansatz: mehrere Kriterien
+    // Ansatz: mehrere Kriterien (robust, unabhaengig vom Equipment-Namen)
     val byMulti = equipment.members.findFirst[i |
         i.tags.contains("Status") && i.name.endsWith("_Status")
     ]
 
-    byName.postUpdate(SomeSensor.state.toString)
+    if(byMulti === null) {
+        logWarn("AssociatedItems", "Kein Status-Item im Equipment " + equipment.name + " gefunden")
+        return;
+    }
+    byMulti.postUpdate(SomeSensor.state.toString)
 end
