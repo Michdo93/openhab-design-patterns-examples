@@ -1,8 +1,8 @@
-val Map<String, Map<String, Double>> SENSOR_CONFIDENCE = newHashMap(
-    "MotionSensor" -> newHashMap("tp" -> 0.9, "fp" -> 0.1),
-    "WindowSensor" -> newHashMap("tp" -> 0.8, "fp" -> 0.2),
-    "LightSensor"  -> newHashMap("tp" -> 0.7, "fp" -> 0.3)
-)
+val Map<String, Map<String, Double>> SENSOR_CONFIDENCE = #{
+    "MotionSensor" -> #{"tp" -> 0.9, "fp" -> 0.1},
+    "WindowSensor" -> #{"tp" -> 0.8, "fp" -> 0.2},
+    "LightSensor"  -> #{"tp" -> 0.7, "fp" -> 0.3}
+}
 val Double PRIOR_PRESENCE = 0.5
 
 rule "Bayesian Multi-Sensor Aggregation"

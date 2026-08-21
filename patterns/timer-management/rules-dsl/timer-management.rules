@@ -1,6 +1,8 @@
+import java.util.HashMap
+
 import java.util.Map
 
-val Map<String, Timer> timers = newHashMap
+val Map<String, Timer> timers = new HashMap<String, Timer>()
 
 rule "Alert if door open for over 60 minutes"
 when

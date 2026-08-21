@@ -1,4 +1,6 @@
-val Map<String, Timer> timers = newHashMap
+import java.util.HashMap
+
+val Map<String, Timer> timers = new HashMap<String, Timer>()
 
 rule "A Motion Detector triggered"
 when

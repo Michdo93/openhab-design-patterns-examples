@@ -1,4 +1,6 @@
-val Map<String, Timer> alertTimers = newHashMap
+import java.util.HashMap
+
+val Map<String, Timer> alertTimers = new HashMap<String, Timer>()
 
 rule "Status Alert"
 when

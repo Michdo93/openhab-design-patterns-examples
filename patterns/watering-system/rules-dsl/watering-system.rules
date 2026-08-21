@@ -1,4 +1,6 @@
-val Map<String, Timer> wateringTimers = newHashMap
+import java.util.HashMap
+
+val Map<String, Timer> wateringTimers = new HashMap<String, Timer>()
 
 rule "Watering Service"
 when

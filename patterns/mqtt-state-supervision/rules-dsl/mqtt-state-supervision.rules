@@ -1,6 +1,8 @@
+import java.util.HashMap
+
 import java.util.Map
 
-val Map<String, Timer> supervisionTimers = newHashMap
+val Map<String, Timer> supervisionTimers = new HashMap<String, Timer>()
 val Number T_RB = 30 // Sekunden
 
 rule "MQTT State Supervision"

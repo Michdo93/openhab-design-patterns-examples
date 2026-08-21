@@ -1,7 +1,9 @@
+import java.util.HashMap
+
 import java.util.Map
 
-val Map<String, Timer> Timers = newHashMap
-val Map<String, DateTime> Timestamps = newHashMap
+val Map<String, Timer> Timers = new HashMap<String, Timer>()
+val Map<String, DateTime> Timestamps = new HashMap<String, DateTime>()
 
 val switchPressed = [ String id |
     Timestamps.put(id, now)
