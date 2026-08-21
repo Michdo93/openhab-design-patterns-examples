@@ -1,24 +1,33 @@
+import java.util.Map
+
 // Hinweis: Rules DSL hat keinen eingebauten, direkten Zugriff auf den
 // RuleManager-Service (anders als JS "rules.setEnabled(...)" oder Python
 // "getService('org.openhab.core.automation.RuleManager')"). Wir nutzen
 // stattdessen die openHAB REST-API.
 //
-// WICHTIG: "rule-manager-controlled-1" ist die von openHAB automatisch
+// WICHTIG 1: "rule-manager-controlled-1" ist die von openHAB automatisch
 // vergebene UID der einzigen Regel in rule-manager-controlled.rules
 // (Muster: <Dateiname ohne Endung>-<laufende Nummer im File>). Bitte vor dem
 // ersten Test in der UI unter "Einstellungen -> Regeln -> Example rule ->
 // Details" die tatsaechliche UID gegenpruefen und hier ggf. anpassen.
+//
+// WICHTIG 2: Falls eure openHAB-Instanz API-Security aktiviert hat, braucht
+// der REST-Aufruf einen API-Token (Einstellungen -> Mein Konto -> API-Token
+// erzeugen). Unten als Platzhalter "DEIN_API_TOKEN" eingetragen - bitte
+// ersetzen. Ohne API-Security kann die "headers"-Zeile auch entfernt werden.
+
+val Map<String, String> authHeaders = newHashMap("Authorization" -> "Bearer DEIN_API_TOKEN")
 
 rule "Enable example rule"
 when
     Item exampleRule changed from OFF to ON
 then
-    sendHttpPostRequest("http://localhost:8080/rest/rules/rule-manager-controlled-1/enable", "text/plain", "true")
+    sendHttpPostRequest("http://localhost:8080/rest/rules/rule-manager-controlled-1/enable", "text/plain", "true", authHeaders, 5000)
 end
 
 rule "Disable example rule"
 when
     Item exampleRule changed from ON to OFF
 then
-    sendHttpPostRequest("http://localhost:8080/rest/rules/rule-manager-controlled-1/enable", "text/plain", "false")
+    sendHttpPostRequest("http://localhost:8080/rest/rules/rule-manager-controlled-1/enable", "text/plain", "false", authHeaders, 5000)
 end

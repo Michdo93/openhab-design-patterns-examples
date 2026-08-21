@@ -13,4 +13,5 @@ then
     val linkedItemName = itemName + "_Linked"
     val linkedItem = ScriptServiceUtil.getItemRegistry().getItem(linkedItemName)
     linkedItem.sendCommand(command)
+    logInfo("ProxyItem", itemName + " -> " + linkedItemName + ": " + command)
 end

@@ -3,10 +3,25 @@ when
     Item vTimeOfDay changed
 then
     gLights_WEATHER_OVERRIDE.postUpdate(OFF)
+    val timeOfDay = vTimeOfDay.state.toString
 
-    val GroupItem offItems = gLights_OFF.members.filter[ g | g.name == "gLights_OFF_" + vTimeOfDay.state.toString ].head as GroupItem
-    offItems.members.filter[ l | l.state != OFF ].forEach[ SwitchItem l | l.sendCommand(OFF) ]
+    val GroupItem offItems = gLights_OFF.members.filter[ g | g.name == "gLights_OFF_" + timeOfDay ].head as GroupItem
+    if(offItems !== null) {
+        offItems.members.filter[ l | l.state != OFF ].forEach[ SwitchItem l |
+            l.sendCommand(OFF)
+            logInfo("ManuelleTriggerErkennung", l.name + " -> OFF")
+        ]
+    } else {
+        logWarn("ManuelleTriggerErkennung", "Keine OFF-Gruppe fuer " + timeOfDay + " gefunden")
+    }
 
-    val GroupItem onItems = gLights_ON.members.filter[ g | g.name == "gLights_ON_" + vTimeOfDay.state.toString ].head as GroupItem
-    onItems.members.filter[ l | l.state != ON ].forEach[ SwitchItem l | l.sendCommand(ON) ]
+    val GroupItem onItems = gLights_ON.members.filter[ g | g.name == "gLights_ON_" + timeOfDay ].head as GroupItem
+    if(onItems !== null) {
+        onItems.members.filter[ l | l.state != ON ].forEach[ SwitchItem l |
+            l.sendCommand(ON)
+            logInfo("ManuelleTriggerErkennung", l.name + " -> ON")
+        ]
+    } else {
+        logWarn("ManuelleTriggerErkennung", "Keine ON-Gruppe fuer " + timeOfDay + " gefunden")
+    }
 end

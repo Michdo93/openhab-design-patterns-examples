@@ -2,8 +2,10 @@ rule "Ceiling fan control"
 when
     Item MotionSensor changed to ON
 then
-    if (CeilingFanTimer.state != ON)
+    if (CeilingFanTimer.state != ON) {
+        logInfo("LoopingTimers", "Schleife gestartet")
         CeilingFanTimer.sendCommand(OFF) // Timer starten
+    }
 end
 
 rule "Ceiling fan loop"
@@ -12,12 +14,21 @@ when
 then
     if (vTimeOfDay.state.toString != "NIGHT") return
 
-    var newState = "STAY"
-    if (CurrentTemp.state > TargetTemp.state) newState = "ON"
-    else if (CurrentTemp.state < TargetTemp.state - 1) newState = "OFF"
+    if (CurrentTemp.state == NULL || TargetTemp.state == NULL) {
+        CeilingFanTimer.sendCommand(ON)
+        return;
+    }
 
-    if (newState != "STAY" && Fan.state.toString != newState)
+    var newState = "STAY"
+    val currentTemp = CurrentTemp.state as Number
+    val targetTemp = TargetTemp.state as Number
+    if (currentTemp > targetTemp) newState = "ON"
+    else if (currentTemp < targetTemp.doubleValue - 1) newState = "OFF"
+
+    if (newState != "STAY" && Fan.state.toString != newState) {
         Fan.sendCommand(newState)
+        logInfo("LoopingTimers", "Fan -> " + newState)
+    }
 
     CeilingFanTimer.sendCommand(ON)
 end

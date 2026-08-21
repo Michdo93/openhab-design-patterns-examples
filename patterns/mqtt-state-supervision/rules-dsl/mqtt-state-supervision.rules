@@ -7,7 +7,7 @@ rule "MQTT State Supervision"
 when
     Item MySwitch received command
 then
-    val itemName = triggeringItem.name
+    val itemName = "MySwitch"
     val expectedState = receivedCommand.toString
 
     supervisionTimers.get(itemName)?.cancel
@@ -25,7 +25,7 @@ rule "MQTT State Update"
 when
     Item MySwitch changed
 then
-    val itemName = triggeringItem.name
+    val itemName = "MySwitch"
     logInfo("MQTTSupervision", itemName + ": Zustand hat sich geaendert, Ueberwachung wird abgebrochen")
     supervisionTimers.get(itemName)?.cancel
     supervisionTimers.remove(itemName)

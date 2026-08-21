@@ -2,7 +2,7 @@ rule "Rate-Limit Beispiel"
 when
     Item RateLimitTrigger received command ON
 then
-    val lastAction = privateCache.get("LastAction", [ | now.minusDays(1) ])
+    val lastAction = privateCache.get("LastAction", [ | now.minusDays(1) ]) as java.time.ZonedDateTime
 
     if (lastAction.isBefore(now.minusHours(24))) {
         logInfo("RateLimit", "Rate-limited action")

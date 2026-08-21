@@ -1,5 +1,8 @@
+import java.util.concurrent.locks.Lock
+import java.util.concurrent.locks.ReentrantLock
+
 var Timer GLSMtimer = null
-var Lock GLSMlock = new java.util.concurrent.locks.ReentrantLock()
+var Lock GLSMlock = new ReentrantLock()
 
 val Number GLSM_OFF         = 0
 val Number GLSM_ON          = 1

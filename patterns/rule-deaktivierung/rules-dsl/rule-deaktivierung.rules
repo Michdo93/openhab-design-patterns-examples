@@ -1,13 +1,22 @@
+import java.util.Map
+
 // Hinweis: Rules DSL hat keinen eingebauten, direkten Zugriff auf den
 // RuleManager-Service (anders als JS "rules.setEnabled(...)" oder Python
 // "getService('org.openhab.core.automation.RuleManager')"). Wir nutzen
 // stattdessen die openHAB REST-API.
 //
-// WICHTIG: Die beiden UIDs unten entsprechen den automatisch vergebenen
+// WICHTIG 1: Die beiden UIDs unten entsprechen den automatisch vergebenen
 // UIDs der Test-Dummy-Regeln aus _test_dummy_christmas_lights.rules und
 // _test_dummy_mbr_humidifier.rules (Muster: <Dateiname ohne Endung>-<laufende
 // Nummer im File>). Bitte vor dem ersten Test in der UI unter
 // "Einstellungen -> Regeln" die tatsaechlichen UIDs gegenpruefen.
+//
+// WICHTIG 2: Falls eure openHAB-Instanz API-Security aktiviert hat, braucht
+// der REST-Aufruf einen API-Token (Einstellungen -> Mein Konto -> API-Token
+// erzeugen). Unten als Platzhalter "DEIN_API_TOKEN" eingetragen - bitte
+// ersetzen. Ohne API-Security kann die "headers"-Zeile auch entfernt werden.
+
+val Map<String, String> authHeaders = newHashMap("Authorization" -> "Bearer DEIN_API_TOKEN")
 
 rule "Christmas Mode"
 when
@@ -18,11 +27,13 @@ then
 
     sendHttpPostRequest(
         "http://localhost:8080/rest/rules/_test_dummy_christmas_lights-1/enable",
-        "text/plain", if(christmasOn) "true" else "false"
+        "text/plain", if(christmasOn) "true" else "false",
+        authHeaders, 5000
     )
     sendHttpPostRequest(
         "http://localhost:8080/rest/rules/_test_dummy_mbr_humidifier-1/enable",
-        "text/plain", if(christmasOn) "false" else "true"
+        "text/plain", if(christmasOn) "false" else "true",
+        authHeaders, 5000
     )
     logInfo("ChristmasMode", "vChristmas=" + christmasOn + " -> christmas_lights enabled=" + christmasOn + ", mbr_humidifier enabled=" + !christmasOn)
 end

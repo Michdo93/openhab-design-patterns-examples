@@ -8,13 +8,18 @@ then
 
     ceilingTimer = createTimer(now, [ |
         if (vTimeOfDay.state.toString == "NIGHT") {
-            var newState = "STAY"
-            if (CurrentTemp.state > TargetTemp.state) newState = "ON"
-            else if (CurrentTemp.state < TargetTemp.state - 1) newState = "OFF"
+            if (CurrentTemp.state != NULL && TargetTemp.state != NULL) {
+                var newState = "STAY"
+                val currentTemp = CurrentTemp.state as Number
+                val targetTemp = TargetTemp.state as Number
+                if (currentTemp > targetTemp) newState = "ON"
+                else if (currentTemp < targetTemp.doubleValue - 1) newState = "OFF"
 
-            if (newState != "STAY" && Fan.state.toString != newState)
-                Fan.sendCommand(newState)
-
+                if (newState != "STAY" && Fan.state.toString != newState) {
+                    Fan.sendCommand(newState)
+                    logInfo("LoopingTimers", "Fan -> " + newState)
+                }
+            }
             ceilingTimer.reschedule(now.plusMillis(60000))
         } else {
             ceilingTimer = null

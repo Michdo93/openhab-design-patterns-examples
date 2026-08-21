@@ -1,12 +1,16 @@
-var DateTime until = null
+var DateTime lockedUntil = null
 
 rule "Latched Rule"
 when
     Item MyItem received update
 then
-    if(until !== null && until.isAfter(now)) return // Skip event if timer exists
+    if(lockedUntil !== null && lockedUntil.isAfter(now)) {
+        logInfo("RuleVerriegelung", "Event ignoriert, gesperrt bis " + lockedUntil.toString)
+        return; // Skip event if timer exists
+    }
 
-    until = now.plusDays(1)
+    lockedUntil = now.plusDays(1)
+    logInfo("RuleVerriegelung", "Regelcode ausgefuehrt, gesperrt bis " + lockedUntil.toString)
 
     // Regelcode ausfuehren
 end

@@ -1,3 +1,6 @@
+val Number GLSM_OFF = 0
+val Number GLSM_ON  = 1
+
 rule "Garage Lights Commanded On"
 when
     Item GarageLightsProxy changed to ON

@@ -1,9 +1,50 @@
-val String logger = "callScript"
-
-rule "call script"
+rule "call scene"
 when
     Item callScriptItem received command
 then
-    logInfo(logger, "command: " + callScriptItem.state + ".script")
-    callScript(callScriptItem.state + ".script")
+    val sceneName = receivedCommand.toString
+    logInfo("Szenenmanagement", "scene: " + sceneName)
+
+    switch (sceneName) {
+        case "SwitchOff_LightsStairs": {
+            sendCommand("FEDL_TOGGLE", "OFF")
+            sendCommand("F1DL_TOGGLE", "OFF")
+            sendCommand("F2WL_TOGGLE", "OFF")
+        }
+        case "SwitchOn_LightsStairs025": {
+            sendCommand("FEDL_DIMM", "25")
+            sendCommand("FEDL_TOGGLE", "ON")
+            sendCommand("F1DL_DIMM", "25")
+            sendCommand("F1DL_TOGGLE", "ON")
+            sendCommand("F2WL_DIMM", "25")
+            sendCommand("F2WL_TOGGLE", "ON")
+        }
+        case "SwitchOn_LightsStairs050": {
+            sendCommand("FEDL_DIMM", "50")
+            sendCommand("FEDL_TOGGLE", "ON")
+            sendCommand("F1DL_DIMM", "50")
+            sendCommand("F1DL_TOGGLE", "ON")
+            sendCommand("F2WL_DIMM", "50")
+            sendCommand("F2WL_TOGGLE", "ON")
+        }
+        case "SwitchOn_LightsStairs075": {
+            sendCommand("FEDL_DIMM", "75")
+            sendCommand("FEDL_TOGGLE", "ON")
+            sendCommand("F1DL_DIMM", "75")
+            sendCommand("F1DL_TOGGLE", "ON")
+            sendCommand("F2WL_DIMM", "75")
+            sendCommand("F2WL_TOGGLE", "ON")
+        }
+        case "SwitchOn_LightsStairs100": {
+            sendCommand("FEDL_DIMM", "100")
+            sendCommand("FEDL_TOGGLE", "ON")
+            sendCommand("F1DL_DIMM", "100")
+            sendCommand("F1DL_TOGGLE", "ON")
+            sendCommand("F2WL_DIMM", "100")
+            sendCommand("F2WL_TOGGLE", "ON")
+        }
+        default: {
+            logWarn("Szenenmanagement", "Unbekannte Szene: " + sceneName)
+        }
+    }
 end

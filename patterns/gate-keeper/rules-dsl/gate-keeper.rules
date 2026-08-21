@@ -1,6 +1,4 @@
-import java.util.concurrent.ConcurrentLinkedQueue
-
-val Queue<String> commands = new ConcurrentLinkedQueue()
+val Queue<String> commands = newLinkedList()
 var Timer timer = null
 var lastCommand = now.minusSeconds(1)
 
