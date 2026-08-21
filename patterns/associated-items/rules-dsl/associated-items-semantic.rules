@@ -1,14 +1,13 @@
-import org.openhab.core.model.script.ScriptServiceUtil
-
 rule "Sensor hat ein Update"
 when
     Item SomeSensor changed
 then
-    val equipment = Semantics.getEquipment(SomeSensor)
-    if(equipment === null) {
+    val equipmentItem = Semantics.getEquipment(SomeSensor)
+    if(equipmentItem === null || !(equipmentItem instanceof GroupItem)) {
         logWarn("AssociatedItems", "Kein Equipment fuer SomeSensor gefunden")
         return;
     }
+    val equipment = equipmentItem as GroupItem
 
     // Ansatz: Equipment-Name (nur als Beispiel, nicht robust: setzt voraus,
     // dass ein Item exakt "<Equipmentname>_Status" existiert)
