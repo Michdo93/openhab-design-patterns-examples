@@ -2,5 +2,7 @@ rule "A sensor stopped reporting"
 when
     Member of DeviceStatuses changed to UNDEF
 then
+    val itemName = triggeringItem.name
     // Meldung oder Alarm ausloesen
+    logWarn("sensorCheck", itemName + " meldet sich nicht mehr (UNDEF) - Alarm/Meldung ausloesen")
 end
