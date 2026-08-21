@@ -1,9 +1,9 @@
-import java.util.HashMap
+import java.util.Map
 
 import org.openhab.core.model.script.ScriptServiceUtil
 
-val Map<String, Timer> retryTimers = new HashMap<String, Timer>()
-val Map<String, Integer> retryCounts = new HashMap<String, Integer>()
+val Map<String, org.openhab.core.model.script.actions.Timer> retryTimers = newHashMap()
+val Map<String, Integer> retryCounts = newHashMap()
 
 rule "Configurable Multi-Device Retry"
 when

@@ -1,9 +1,7 @@
-import java.util.HashMap
-
 import java.util.Map
 
-val Map<String, Timer> Timers = new HashMap<String, Timer>()
-val Map<String, DateTime> Timestamps = new HashMap<String, DateTime>()
+val Map<String, org.openhab.core.model.script.actions.Timer> Timers = newHashMap()
+val Map<String, DateTime> Timestamps = newHashMap()
 
 val switchPressed = [ String id |
     Timestamps.put(id, now)

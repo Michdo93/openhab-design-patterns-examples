@@ -1,8 +1,6 @@
-import java.util.HashMap
-
 import java.util.Map
 
-val Map<String, Timer> supervisionTimers = new HashMap<String, Timer>()
+val Map<String, org.openhab.core.model.script.actions.Timer> supervisionTimers = newHashMap()
 val Number T_RB = 30 // Sekunden
 
 rule "MQTT State Supervision"

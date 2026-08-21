@@ -1,7 +1,7 @@
-import java.util.HashMap
+import java.util.Map
 
-val Map<String, Number> presentTargets = new HashMap<String, Number>()
-val Map<String, Number> awayTargets = new HashMap<String, Number>()
+val Map<String, Number> presentTargets = newHashMap()
+val Map<String, Number> awayTargets = newHashMap()
 
 rule "Werte initialisieren"
 when

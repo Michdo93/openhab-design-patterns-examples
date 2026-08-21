@@ -1,6 +1,6 @@
-import java.util.HashMap
+import java.util.Map
 
-val Map<String, Timer> wateringTimers = new HashMap<String, Timer>()
+val Map<String, org.openhab.core.model.script.actions.Timer> wateringTimers = newHashMap()
 
 rule "Watering Service"
 when

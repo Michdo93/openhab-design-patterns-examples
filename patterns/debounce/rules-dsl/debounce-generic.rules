@@ -1,8 +1,8 @@
-import java.util.HashMap
+import java.util.Map
 
 import org.openhab.core.model.script.ScriptServiceUtil
 
-val Map<String, Timer> timers = new HashMap<String, Timer>()
+val Map<String, org.openhab.core.model.script.actions.Timer> timers = newHashMap()
 
 rule "Presence detection debounce"
 when

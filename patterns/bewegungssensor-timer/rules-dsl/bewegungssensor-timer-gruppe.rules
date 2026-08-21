@@ -10,7 +10,6 @@ then
     val itemObj = triggeringItem
     val timeoutMinutes = 5
     val currentTimer = timers.get(itemName)
-
     if (currentTimer === null || currentTimer.hasTerminated()) {
         timers.put(itemName, createTimer(now.plusMinutes(timeoutMinutes), [|
             itemObj.sendCommand(OFF)

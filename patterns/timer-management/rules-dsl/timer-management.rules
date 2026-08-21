@@ -1,8 +1,6 @@
-import java.util.HashMap
-
 import java.util.Map
 
-val Map<String, Timer> timers = new HashMap<String, Timer>()
+val Map<String, org.openhab.core.model.script.actions.Timer> timers = newHashMap()
 
 rule "Alert if door open for over 60 minutes"
 when
