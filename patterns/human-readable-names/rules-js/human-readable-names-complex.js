@@ -4,7 +4,7 @@ rules.JSRule({
   name: "Status Alert",
   triggers: [triggers.GroupStateChangeTrigger("gSensorStatus")],
   execute: (event) => {
-    if (event.oldItemState === undefined || event.oldItemState === null) return;
+    if (event.oldState === undefined || event.oldState === null) return;
 
     const itemName = event.itemName;
     if (alertTimers.has(itemName)) alertTimers.get(itemName).cancel();
