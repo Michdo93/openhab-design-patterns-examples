@@ -25,7 +25,7 @@ then
             }
 
             val deltaTime = Duration.between(lastCommand, now).toMillis
-            timer.reschedule(now.plusMillis(if(deltaTime < 100) 100 - deltaTime else 0))
+            timer.reschedule(now.plusNanos((if(deltaTime < 100) 100 - deltaTime else 0) * 1000000L))
         ])
     }
 end
