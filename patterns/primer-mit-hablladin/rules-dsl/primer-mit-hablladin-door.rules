@@ -1,3 +1,7 @@
+val Number GLSM_OFF         = 0
+val Number GLSM_TIMED_ON    = 2
+val Number GLSM_TIMED_BLINK = 3
+
 rule "GLSM - Garage Door Up Event Handler"
 when
     Item LeftGarageDoor changed to OPEN or
@@ -7,5 +11,8 @@ then
     if (afterSunset && (GLSM.state == GLSM_OFF ||
         GLSM.state == GLSM_TIMED_ON || GLSM.state == GLSM_TIMED_BLINK)) {
         GLSM.postUpdate(GLSM_TIMED_ON)
+        logInfo("Hablladin", "Tor geoeffnet nach Sonnenuntergang -> Licht mit Timer an")
+    } else {
+        logInfo("Hablladin", "Tor geoeffnet, aber kein Trigger (vor Sonnenuntergang oder Licht bereits dauerhaft an)")
     }
 end
