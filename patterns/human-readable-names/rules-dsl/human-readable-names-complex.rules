@@ -26,6 +26,7 @@ then
 
             logInfo("StatusAlert", name + " ist jetzt " + stateName)
             postUpdate(itemName + "_Alerted", "ON")
+            logInfo("StatusAlert", itemName + "_Alerted -> ON")
         }
     ]))
 end
