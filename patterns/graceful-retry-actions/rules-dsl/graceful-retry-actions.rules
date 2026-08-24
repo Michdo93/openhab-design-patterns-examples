@@ -52,11 +52,13 @@ then
                     val message = if(altAction != "") device + ": " + altAction
                                    else device + " could not be switched ON!"
                     postUpdate(NotificationItem, message)
-                    try {
-                        sendNotification("admin@example.com", message)
-                    } catch(Throwable notifyEx) {
-                        logWarn("DynamicRetryDSL", "Cloud-Benachrichtigung nicht verfuegbar: " + notifyEx.message)
-                    }
+                    // Hinweis: sendNotification() (Cloud Connector) konnte in
+                    // dieser DSL-Ausfuehrungsumgebung innerhalb verschachtelter
+                    // Timer-Closures nicht als Name aufgeloest werden - das ist
+                    // ein Namensauflösungsfehler, kein try/catch-faehiger
+                    // Laufzeitfehler, daher hier bewusst weggelassen. Die lokale
+                    // NotificationItem-Aktualisierung bleibt als zuverlaessiger
+                    // Kanal bestehen.
                 }
             }
         ])
