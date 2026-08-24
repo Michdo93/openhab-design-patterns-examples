@@ -1,5 +1,3 @@
-const { rules, triggers } = require('openhab');
-
 rules.JSRule({
   name: "Zugehoeriges Item ueber Gruppenzugehoerigkeit finden",
   triggers: [triggers.ItemStateChangeTrigger("gSensors")],
