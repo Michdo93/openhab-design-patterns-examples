@@ -12,8 +12,8 @@ rules.JSRule({
   name: "BoundSwitchUpdates erhielt Update",
   triggers: [triggers.ItemStateUpdateTrigger("BoundSwitchUpdates")],
   execute: (event) => {
-    if (items.getItem("ProxySwitch").state !== String(event.itemState)) {
-      items.getItem("ProxySwitch").postUpdate(event.itemState);
+    if (items.getItem("ProxySwitch").state !== String(event.receivedState)) {
+      items.getItem("ProxySwitch").postUpdate(event.receivedState);
     }
   }
 });
