@@ -5,7 +5,7 @@ let lastCommand = time.ZonedDateTime.now().minusSeconds(1);
 function processQueue() {
   if (commands.length > 0) {
     const cmd = commands.shift();
-    const results = actions.Exec.executeCommandLine(cmd, 5000);
+    const results = actions.Exec.executeCommandLine(time.Duration.ofMillis(5000), cmd.split(" "));
     console.debug("433: " + results);
     lastCommand = time.ZonedDateTime.now();
   }
