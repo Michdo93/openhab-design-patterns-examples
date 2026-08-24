@@ -2,9 +2,9 @@ rule "Button gedrueckt (mit Fallback)"
 when
     Item ButtonState changed from OFF to ON
 then
-    pressStart = now
     createTimer(now.plusSeconds(5), [ |
         if (ButtonState.state == ON) {
+            logInfo("LongPress", "Fallback: kein OFF-Signal erhalten, setze ButtonState manuell zurueck")
             ButtonState.postUpdate(OFF)
         }
     ])
