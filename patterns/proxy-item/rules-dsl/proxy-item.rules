@@ -2,9 +2,10 @@ rule "ProxySwitch received command"
 when
     Item ProxySwitch received command
 then
-    if(BoundSwitch.state != receivedCommand) {
-        BoundSwitch.sendCommand(receivedCommand)
-        logInfo("ProxyItem", "ProxySwitch -> BoundSwitch: " + receivedCommand.toString)
+    val commandStr = receivedCommand.toString
+    if(BoundSwitch.state.toString != commandStr) {
+        BoundSwitch.sendCommand(commandStr)
+        logInfo("ProxyItem", "ProxySwitch -> BoundSwitch: " + commandStr)
     }
 end
 
@@ -12,8 +13,9 @@ rule "BoundSwitchUpdates received update"
 when
     Item BoundSwitchUpdates received update
 then
-    if(ProxySwitch.state != BoundSwitchUpdates.state) {
-        ProxySwitch.postUpdate(BoundSwitchUpdates.state)
-        logInfo("ProxyItem", "BoundSwitchUpdates -> ProxySwitch: " + BoundSwitchUpdates.state.toString)
+    val stateStr = BoundSwitchUpdates.state.toString
+    if(ProxySwitch.state.toString != stateStr) {
+        ProxySwitch.postUpdate(stateStr)
+        logInfo("ProxyItem", "BoundSwitchUpdates -> ProxySwitch: " + stateStr)
     }
 end
