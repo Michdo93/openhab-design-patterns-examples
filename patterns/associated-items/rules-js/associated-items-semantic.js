@@ -1,32 +1,23 @@
+const { rules, triggers, items, actions } = require('openhab');
+
 rules.JSRule({
   name: "Sensor hat ein Update",
-  triggers: [triggers.ItemStateChangeTrigger("SomeSensor")],
+  triggers: [triggers.ItemStateChangeTrigger("SomeSensor")], //[cite: 1]
   execute: (event) => {
-    const equipment = actions.Semantics.getEquipment(items.getItem(event.itemName));
+    const equipment = actions.Semantics.getEquipment(items.getItem(event.itemName)); //[cite: 1]
     if (!equipment) {
-      console.warn("Kein Equipment fuer SomeSensor gefunden");
+      console.warn("Kein Equipment fuer SomeSensor gefunden"); //[cite: 1]
       return;
     }
 
-    // Ansatz: Equipment-Name (nur als Beispiel, nicht robust: setzt voraus,
-    // dass ein Item exakt "<Equipmentname>_Status" existiert)
-    // const byName = items.getItem(equipment.name + "_Status");
-
-    // Ansatz: Item-Typ
-    const byType = equipment.members.find((i) => i.type === "Switch");
-
-    // Ansatz: Item-Tag
-    const byTag = equipment.members.find((i) => i.tags.includes("Status"));
-
-    // Ansatz: mehrere Kriterien (robust, unabhaengig vom Equipment-Namen)
-    const byMulti = equipment.members.find(
-      (i) => i.tags.includes("Status") && i.name.endsWith("_Status")
+    const byMulti = equipment.members.find( //[cite: 1]
+      (i) => i.tags.includes("Status") && i.name.endsWith("_Status") //[cite: 1]
     );
 
     if (!byMulti) {
-      console.warn("Kein Status-Item im Equipment " + equipment.name + " gefunden");
+      console.warn("Kein Status-Item im Equipment " + equipment.name + " gefunden"); //[cite: 1]
       return;
     }
-    byMulti.postUpdate(items.getItem(event.itemName).state);
+    byMulti.postUpdate(items.getItem(event.itemName).state); //[cite: 1]
   }
 });
