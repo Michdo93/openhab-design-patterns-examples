@@ -19,7 +19,7 @@ then
             val innerCommands = commandsObj as Queue<String>
             if(innerCommands.peek !== null) {
                 val cmd = innerCommands.poll
-                val results = executeCommandLine(cmd, 5000)
+                val results = executeCommandLine(Duration.ofMillis(5000), cmd)
                 logInfo("433", cmd + " -> " + results)
                 lastCommand = now
             }
