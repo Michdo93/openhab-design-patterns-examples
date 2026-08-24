@@ -19,7 +19,7 @@ rules.JSRule({
   tags: ["admin"],
   triggers: [triggers.GroupStateChangeTrigger("gSensorStatus")],
   execute: (event) => {
-    if (event.oldItemState === undefined || event.oldItemState === null) return;
+    if (event.oldState === undefined || event.oldState === null) return;
 
     const itemName = event.itemName;
     const meta = items.getItem(itemName).getMetadata("Alert");
@@ -33,9 +33,9 @@ rules.JSRule({
       return; // Flapping erkannt: laufenden Timer abbrechen, kein neuer Alert
     }
 
-    if (alerted === String(event.itemState)) {
+    if (alerted === String(event.newState)) {
       alertTimers[itemName] = setTimeout(
-        () => alertTimerExpired(itemName, name, event.itemState),
+        () => alertTimerExpired(itemName, name, event.newState),
         60000
       );
     }
