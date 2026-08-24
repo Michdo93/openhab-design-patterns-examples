@@ -1,5 +1,3 @@
-const { rules, triggers, items, actions } = require('openhab');
-
 rules.JSRule({
   name: "Sensor hat ein Update",
   triggers: [triggers.ItemStateChangeTrigger("SomeSensor")],
