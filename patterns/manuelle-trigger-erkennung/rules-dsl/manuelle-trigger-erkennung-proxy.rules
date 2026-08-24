@@ -10,10 +10,19 @@ then
     val ui = LightControls.members.findFirst[ l | l.name == lightName + "_UI" ]
     val rulesItem = LightControls.members.findFirst[ l | l.name == lightName + "_Rules" ]
 
-    if(source == "Proxy") return
+    if(source == "Proxy") {
+        return;
+    }
+
+    if(proxy === null || device === null || ui === null || rulesItem === null) {
+        logWarn("ManuelleTriggerErkennung", "Nicht alle Proxy-Items fuer " + lightName + " gefunden (Quelle: " + source + ")")
+        return;
+    }
 
     if(proxy.state != receivedCommand) proxy.postUpdate(receivedCommand)
     if(ui.state != receivedCommand) ui.postUpdate(receivedCommand)
     if(rulesItem.state != receivedCommand) rulesItem.postUpdate(receivedCommand)
     if(device.state != receivedCommand) device.sendCommand(receivedCommand)
+
+    logInfo("ManuelleTriggerErkennung", "Quelle=" + source + " -> " + lightName + " = " + receivedCommand.toString)
 end
