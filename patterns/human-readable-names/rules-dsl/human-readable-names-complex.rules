@@ -8,7 +8,9 @@ rule "Status Alert"
 when
     Member of gSensorStatus changed
 then
-    if(previousState == NULL || previousState == UNDEF) return
+    if(previousState == NULL || previousState == UNDEF) {
+        return;
+    }
 
     val itemName = triggeringItem.name
     val origStateStr = triggeringItem.state.toString
