@@ -1,5 +1,3 @@
-const { rules, triggers, items } = require('openhab');
-
 rules.JSRule({
   name: "Zugehoeriges Item ueber Namenskonvention finden",
   triggers: [triggers.ItemStateChangeTrigger("gSensors")],
