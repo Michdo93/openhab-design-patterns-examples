@@ -25,7 +25,7 @@ then
             if(stateName == "") stateName = origStateStr
 
             logInfo("StatusAlert", name + " ist jetzt " + stateName)
-            postUpdate(itemName + "_Alerted", ON)
+            postUpdate(itemName + "_Alerted", "ON")
         }
     ]))
 end
