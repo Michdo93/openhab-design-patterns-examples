@@ -19,10 +19,12 @@ then
         return;
     }
 
-    if(proxy.state != receivedCommand) proxy.postUpdate(receivedCommand)
-    if(ui.state != receivedCommand) ui.postUpdate(receivedCommand)
-    if(rulesItem.state != receivedCommand) rulesItem.postUpdate(receivedCommand)
-    if(device.state != receivedCommand) device.sendCommand(receivedCommand)
+    val commandStr = receivedCommand.toString
 
-    logInfo("ManuelleTriggerErkennung", "Quelle=" + source + " -> " + lightName + " = " + receivedCommand.toString)
+    if(proxy.state.toString != commandStr) proxy.postUpdate(commandStr)
+    if(ui.state.toString != commandStr) ui.postUpdate(commandStr)
+    if(rulesItem.state.toString != commandStr) rulesItem.postUpdate(commandStr)
+    if(device.state.toString != commandStr) device.sendCommand(commandStr)
+
+    logInfo("ManuelleTriggerErkennung", "Quelle=" + source + " -> " + lightName + " = " + commandStr)
 end
