@@ -20,6 +20,8 @@ when
     Member of gWatchItems received update
 then
     if(DeadMansSwitch.state.toString == "MANUAL") {
-        // Element wurde manuell ausgeloest
+        logInfo("ManuelleTriggerErkennung", "Element wurde manuell ausgeloest")
+    } else {
+        logInfo("ManuelleTriggerErkennung", "Element wurde durch eine Regel ausgeloest (DeadMansSwitch=RULE)")
     }
 end
