@@ -1,4 +1,7 @@
-val Queue<String> commands = newLinkedList()
+import java.util.LinkedList
+import java.util.Queue
+
+val Object commandsObj = new LinkedList<String>()
 var Timer timer = null
 var lastCommand = now.minusSeconds(1)
 
@@ -6,13 +9,16 @@ rule "433MHz Controller"
 when
     Item WirelessController received command
 then
+    val commands = commandsObj as Queue<String>
+
     commands.add(receivedCommand.toString)
     logInfo("433", "Befehl in Warteschlange eingereiht: " + receivedCommand.toString)
 
     if(timer === null) {
         timer = createTimer(now, [ |
-            if(commands.peek !== null) {
-                val cmd = commands.poll
+            val innerCommands = commandsObj as Queue<String>
+            if(innerCommands.peek !== null) {
+                val cmd = innerCommands.poll
                 val results = executeCommandLine(cmd, 5000)
                 logInfo("433", cmd + " -> " + results)
                 lastCommand = now
