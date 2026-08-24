@@ -13,10 +13,6 @@ then
         logWarn("DynamicRetryDSL", "Konfiguration (RetryMaxAttempts/RetryInitialInterval/RetryMaxInterval) noch nicht gesetzt")
         return;
     }
-    val int maxRetries = RetryMaxAttempts.state as Number
-    val int initialInterval = RetryInitialInterval.state as Number
-    val int maxInterval = RetryMaxInterval.state as Number
-    val String altAction = RetryAlternativeAction.state.toString
 
     val devices = RetryDevices.members.map[i | i.name]
 
@@ -24,6 +20,16 @@ then
         retryCounts.put(device, 0)
 
         val Timer t = createTimer(now, [ |
+            // Werte werden HIER frisch aus den Items gelesen statt aus dem
+            // aeusseren Regel-Scope erfasst - verschachtelte Timer-Closures
+            // (createTimer innerhalb von forEach) verlieren in dieser Engine
+            // zuverlaessig nur Variablen aus dem AEUSSERSTEN Scope, nicht aus
+            // der unmittelbar umschliessenden Closure (device funktioniert).
+            val maxRetries = (RetryMaxAttempts.state as Number).intValue
+            val initialInterval = (RetryInitialInterval.state as Number).intValue
+            val maxInterval = (RetryMaxInterval.state as Number).intValue
+            val altAction = RetryAlternativeAction.state.toString
+
             try {
                 if(ScriptServiceUtil.getItemRegistry().getItem(device).state != NULL) {
                     sendCommand(device, ON)
