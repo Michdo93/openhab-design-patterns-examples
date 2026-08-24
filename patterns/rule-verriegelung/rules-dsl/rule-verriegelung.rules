@@ -1,4 +1,4 @@
-var DateTime lockedUntil = null
+var ZonedDateTime lockedUntil = null
 
 rule "Latched Rule"
 when
