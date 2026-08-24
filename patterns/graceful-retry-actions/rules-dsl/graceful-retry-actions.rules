@@ -31,8 +31,9 @@ then
             val altAction = RetryAlternativeAction.state.toString
 
             try {
-                if(ScriptServiceUtil.getItemRegistry().getItem(device).state != NULL) {
-                    sendCommand(device, ON)
+                val deviceItem = ScriptServiceUtil.getItemRegistry().getItem(device)
+                if(deviceItem.state != NULL) {
+                    deviceItem.sendCommand(ON)
                     logInfo("DynamicRetryDSL", device + " command sent successfully!")
                     retryTimers.get(device)?.cancel()
                 } else {
