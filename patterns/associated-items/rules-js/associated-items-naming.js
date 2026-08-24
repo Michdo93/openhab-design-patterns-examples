@@ -2,12 +2,12 @@ const { rules, triggers, items } = require('openhab');
 
 rules.JSRule({
   name: "Zugehoeriges Item ueber Namenskonvention finden",
-  triggers: [triggers.ItemGroupStateChangeTrigger("gSensors")], // Angepasst
+  triggers: [triggers.ItemStateChangeTrigger("gSensors")],
   execute: (event) => {
-    if (event.itemName.endsWith("_Status")) { //[cite: 2]
+    if (event.itemName.endsWith("_Status")) {
       return;
     }
-    const statusItem = items.getItem(event.itemName + "_Status"); //[cite: 2]
-    statusItem.postUpdate("ON"); //[cite: 2]
+    const statusItem = items.getItem(event.itemName + "_Status");
+    statusItem.postUpdate("ON");
   }
 });
