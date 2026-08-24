@@ -30,9 +30,9 @@ then
 
     var curr = "UNKNOWN"
     for (row : table) {
-        val start = LocalTime.parse(row.get(1))
-        val end = LocalTime.parse(row.get(2))
-        if (!nowTime.isBefore(start) && nowTime.isBefore(end)) {
+        val startTime = LocalTime.parse(row.get(1))
+        val endTime = LocalTime.parse(row.get(2))
+        if (!nowTime.isBefore(startTime) && nowTime.isBefore(endTime)) {
             curr = row.get(0)
         }
     }
