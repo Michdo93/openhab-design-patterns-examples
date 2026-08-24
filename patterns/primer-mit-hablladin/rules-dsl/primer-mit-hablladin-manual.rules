@@ -6,6 +6,7 @@ when
     Item GarageLightsProxy changed to ON
 then
     GLSM.postUpdate(GLSM_ON)
+    logInfo("Hablladin", "GarageLightsProxy -> ON, GLSM -> " + GLSM_ON)
 end
 
 rule "Garage Lights Commanded Off"
@@ -13,4 +14,5 @@ when
     Item GarageLightsProxy changed to OFF
 then
     GLSM.postUpdate(GLSM_OFF)
+    logInfo("Hablladin", "GarageLightsProxy -> OFF, GLSM -> " + GLSM_OFF)
 end
