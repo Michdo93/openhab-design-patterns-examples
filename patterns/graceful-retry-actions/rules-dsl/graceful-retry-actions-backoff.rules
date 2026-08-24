@@ -25,11 +25,10 @@ then
             } else {
                 logError("RetryBackoff", "Maximale Anzahl an Versuchen erreicht!")
                 postUpdate(NotificationItem, "LightSwitch konnte nicht eingeschaltet werden")
-                try {
-                    sendNotification("admin@example.com", "LightSwitch konnte nicht eingeschaltet werden")
-                } catch(Throwable notifyEx) {
-                    logWarn("RetryBackoff", "Cloud-Benachrichtigung nicht verfuegbar: " + notifyEx.message)
-                }
+                // Hinweis: sendNotification() (Cloud Connector) laesst sich in
+                // dieser DSL-Ausfuehrungsumgebung innerhalb verschachtelter
+                // Timer-Closures nicht auflösen (Namensauflösungsfehler, nicht
+                // durch try/catch abfangbar) - daher bewusst weggelassen.
             }
         }
     ])
