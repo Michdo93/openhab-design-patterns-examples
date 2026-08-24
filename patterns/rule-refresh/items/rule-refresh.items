@@ -1,4 +1,8 @@
-// Wird durch die Metadaten "triggerRule" von der dynamischen Regel gefunden
-Switch DynamicTriggerItem1 { triggerRule="watch" }
+Group gDynamicTrigger
+
+// Wird durch Mitgliedschaft in gDynamicTrigger von der Regel erfasst
+// (Metadaten "triggerRule" bleiben zur Veranschaulichung erhalten, werden
+// vom DSL-Trigger selbst aber nicht ausgewertet - siehe rule-refresh.rules)
+Switch DynamicTriggerItem1 (gDynamicTrigger) { triggerRule="watch" }
 
 Switch Reload_Item "Regel-Skript neu laden ausloesen"
