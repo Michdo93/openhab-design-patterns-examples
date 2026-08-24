@@ -20,9 +20,11 @@ then
     if (pressDuration < 500) {
         // kurzer Druck
         TargetLight.sendCommand(if(TargetLight.state == ON) OFF else ON)
+        logInfo("LongPress", "Kurzer Druck (" + pressDuration + "ms) -> Toggle")
     } else {
         // langer Druck
         TargetLight.sendCommand(INCREASE)
+        logInfo("LongPress", "Langer Druck (" + pressDuration + "ms) -> Dimmen")
     }
     ButtonPressTime.postUpdate(pressDuration)
 end
