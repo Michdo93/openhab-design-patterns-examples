@@ -20,7 +20,7 @@ then
                     logInfo("LoopingTimers", "Fan -> " + newState)
                 }
             }
-            ceilingTimer.reschedule(now.plusMillis(60000))
+            ceilingTimer.reschedule(now.plusNanos(60000L * 1000000L))
         } else {
             ceilingTimer = null
         }
