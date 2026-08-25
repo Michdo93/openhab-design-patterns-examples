@@ -19,9 +19,11 @@ rules.JSRule({
     if (pressDuration < 500) {
       // kurzer Druck
       items.getItem("TargetLight").sendToggle();
+      console.log("Kurzer Druck (" + pressDuration + "ms) -> Toggle");
     } else {
       // langer Druck
       items.getItem("TargetLight").sendCommand("INCREASE");
+      console.log("Langer Druck (" + pressDuration + "ms) -> Dimmen");
     }
     items.getItem("ButtonPressTime").postUpdate(pressDuration);
   }
