@@ -18,5 +18,7 @@ rules.JSRule({
     if (ui.state !== command) ui.postUpdate(command);
     if (rulesItem.state !== command) rulesItem.postUpdate(command);
     if (device.state !== command) device.sendCommand(command);
+
+    console.log("Quelle=" + source + " -> " + lightName + " = " + command);
   }
 });
