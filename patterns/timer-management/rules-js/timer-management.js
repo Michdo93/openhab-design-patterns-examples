@@ -14,6 +14,7 @@ rules.JSRule({
 
     // Timer neu erstellen, wenn Tuer geoeffnet wurde
     if (items.getItem(itemName).state === "OPEN") {
+      console.log(itemName + ": Timer gestartet (1h)");
       const t = actions.ScriptExecution.createTimer(
         time.ZonedDateTime.now().plusMinutes(60),
         () => {
@@ -21,6 +22,8 @@ rules.JSRule({
         }
       );
       timers.set(itemName, t);
+    } else {
+      console.log(itemName + ": geschlossen, kein Timer noetig");
     }
   }
 });
