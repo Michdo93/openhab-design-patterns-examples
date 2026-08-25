@@ -10,7 +10,7 @@ rules.JSRule({
   ],
   execute: (event) => {
     const sunset = items.getItem("Sun_Set").rawState;
-    const afterSunset = sunset && time.ZonedDateTime.parse(String(sunset)).isBefore(time.ZonedDateTime.now());
+    const afterSunset = sunset && time.toZDT(sunset).isBefore(time.ZonedDateTime.now());
     const state = items.getItem("GLSM").state;
 
     if (afterSunset && (state === GLSM_OFF || state === GLSM_TIMED_ON || state === GLSM_TIMED_BLINK)) {
