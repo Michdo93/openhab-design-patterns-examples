@@ -18,8 +18,9 @@ rules.JSRule({
 
     if (pressDuration < 500) {
       // kurzer Druck
-      items.getItem("TargetLight").sendToggle();
-      console.log("Kurzer Druck (" + pressDuration + "ms) -> Toggle");
+      const newState = items.getItem("TargetLight").state === "ON" ? "OFF" : "ON";
+      items.getItem("TargetLight").sendCommand(newState);
+      console.log("Kurzer Druck (" + pressDuration + "ms) -> Toggle (" + newState + ")");
     } else {
       // langer Druck
       items.getItem("TargetLight").sendCommand("INCREASE");
