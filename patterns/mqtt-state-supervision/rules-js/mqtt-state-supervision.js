@@ -12,6 +12,8 @@ rules.JSRule({
       supervisionTimers.get(itemName).cancel();
     }
 
+    console.log(itemName + ": Ueberwachung gestartet, erwarte " + expectedState + " innerhalb " + T_RB_SECONDS + "s");
+
     const t = actions.ScriptExecution.createTimer(
       time.ZonedDateTime.now().plusSeconds(T_RB_SECONDS),
       () => {
@@ -31,6 +33,7 @@ rules.JSRule({
     if (supervisionTimers.has(event.itemName)) {
       supervisionTimers.get(event.itemName).cancel();
       supervisionTimers.delete(event.itemName);
+      console.log(event.itemName + ": Zustand hat sich geaendert, Ueberwachung wird abgebrochen");
     }
   }
 });
