@@ -11,6 +11,7 @@ then
     val timeoutMinutes = 5
     val currentTimer = timers.get(itemName)
     if (currentTimer === null || currentTimer.hasTerminated()) {
+        logInfo("BewegungssensorTimer", itemName + ": Timer gestartet (" + (timeoutMinutes * 60) + "s)")
         timers.put(itemName, createTimer(now.plusMinutes(timeoutMinutes), [|
             itemObj.sendCommand(OFF)
             timers.remove(itemName)

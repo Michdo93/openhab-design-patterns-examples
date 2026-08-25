@@ -23,6 +23,7 @@ when
     Item exampleRule changed from OFF to ON
 then
     sendHttpPostRequest("http://localhost:8080/rest/rules/rule-manager-controlled-1/enable", "text/plain", "true", authHeaders, 5000)
+    logInfo("RuleManager", "rule-manager-controlled-1 enabled=true")
 end
 
 rule "Disable example rule"
@@ -30,4 +31,5 @@ when
     Item exampleRule changed from ON to OFF
 then
     sendHttpPostRequest("http://localhost:8080/rest/rules/rule-manager-controlled-1/enable", "text/plain", "false", authHeaders, 5000)
+    logInfo("RuleManager", "rule-manager-controlled-1 enabled=false")
 end

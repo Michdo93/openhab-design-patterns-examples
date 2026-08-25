@@ -16,6 +16,7 @@ rules.JSRule({
 
         if (newState !== "STAY" && items.getItem("Fan").state !== newState) {
           items.getItem("Fan").sendCommand(newState);
+          console.log("Fan -> " + newState);
         }
 
         ceilingTimer.reschedule(time.ZonedDateTime.now().plusSeconds(60));

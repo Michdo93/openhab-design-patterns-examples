@@ -10,5 +10,6 @@ rules.JSRule({
       items.getItem("AlertItem").sendCommand("Garagentor-Controller offline!");
     }
     items.getItem(event.itemName + "_Linked").sendCommand(event.receivedCommand);
+    console.log(event.itemName + " -> " + event.itemName + "_Linked: " + event.receivedCommand);
   }
 });

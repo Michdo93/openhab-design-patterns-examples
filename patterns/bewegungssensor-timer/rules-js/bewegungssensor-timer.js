@@ -5,6 +5,7 @@ rules.JSRule({
   triggers: [triggers.ItemStateUpdateTrigger("MotionDetector1", "ON")],
   execute: (event) => {
     if (occupancyTimer === null || occupancyTimer.hasTerminated()) {
+      console.log("MotionDetector1: Timer gestartet (5min)");
       occupancyTimer = actions.ScriptExecution.createTimer(
         time.ZonedDateTime.now().plusMinutes(5),
         () => {

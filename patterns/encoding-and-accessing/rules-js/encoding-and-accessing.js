@@ -14,6 +14,7 @@ rules.JSRule({
     const targets = items.getItem("vPresent").state === "ON" ? presentTargets : awayTargets;
     Object.entries(targets).forEach(([name, temp]) => {
       items.getItem(name).sendCommand(temp);
+      console.log(name + " -> " + temp);
     });
   }
 });

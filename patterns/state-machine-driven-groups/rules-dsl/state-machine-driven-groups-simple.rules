@@ -2,6 +2,8 @@ rule "Set lights based on Time of Day"
 when
     Item vTimeOfDay changed
 then
-    sendCommand("gLights_OFF_" + vTimeOfDay.state.toString, "OFF")
-    sendCommand("gLights_ON_"  + vTimeOfDay.state.toString, "ON")
+    val timeOfDay = vTimeOfDay.state.toString
+    sendCommand("gLights_OFF_" + timeOfDay, "OFF")
+    sendCommand("gLights_ON_"  + timeOfDay, "ON")
+    logInfo("StateMachineGroups", "vTimeOfDay=" + timeOfDay + " -> Lichtgruppen angesteuert")
 end

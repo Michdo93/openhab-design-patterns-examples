@@ -17,4 +17,6 @@ then
 
     mySleepProbability.postUpdate(prob * 100)
     mySleepSensor.sendCommand(if(prob >= THRESHOLD) ON else OFF)
+
+    logInfo("Bayes", String.format("Schlafwahrscheinlichkeit: %.1f%% (Schwelle: %.0f%%)", prob * 100, THRESHOLD * 100))
 end

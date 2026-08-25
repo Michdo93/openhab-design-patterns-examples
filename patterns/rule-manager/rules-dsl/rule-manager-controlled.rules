@@ -6,15 +6,19 @@ then
 
     // Teil 1
     if (isRunningExampleRule.state == ON) {
+        logInfo("RuleManager", "Teil 1 der Regel wird ausgefuehrt")
         // Teil 1 der Regel
     } else {
+        logInfo("RuleManager", "Teil 1: Aenderungen rueckgaengig gemacht (Abbruch erkannt)")
         // Aenderungen rueckgaengig machen
     }
 
     // Teil 2
     if (isRunningExampleRule.state == ON) {
+        logInfo("RuleManager", "Teil 2 der Regel wird ausgefuehrt")
         // Teil 2 der Regel
     } else {
+        logInfo("RuleManager", "Teil 2: Aenderungen rueckgaengig gemacht (Abbruch erkannt)")
         // Aenderungen rueckgaengig machen
     }
 

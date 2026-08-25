@@ -1,6 +1,6 @@
 import threading
 
-from openhab import rule, Registry
+from openhab import rule, Registry, logger
 from openhab.triggers import ItemStateChangeTrigger
 
 ceiling_timer = None
@@ -23,6 +23,7 @@ def loop():
 
             if new_state != "STAY" and str(Registry.getItem("Fan").getState()) != new_state:
                 Registry.getItem("Fan").sendCommand(new_state)
+                logger.info("Fan -> " + new_state)
 
         ceiling_timer = threading.Timer(60, loop)
         ceiling_timer.start()
@@ -36,4 +37,5 @@ class CeilingFanControl:
         global ceiling_timer
         if ceiling_timer is not None:
             return
+        self.logger.info("Schleife gestartet")
         loop()

@@ -5,5 +5,6 @@ rules.JSRule({
     const timeOfDay = items.getItem("vTimeOfDay").state;
     items.getItem("gLights_OFF_" + timeOfDay).sendCommand("OFF");
     items.getItem("gLights_ON_" + timeOfDay).sendCommand("ON");
+    console.log("vTimeOfDay=" + timeOfDay + " -> Lichtgruppen angesteuert");
   }
 });

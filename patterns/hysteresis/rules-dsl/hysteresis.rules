@@ -2,11 +2,19 @@ rule "Heizung mit Hysterese"
 when
     Item MyTemp changed
 then
-    if(MyTemp.state < 68) {
-        MyHeater.sendCommand(ON)
+    val temp = MyTemp.state as Number
+    var newCommand = "STAY"
+
+    if(temp.doubleValue < 68) {
+        newCommand = "ON"
+    } else if(temp.doubleValue >= 70) {
+        newCommand = "OFF"
     }
-    else if(MyTemp.state >= 70) {
-        MyHeater.sendCommand(OFF)
+
+    if(newCommand != "STAY" && newCommand != MyHeater.state.toString) {
+        MyHeater.sendCommand(newCommand)
+        logInfo("Hysterese", "Temp=" + temp + " -> Heizung=" + newCommand)
+    } else {
+        logInfo("Hysterese", "Temp=" + temp + " -> keine Aenderung (Hysterese-Bereich oder bereits im Zielzustand)")
     }
-    // sonst: Zustand beibehalten
 end

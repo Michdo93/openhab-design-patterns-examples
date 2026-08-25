@@ -2,12 +2,18 @@ rule "Set lights based on Time of Day"
 when
     Item vTimeOfDay changed
 then
+    val timeOfDay = vTimeOfDay.state.toString
     gLights.members.forEach[ light |
         val setting = gSettings.members.findFirst[
-            s | s.name == light.name + "_" + vTimeOfDay.state.toString
+            s | s.name == light.name + "_" + timeOfDay
         ]
-        if(setting !== null && setting.state != NULL) {
+        if(setting === null) {
+            // Keine Einstellung fuer diese Tageszeit vorgesehen - kein Fehler
+        } else if(setting.state == NULL || setting.state == UNDEF) {
+            logWarn("StateMachineGroups", light.name + ": Sollwert fuer " + timeOfDay + " noch nicht gesetzt")
+        } else {
             light.sendCommand(setting.state.toString)
+            logInfo("StateMachineGroups", light.name + " -> " + setting.state.toString)
         }
     ]
 end

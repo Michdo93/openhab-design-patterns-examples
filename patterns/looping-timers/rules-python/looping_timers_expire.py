@@ -6,6 +6,7 @@ from openhab.triggers import ItemStateChangeTrigger, ItemCommandTrigger
 class CeilingFanControl:
     def execute(self, module, input):
         if str(Registry.getItem("CeilingFanTimer").getState()) != "ON":
+            self.logger.info("Schleife gestartet")
             Registry.getItem("CeilingFanTimer").sendCommand("OFF")  # Timer starten
 
 
@@ -29,5 +30,6 @@ class CeilingFanLoop:
 
             if new_state != "STAY" and str(Registry.getItem("Fan").getState()) != new_state:
                 Registry.getItem("Fan").sendCommand(new_state)
+                self.logger.info("Fan -> " + new_state)
 
         Registry.getItem("CeilingFanTimer").sendCommand("ON")

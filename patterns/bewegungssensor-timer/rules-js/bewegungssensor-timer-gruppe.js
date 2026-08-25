@@ -9,6 +9,7 @@ rules.JSRule({
     const existing = timers.get(triggeringItem.name);
 
     if (!existing || existing.hasTerminated()) {
+      console.log(triggeringItem.name + ": Timer gestartet (" + TIMEOUT_MINUTES * 60 + "s)");
       const t = actions.ScriptExecution.createTimer(
         time.ZonedDateTime.now().plusMinutes(TIMEOUT_MINUTES),
         () => {

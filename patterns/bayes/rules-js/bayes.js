@@ -24,5 +24,7 @@ rules.JSRule({
 
     items.getItem("mySleepProbability").postUpdate(prob * 100);
     items.getItem("mySleepSensor").sendCommand(prob >= THRESHOLD ? "ON" : "OFF");
+
+    console.log("Schlafwahrscheinlichkeit: " + (prob * 100).toFixed(1) + "% (Schwelle: " + (THRESHOLD * 100).toFixed(0) + "%)");
   }
 });

@@ -5,6 +5,7 @@ when
     Item MotionDetector1 received update ON
 then
     if(occupancyTimer === null || occupancyTimer.hasTerminated()) {
+        logInfo("BewegungssensorTimer", "MotionDetector1: Timer gestartet (5min)")
         occupancyTimer = createTimer(now.plusMinutes(5), [|
             MotionDetector1.sendCommand(OFF)
             occupancyTimer = null

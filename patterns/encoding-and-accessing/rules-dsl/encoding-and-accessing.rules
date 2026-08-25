@@ -18,5 +18,8 @@ when
     Item vPresent changed
 then
     val targets = if(vPresent.state == ON) presentTargets else awayTargets
-    targets.forEach[ name, temp | sendCommand(name, temp.toString) ]
+    targets.forEach[ name, temp |
+        sendCommand(name, temp.toString)
+        logInfo("EncodingAndAccessing", name + " -> " + temp.toString)
+    ]
 end

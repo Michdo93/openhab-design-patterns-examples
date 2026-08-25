@@ -2,8 +2,10 @@ rules.JSRule({
   name: "ProxySwitch erhielt Befehl",
   triggers: [triggers.ItemCommandTrigger("ProxySwitch")],
   execute: (event) => {
-    if (items.getItem("BoundSwitch").state !== String(event.receivedCommand)) {
+    const commandStr = String(event.receivedCommand);
+    if (items.getItem("BoundSwitch").state !== commandStr) {
       items.getItem("BoundSwitch").sendCommand(event.receivedCommand);
+      console.log("ProxySwitch -> BoundSwitch: " + commandStr);
     }
   }
 });
@@ -12,8 +14,10 @@ rules.JSRule({
   name: "BoundSwitchUpdates erhielt Update",
   triggers: [triggers.ItemStateUpdateTrigger("BoundSwitchUpdates")],
   execute: (event) => {
-    if (items.getItem("ProxySwitch").state !== String(event.receivedState)) {
+    const stateStr = String(event.receivedState);
+    if (items.getItem("ProxySwitch").state !== stateStr) {
       items.getItem("ProxySwitch").postUpdate(event.receivedState);
+      console.log("BoundSwitchUpdates -> ProxySwitch: " + stateStr);
     }
   }
 });
