@@ -9,7 +9,12 @@ rules.JSRule({
   execute: (event) => {
     const christmasOn = items.getItem("vChristmas").state === "ON";
 
-    rules.setEnabled("christmas_lights", christmasOn);
-    rules.setEnabled("mbr_humidifier", !christmasOn);
+    try {
+      rules.setEnabled("christmas_lights", christmasOn);
+      rules.setEnabled("mbr_humidifier", !christmasOn);
+      console.log("vChristmas=" + christmasOn + " -> christmas_lights enabled=" + christmasOn + ", mbr_humidifier enabled=" + !christmasOn);
+    } catch (e) {
+      console.warn("Konnte Regeln noch nicht umschalten (evtl. beim Start, Dummy-Regeln noch nicht geladen): " + e.message);
+    }
   }
 });
