@@ -11,8 +11,11 @@ rules.JSRule({
       newCommand = "OFF";
     }
 
+    console.log("MyTemp=" + temp + " -> " + newCommand);
+
     if (newCommand !== "STAY" && newCommand !== items.getItem("MyHeater").state) {
       items.getItem("MyHeater").sendCommand(newCommand);
+      console.log("MyHeater -> " + newCommand);
     }
   }
 });
