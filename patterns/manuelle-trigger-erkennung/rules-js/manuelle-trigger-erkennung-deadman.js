@@ -22,7 +22,9 @@ rules.JSRule({
   triggers: [triggers.GroupStateUpdateTrigger("gWatchItems")],
   execute: (event) => {
     if (items.getItem("DeadMansSwitch").state === "MANUAL") {
-      // Element wurde manuell ausgeloest
+      console.log("Element wurde manuell ausgeloest");
+    } else {
+      console.log("Element wurde durch eine Regel ausgeloest (DeadMansSwitch=RULE)");
     }
   }
 });
