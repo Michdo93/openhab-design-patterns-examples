@@ -1,4 +1,4 @@
-rule "Rollladen nach Sonnenaufgang oeffnen"
+rule "Rollladen nach Sonnenaufgang öffnen"
 when
     Item DayNight changed from NIGHT to DAY
 then
