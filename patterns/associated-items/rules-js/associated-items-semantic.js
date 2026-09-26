@@ -4,7 +4,7 @@ rules.JSRule({
   execute: (event) => {
     const equipment = actions.Semantics.getEquipment(items.getItem(event.itemName));
     if (!equipment) {
-      console.warn("Kein Equipment fuer SomeSensor gefunden");
+      console.warn("Kein Equipment für SomeSensor gefunden");
       return;
     }
 
