@@ -1,6 +1,6 @@
 # associated-items
 
-Zugehoerige Items zur Laufzeit finden: semantisches Modell, Gruppenzugehoerigkeit oder Namenskonvention.
+Zugehörige Items zur Laufzeit finden: semantisches Modell, Gruppenzugehörigkeit oder Namenskonvention.
 
 ## Dateien in diesem Beispiel
 
