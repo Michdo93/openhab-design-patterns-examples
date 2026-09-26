@@ -32,7 +32,7 @@ then
             if (matcher.matches()) {
                 triggerTime = ZonedDateTime.parse(matcher.group(1) + now.getOffset().getId())
             } else {
-                throw new RuntimeException("Ungueltiges Timerformat [" + triggeringItem.state + "]")
+                throw new RuntimeException("Ungültiges Timerformat [" + triggeringItem.state + "]")
             }
         }
         val String command = matcher.group(matcher.groupCount())
@@ -47,7 +47,7 @@ then
         }
 
         timer = createTimer(triggerTime, [|
-            logInfo("DeferredAction", "Ausfuehren verzoegerter Aktion {} auf {}", command, targetItem)
+            logInfo("DeferredAction", "Ausführen verzögerter Aktion {} auf {}", command, targetItem)
             timers.remove(target)
             targetItem.sendCommand(command)
         ])
@@ -62,7 +62,7 @@ when
 then
     val timer = timers.get(triggeringItem.name)
     if (timer !== null) {
-        logInfo("DeferredAction", "Timer fuer {} entfernen [{}]", triggeringItem.name, timer)
+        logInfo("DeferredAction", "Timer für {} entfernen [{}]", triggeringItem.name, timer)
         timer.cancel()
         timers.remove(triggeringItem.name)
     }
