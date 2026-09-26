@@ -1,6 +1,6 @@
 Group gSensors
 
-// Unbound (virtuelle) Items zur Demonstration - kein echtes Geraet noetig
+// Unbound (virtuelle) Items zur Demonstration - kein echtes Gerät nötig
 Switch Sensor1 (gSensors)
 Switch Sensor1_Status (gSensors) ["Status"]
 
