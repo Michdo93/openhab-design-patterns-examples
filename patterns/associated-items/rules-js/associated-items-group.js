@@ -1,5 +1,5 @@
 rules.JSRule({
-  name: "Zugehoeriges Item ueber Gruppenzugehoerigkeit finden",
+  name: "Zugehöriges Item über Gruppenzugehörigkeit finden",
   triggers: [triggers.GroupStateChangeTrigger("gSensors")],
   execute: (event) => {
     const sensors = items.getItem("gSensors").members;
