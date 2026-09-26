@@ -33,7 +33,7 @@ def set_deferred(target, raw_state):
     else:
         match = TIME_SPECIFIC.match(raw_state)
         if not match:
-            raise ValueError("Ungueltiges Timerformat [" + raw_state + "]")
+            raise ValueError("Ungültiges Timerformat [" + raw_state + "]")
         trigger_time = datetime.fromisoformat(match.group(1)).astimezone()
         command = match.group(2)
 
@@ -43,7 +43,7 @@ def set_deferred(target, raw_state):
     cancel_deferred(target)
 
     def on_expire():
-        logger.info("Ausfuehren verzoegerter Aktion {} auf {}".format(command, target))
+        logger.info("Ausführen verzögerter Aktion {} auf {}".format(command, target))
         del timers[target]
         Registry.getItem(target).sendCommand(command)
 
