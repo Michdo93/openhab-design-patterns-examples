@@ -13,13 +13,13 @@ class SensorHatEinUpdate:
 
         equipment = sensor.getSemantic().getEquipment()
         if not equipment:
-            self.logger.warn("Kein Equipment fuer " + sensor.getName() + " gefunden")
+            self.logger.warn("Kein Equipment für " + sensor.getName() + " gefunden")
             return
 
         members = equipment.getAllMembers()
 
         # Robuster Ansatz: Tag "Status" + Namenskonvention kombiniert,
-        # unabhaengig davon, wie das Equipment selbst benannt ist
+        # unabhängig davon, wie das Equipment selbst benannt ist
         status_item = next(
             (i for i in members if "Status" in i.getTags() and i.getName().endswith("_Status")),
             None,
