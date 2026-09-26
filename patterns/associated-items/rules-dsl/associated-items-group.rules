@@ -1,4 +1,4 @@
-rule "Zugehoeriges Item ueber Gruppenzugehoerigkeit finden"
+rule "Zugehöriges Item über Gruppenzugehörigkeit finden"
 when
     Member of gSensors changed
 then
