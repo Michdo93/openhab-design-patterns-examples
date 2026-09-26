@@ -1,6 +1,6 @@
 # aufgeschobene-automatisierte-aktionen
 
-Verzoegerte Befehle per Proxy-Item, die durch erneute Interaktion automatisch abgebrochen werden, inkl. wiederverwendbarem Timer-Modul.
+Verzögerte Befehle per Proxy-Item, die durch erneute Interaktion automatisch abgebrochen werden, inkl. wiederverwendbarem Timer-Modul.
 
 ## Dateien in diesem Beispiel
 
