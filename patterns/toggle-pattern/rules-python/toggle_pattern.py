@@ -3,7 +3,7 @@ from openhab.triggers import ItemCommandTrigger
 
 
 @rule(triggers=[ItemCommandTrigger("mqttSwitchIn2", "OFF")])
-class ToggleLampe:
+class ToggleLamp:
     def execute(self, module, input):
         lamp = Registry.getItem("modbusSwitchOut1")
         if str(lamp.getState()) != "ON":

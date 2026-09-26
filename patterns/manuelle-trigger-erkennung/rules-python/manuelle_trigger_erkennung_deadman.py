@@ -12,7 +12,7 @@ class SystemStarted:
 class RuleThatChangesAGWatchItem:
     def execute(self, module, input):
         Registry.getItem("DeadMansSwitch").sendCommand("RULE")
-        # Aktionen ausfuehren
+        # Aktionen ausführen
         Registry.getItem("WatchedItem1").sendCommand("ON")
         Registry.getItem("DeadMansSwitch").sendCommand("MANUAL")
 
@@ -21,6 +21,6 @@ class RuleThatChangesAGWatchItem:
 class IsManuallyTriggered:
     def execute(self, module, input):
         if str(Registry.getItem("DeadMansSwitch").getState()) == "MANUAL":
-            self.logger.info("Element wurde manuell ausgeloest")
+            self.logger.info("Item was triggered manually")
         else:
-            self.logger.info("Element wurde durch eine Regel ausgeloest (DeadMansSwitch=RULE)")
+            self.logger.info("Item was triggered by a rule (DeadMansSwitch=RULE)")

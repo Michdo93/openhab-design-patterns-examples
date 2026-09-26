@@ -5,5 +5,5 @@ then
     val timeOfDay = vTimeOfDay.state.toString
     sendCommand("gLights_OFF_" + timeOfDay, "OFF")
     sendCommand("gLights_ON_"  + timeOfDay, "ON")
-    logInfo("StateMachineGroups", "vTimeOfDay=" + timeOfDay + " -> Lichtgruppen angesteuert")
+    logInfo("StateMachineGroups", "vTimeOfDay=" + timeOfDay + " -> light groups commanded")
 end

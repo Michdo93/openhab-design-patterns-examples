@@ -1,9 +1,9 @@
-rule "Menschenlesbarer Name (einfach)"
+rule "Human-readable name (simple)"
 when
     Item MyItem changed
 then
     var name = transform("MAP", "admin.map", MyItem.name)
     if(name == "") name = MyItem.name
 
-    logInfo("HumanReadableNames", name + " ist jetzt " + MyItem.state.toString)
+    logInfo("HumanReadableNames", name + " is now " + MyItem.state.toString)
 end

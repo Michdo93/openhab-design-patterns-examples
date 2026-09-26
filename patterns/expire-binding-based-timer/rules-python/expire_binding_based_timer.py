@@ -3,22 +3,22 @@ from openhab.triggers import ItemCommandTrigger
 
 
 @rule(triggers=[ItemCommandTrigger("StartMyTimerTrigger", "ON")])
-class EineRegelDieDenTimerStartet:
+class ARuleThatStartsTheTimer:
     def execute(self, module, input):
-        # Arbeitsschritte ausfuehren
+        # Arbeitsschritte ausführen
 
         if str(Registry.getItem("MyTimer").getState()) == "ON":
-            self.logger.info("Timer ist bereits aktiv - wird neu gestartet")
+            self.logger.info("Timer is already active - restarting")
 
         # Timer abbrechen
         Registry.getItem("MyTimer").postUpdate("OFF")
 
         # Timer starten
         Registry.getItem("MyTimer").sendCommand("ON")
-        self.logger.info("MyTimer gestartet (5 Minuten)")
+        self.logger.info("MyTimer started (5 minutes)")
 
 
 @rule(triggers=[ItemCommandTrigger("MyTimer", "OFF")])
-class MyTimerAbgelaufen:
+class MyTimerExpired:
     def execute(self, module, input):
-        self.logger.info("MyTimer abgelaufen - Code nach Ablauf wird ausgefuehrt")
+        self.logger.info("MyTimer expired - running expiry code")

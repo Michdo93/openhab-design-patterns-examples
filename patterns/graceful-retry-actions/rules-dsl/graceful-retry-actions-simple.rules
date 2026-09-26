@@ -11,18 +11,18 @@ then
     retryTimer = createTimer(now, [ |
         try {
             LightSwitch.sendCommand(ON)
-            logInfo("Retry", "Command erfolgreich gesendet!")
+            logInfo("Retry", "Command sent successfully!")
             if(retryTimer !== null) retryTimer.cancel()
         } catch(Throwable t) {
             retryCount = retryCount + 1
-            logWarn("Retry", "Fehler beim Senden, Versuch #" + retryCount)
+            logWarn("Retry", "Error while sending, attempt #" + retryCount)
             if(retryCount < MAX_RETRIES) {
                 retryTimer.reschedule(now.plusSeconds(RETRY_INTERVAL))
             } else {
-                logError("Retry", "Maximale Anzahl an Versuchen erreicht!")
-                postUpdate(NotificationItem, "LightSwitch konnte nicht eingeschaltet werden")
-                // Hinweis: sendNotification() (Cloud Connector) laesst sich in
-                // dieser DSL-Ausfuehrungsumgebung innerhalb verschachtelter
+                logError("Retry", "Maximum number of attempts reached!")
+                postUpdate(NotificationItem, "LightSwitch could not be switched ON")
+                // Hinweis: sendNotification() (Cloud Connector) lässt sich in
+                // dieser DSL-Ausführungsumgebung innerhalb verschachtelter
                 // Timer-Closures nicht auflösen (Namensauflösungsfehler, nicht
                 // durch try/catch abfangbar) - daher bewusst weggelassen.
             }

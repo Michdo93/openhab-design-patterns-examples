@@ -3,7 +3,7 @@ from openhab.triggers import ItemCommandTrigger
 
 
 @rule(triggers=[ItemCommandTrigger("myCounter")])
-class CountdownVerwaltung:
+class CountdownManagement:
     def execute(self, module, input):
         event = input.get("event")
         if not event:
@@ -30,24 +30,24 @@ class CountdownVerwaltung:
 
 
 @rule(triggers=[ItemCommandTrigger("test6")])
-class SechsMinutenStarten:
+class StartSixMinutes:
     def execute(self, module, input):
         Registry.getItem("myCounter").sendCommand(6)
 
 
 @rule(triggers=[ItemCommandTrigger("test3")])
-class DreiMinutenStarten:
+class StartThreeMinutes:
     def execute(self, module, input):
         Registry.getItem("myCounter").sendCommand(3)
 
 
 @rule(triggers=[ItemCommandTrigger("test2")])
-class AufZweiMinutenSetzen:
+class SetToTwoMinutes:
     def execute(self, module, input):
         Registry.getItem("myCounter").sendCommand(-2)
 
 
 @rule(triggers=[ItemCommandTrigger("testabort")])
-class CountdownAbbrechen:
+class CancelCountdown:
     def execute(self, module, input):
         Registry.getItem("myCounter").sendCommand(0)

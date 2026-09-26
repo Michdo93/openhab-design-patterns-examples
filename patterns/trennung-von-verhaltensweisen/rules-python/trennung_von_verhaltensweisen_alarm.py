@@ -20,10 +20,10 @@ class SendMessage:
             if item_name == "Notification_Proxy_Info":
                 if NotificationAction is not None:
                     NotificationAction.sendNotification("admin@example.com", command)
-                logger.info("Info-Benachrichtigung: " + command)
+                logger.info("Info notification: " + command)
             else:
                 if NotificationAction is not None:
                     NotificationAction.sendBroadcastNotification(command)
-                logger.info("Alarm-Benachrichtigung: " + command)
+                logger.info("Alert notification: " + command)
         except Exception as ex:
-            logger.warn("Cloud-Benachrichtigung nicht verfuegbar: " + str(ex))
+            logger.warn("Cloud notification not available: " + str(ex))

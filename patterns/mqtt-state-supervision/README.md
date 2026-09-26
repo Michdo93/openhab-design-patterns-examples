@@ -1,6 +1,6 @@
 # mqtt-state-supervision
 
-Ueberwachen, ob ein gesendeter MQTT-Befehl innerhalb einer Frist bestaetigt wird, sonst Alarm.
+Überwachen, ob ein gesendeter MQTT-Befehl innerhalb einer Frist bestätigt wird, sonst Alarm.
 
 ## Dateien in diesem Beispiel
 

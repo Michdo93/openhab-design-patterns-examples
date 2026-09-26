@@ -35,4 +35,4 @@ class PresenceDetectionDebounce:
         t = threading.Timer(delay, on_expire)
         t.start()
         timers[item_name] = t
-        self.logger.info(item_name + ": Debounce-Timer gestartet, Verzoegerung=" + str(delay) + "s")
+        self.logger.info(item_name + ": debounce timer started, delay=" + str(delay) + "s")

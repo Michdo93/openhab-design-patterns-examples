@@ -1,5 +1,5 @@
 rules.JSRule({
-  name: "ProxySwitch erhielt Befehl",
+  name: "ProxySwitch received command",
   triggers: [triggers.ItemCommandTrigger("ProxySwitch")],
   execute: (event) => {
     const commandStr = String(event.receivedCommand);
@@ -11,7 +11,7 @@ rules.JSRule({
 });
 
 rules.JSRule({
-  name: "BoundSwitchUpdates erhielt Update",
+  name: "BoundSwitchUpdates received update",
   triggers: [triggers.ItemStateUpdateTrigger("BoundSwitchUpdates")],
   execute: (event) => {
     const stateStr = String(event.receivedState);

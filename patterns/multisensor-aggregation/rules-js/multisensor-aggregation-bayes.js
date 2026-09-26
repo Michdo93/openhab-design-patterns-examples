@@ -37,12 +37,12 @@ rules.JSRule({
     const total = probPresence + probAbsence;
     probPresence /= total;
 
-    console.log("Bayes Anwesenheitswahrscheinlichkeit: " + probPresence.toFixed(2));
+    console.log("Bayes presence probability: " + probPresence.toFixed(2));
 
     if (probPresence > 0.6) {
-      console.log("Anwesenheit erkannt!");
+      console.log("Presence detected!");
     } else {
-      console.log("Keine Anwesenheit.");
+      console.log("No presence.");
     }
   }
 });

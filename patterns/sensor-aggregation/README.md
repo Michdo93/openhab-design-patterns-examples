@@ -1,6 +1,6 @@
 # sensor-aggregation
 
-Mehrere Praesenzsensoren zu einem Gesamtstatus aggregieren, inkl. Anti-Flapping-Timer und Personenerkennung.
+Mehrere Präsenzsensoren zu einem Gesamtstatus aggregieren, inkl. Anti-Flapping-Timer und Personenerkennung.
 
 ## Dateien in diesem Beispiel
 
@@ -9,7 +9,7 @@ Mehrere Praesenzsensoren zu einem Gesamtstatus aggregieren, inkl. Anti-Flapping-
 - `sensor-aggregation-simple.items`
 
 **Transformationen** (`transform/`) – benötigt das Add-on „Map Transformation“:
-- `en.map`
+- `de.map`
 
 **Regeln** – bitte nur EINE der drei Varianten verwenden:
 

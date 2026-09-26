@@ -1,6 +1,6 @@
 # decoupled-notification-service
 
-Benachrichtigungslogik von Automatisierungsregeln entkoppeln ueber zentrale Notify-Items und eine Sammel-Regel.
+Benachrichtigungslogik von Automatisierungsregeln entkoppeln über zentrale Notify-Items und eine Sammel-Regel.
 
 ## Dateien in diesem Beispiel
 

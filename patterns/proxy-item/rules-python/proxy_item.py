@@ -3,7 +3,7 @@ from openhab.triggers import ItemCommandTrigger, ItemStateUpdateTrigger
 
 
 @rule(triggers=[ItemCommandTrigger("ProxySwitch")])
-class ProxySwitchErhieltBefehl:
+class ProxySwitchReceivedCommand:
     def execute(self, module, input):
         event = input.get("event")
         if not event:
@@ -17,7 +17,7 @@ class ProxySwitchErhieltBefehl:
 
 
 @rule(triggers=[ItemStateUpdateTrigger("BoundSwitchUpdates")])
-class BoundSwitchUpdatesErhieltUpdate:
+class BoundSwitchUpdatesReceivedUpdate:
     def execute(self, module, input):
         event = input.get("event")
         if not event:

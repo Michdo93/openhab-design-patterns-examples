@@ -11,7 +11,7 @@ rules.JSRule({
   triggers: [triggers.ItemCommandTrigger("SomeRuleTrigger", "ON")],
   execute: (event) => {
     items.getItem("DeadMansSwitch").sendCommand("RULE");
-    // Aktionen ausfuehren
+    // Aktionen ausführen
     items.getItem("WatchedItem1").sendCommand("ON");
     items.getItem("DeadMansSwitch").sendCommand("MANUAL");
   }
@@ -22,9 +22,9 @@ rules.JSRule({
   triggers: [triggers.GroupStateUpdateTrigger("gWatchItems")],
   execute: (event) => {
     if (items.getItem("DeadMansSwitch").state === "MANUAL") {
-      console.log("Element wurde manuell ausgeloest");
+      console.log("Item was triggered manually");
     } else {
-      console.log("Element wurde durch eine Regel ausgeloest (DeadMansSwitch=RULE)");
+      console.log("Item was triggered by a rule (DeadMansSwitch=RULE)");
     }
   }
 });

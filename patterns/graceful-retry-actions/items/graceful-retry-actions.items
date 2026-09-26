@@ -1,12 +1,12 @@
-Switch RetryTrigger "Retry Trigger"
+Switch RetryTrigger "Wiederholungs-Auslöser"
 
-Group RetryDevices "Devices to Retry"
-Switch LightSwitch  "Living Room Light" (RetryDevices)
-Switch HeaterSwitch "Heater"            (RetryDevices)
-Switch FanSwitch    "Fan"               (RetryDevices)
+Group RetryDevices "Geräte für Wiederholung"
+Switch LightSwitch  "Wohnzimmerlicht" (RetryDevices)
+Switch HeaterSwitch "Heizung"           (RetryDevices)
+Switch FanSwitch    "Ventilator"        (RetryDevices)
 
-Number RetryMaxAttempts      "Max Retries"          <number>
-Number RetryInitialInterval  "Initial Interval (s)" <time>
-Number RetryMaxInterval      "Max Interval (s)"      <time>
-String RetryAlternativeAction "Alternative Action"
+Number RetryMaxAttempts      "Max. Versuche"        <number>
+Number RetryInitialInterval  "Startintervall (s)"   <time>
+Number RetryMaxInterval      "Max. Intervall (s)"    <time>
+String RetryAlternativeAction "Alternative Aktion"
 String NotificationItem "Letzte Alarmmeldung [%s]"

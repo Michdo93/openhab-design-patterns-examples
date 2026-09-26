@@ -1,10 +1,10 @@
 rules.JSRule({
-  name: "Sensor hat ein Update",
+  name: "Sensor received an update",
   triggers: [triggers.ItemStateChangeTrigger("SomeSensor")],
   execute: (event) => {
     const equipment = actions.Semantics.getEquipment(items.getItem(event.itemName));
     if (!equipment) {
-      console.warn("Kein Equipment für SomeSensor gefunden");
+      console.warn("No equipment found for SomeSensor");
       return;
     }
 
@@ -23,13 +23,13 @@ rules.JSRule({
     // Ansatz: Item-Tag
     const byTag = members.find((i) => i.tags.includes("Status"));
 
-    // Ansatz: mehrere Kriterien (robust, unabhaengig vom Equipment-Namen)
+    // Ansatz: mehrere Kriterien (robust, unabhängig vom Equipment-Namen)
     const byMulti = members.find(
       (i) => i.tags.includes("Status") && i.name.endsWith("_Status")
     );
 
     if (!byMulti) {
-      console.warn("Kein Status-Item im Equipment " + equipment.name + " gefunden");
+      console.warn("No status item found in equipment " + equipment.name);
       return;
     }
     byMulti.postUpdate(items.getItem(event.itemName).state);

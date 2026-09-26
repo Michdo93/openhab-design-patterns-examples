@@ -1,6 +1,6 @@
 # unbound-item
 
-Virtuelles Item ohne Binding/Thing zur Speicherung von regelinternem Zustand. Kein Rule-Beispiel noetig.
+Virtuelles Item ohne Binding/Thing zur Speicherung von regelinternem Zustand. Kein Rule-Beispiel nötig.
 
 ## Dateien in diesem Beispiel
 

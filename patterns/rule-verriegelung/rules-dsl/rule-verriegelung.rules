@@ -5,12 +5,12 @@ when
     Item MyItem received update
 then
     if(lockedUntil !== null && lockedUntil.isAfter(now)) {
-        logInfo("RuleVerriegelung", "Event ignoriert, gesperrt bis " + lockedUntil.toString)
-        return; // Skip event if timer exists
+        logInfo("RuleLatching", "Event ignored, locked until " + lockedUntil.toString)
+        return; // Ereignis überspringen, solange die Sperre aktiv ist
     }
 
     lockedUntil = now.plusDays(1)
-    logInfo("RuleVerriegelung", "Regelcode ausgefuehrt, gesperrt bis " + lockedUntil.toString)
+    logInfo("RuleLatching", "Rule code executed, locked until " + lockedUntil.toString)
 
-    // Regelcode ausfuehren
+    // Regelcode ausführen
 end

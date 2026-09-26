@@ -5,14 +5,14 @@ when
     Item motionSensor changed
 then
     if(debounceTimer === null) {
-        logInfo("Debounce", "Bewegung erkannt - Licht einschalten")
+        logInfo("Debounce", "Motion detected - turning light on")
         light.sendCommand(ON)
 
         debounceTimer = createTimer(now.plusSeconds(2), [|
             debounceTimer = null
-            logInfo("Debounce", "Debounce beendet - neue Events moeglich")
+            logInfo("Debounce", "Debounce finished - new events possible")
         ])
     } else {
-        logInfo("Debounce", "Event ignoriert - Timer laeuft noch")
+        logInfo("Debounce", "Event ignored - timer still running")
     }
 end

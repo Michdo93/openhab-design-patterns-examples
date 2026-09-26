@@ -22,7 +22,7 @@ class DebouncePerson1:
             if str(proxy.getState()) != sensor_state:
                 proxy.postUpdate(sensor_state)
                 logger.info(
-                    "Person1Presence uebernimmt {} (Verzoegerung={}s)".format(sensor_state, delay_seconds)
+                    "Person1Presence set to {} (delay={}s)".format(sensor_state, delay_seconds)
                 )
             timer = None
 

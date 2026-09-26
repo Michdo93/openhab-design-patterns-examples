@@ -1,7 +1,7 @@
 const { setDeferred, cancelDeferred } = require("./lib/deferred");
 
 rules.JSRule({
-  name: "Timer setzen",
+  name: "Set timer",
   triggers: [triggers.GroupStateChangeTrigger("gDeferredAction")],
   execute: (event) => {
     const rawState = items.getItem(event.itemName).state;
@@ -14,7 +14,7 @@ rules.JSRule({
 });
 
 rules.JSRule({
-  name: "Timer entfernen",
+  name: "Remove timer",
   triggers: [triggers.GroupStateChangeTrigger("gDeferredAction")],
   execute: (event) => {
     cancelDeferred(event.itemName);

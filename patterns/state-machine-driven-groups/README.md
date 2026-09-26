@@ -1,6 +1,6 @@
 # state-machine-driven-groups
 
-Tageszeit-abhaengige Zustaende ueber benannte Gruppen (gLights_ON_MORNING etc.) statt if-else-Ketten.
+Tageszeit-abhängige Zustände über benannte Gruppen (gLights_ON_MORNING etc.) statt if-else-Ketten.
 
 ## Dateien in diesem Beispiel
 

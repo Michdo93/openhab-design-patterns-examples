@@ -1,6 +1,6 @@
 # multisensor-aggregation
 
-Mehrere unsichere Sensoren zu einer zuverlaessigen Entscheidung kombinieren: Weighted-Sum- und Bayes-Variante.
+Mehrere unsichere Sensoren zu einer zuverlässigen Entscheidung kombinieren: Weighted-Sum- und Bayes-Variante.
 
 ## Dateien in diesem Beispiel
 

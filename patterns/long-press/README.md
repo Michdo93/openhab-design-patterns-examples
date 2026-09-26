@@ -1,6 +1,6 @@
 # long-press
 
-Kurzen vs. langen Tastendruck unterscheiden ueber Zeitmessung, inkl. Fallback-Timer.
+Kurzen vs. langen Tastendruck unterscheiden über Zeitmessung, inkl. Fallback-Timer.
 
 ## Dateien in diesem Beispiel
 

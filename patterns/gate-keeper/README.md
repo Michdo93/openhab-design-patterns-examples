@@ -1,6 +1,6 @@
 # gate-keeper
 
-Befehls-Warteschlange mit Mindestabstand fuer story-sensitive Technologien (433MHz/Insteon).
+Befehls-Warteschlange mit Mindestabstand für story-sensitive Technologien (433MHz/Insteon).
 
 ## Dateien in diesem Beispiel
 

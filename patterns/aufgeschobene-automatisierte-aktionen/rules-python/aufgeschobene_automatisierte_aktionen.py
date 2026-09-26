@@ -5,7 +5,7 @@ from deferred import set_deferred, cancel_deferred
 
 
 @rule(triggers=[GroupStateChangeTrigger("gDeferredAction")])
-class TimerSetzen:
+class SetTimer:
     def execute(self, module, input):
         event = input.get("event")
         if not event:
@@ -25,7 +25,7 @@ class TimerSetzen:
 
 
 @rule(triggers=[GroupStateChangeTrigger("gDeferredAction")])
-class TimerEntfernen:
+class RemoveTimer:
     def execute(self, module, input):
         event = input.get("event")
         if not event:

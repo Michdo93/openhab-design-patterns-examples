@@ -3,6 +3,6 @@ when
     Member of DeviceStatuses changed to UNDEF
 then
     val itemName = triggeringItem.name
-    // Meldung oder Alarm ausloesen
-    logWarn("sensorCheck", itemName + " meldet sich nicht mehr (UNDEF) - Alarm/Meldung ausloesen")
+    // Meldung oder Alarm auslösen
+    logWarn("sensorCheck", itemName + " stopped reporting (UNDEF) - raise alert/notification")
 end

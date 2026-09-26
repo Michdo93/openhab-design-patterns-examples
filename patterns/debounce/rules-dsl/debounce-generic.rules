@@ -16,14 +16,14 @@ then
     timers.put(sensorName, null)
 
     if(sensorState == ON) {
-        // Sofort uebernehmen, kein Timer noetig (vermeidet Timer mit 0 Verzoegerung)
-        logInfo("Debounce", sensorName + ": Debounce-Timer gestartet, Verzoegerung=0s")
+        // Sofort übernehmen, kein Timer nötig (vermeidet Timer mit 0 Verzögerung)
+        logInfo("Debounce", sensorName + ": debounce timer started, delay=0s")
         val proxyItem = ScriptServiceUtil.getItemRegistry().getItem(proxyName)
         if(proxyItem.state != sensorState) {
             proxyItem.sendCommand(sensorState.toString)
         }
     } else {
-        logInfo("Debounce", sensorName + ": Debounce-Timer gestartet, Verzoegerung=120s")
+        logInfo("Debounce", sensorName + ": debounce timer started, delay=120s")
         timers.put(sensorName, createTimer(now.plusSeconds(120), [ |
             val proxyItem = ScriptServiceUtil.getItemRegistry().getItem(proxyName)
             if(proxyItem.state != sensorState) {

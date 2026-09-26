@@ -1,8 +1,8 @@
-Group:Switch:AND(ON, OFF) gSensorStatus "Sensor's Status [MAP(admin.map):%s]" <network>
+Group:Switch:AND(ON, OFF) gSensorStatus "Sensorstatus [MAP(admin.map):%s]" <network>
 Group gResetExpire
 Group sensorReporters
 
-Switch vNetwork_cerberos "cerberos Network [MAP(admin.map):%s]"
+Switch vNetwork_cerberos "Cerberos Netzwerk [MAP(admin.map):%s]"
     <network> (gSensorStatus, gResetExpire)
     { expire="2m", name="cerberos" }
 

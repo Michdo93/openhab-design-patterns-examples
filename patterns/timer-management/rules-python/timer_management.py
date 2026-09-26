@@ -20,7 +20,7 @@ class AlertIfDoorOpen:
             timers[item_name].cancel()
             del timers[item_name]
 
-        # Timer neu erstellen, wenn Tuer geoeffnet wurde
+        # Timer neu erstellen, wenn Tür geöffnet wurde
         state = Registry.getItem(item_name).getState()
         if str(state) == "OPEN":
             def alert(name=item_name):
@@ -29,6 +29,6 @@ class AlertIfDoorOpen:
             t = threading.Timer(60 * 60, alert)
             t.start()
             timers[item_name] = t
-            self.logger.info(item_name + ": Timer gestartet (1h)")
+            self.logger.info(item_name + ": Timer started (1h)")
         else:
-            self.logger.info(item_name + ": geschlossen, kein Timer noetig")
+            self.logger.info(item_name + ": closed, no timer needed")

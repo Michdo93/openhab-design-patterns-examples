@@ -13,7 +13,7 @@ rules.JSRule({
         console.log(l.name + " -> OFF");
       });
     } else {
-      console.warn("Keine OFF-Gruppe fuer " + timeOfDay + " gefunden");
+      console.warn("No OFF group found for " + timeOfDay);
     }
 
     const onGroup = items.getItem("gLights_ON").members.find((g) => g.name === "gLights_ON_" + timeOfDay);
@@ -23,7 +23,7 @@ rules.JSRule({
         console.log(l.name + " -> ON");
       });
     } else {
-      console.warn("Keine ON-Gruppe fuer " + timeOfDay + " gefunden");
+      console.warn("No ON group found for " + timeOfDay);
     }
   }
 });

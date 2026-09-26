@@ -1,13 +1,13 @@
 // Realer Schalter
-Switch MySwitch1 "Intelligent Switch 1" <switch> {channel="enocean:rockerSwitch:xxxxxxxx:xxxxxxxx:rockerswitchA"}
+Switch MySwitch1 "Intelligenter Schalter 1" <switch> {channel="enocean:rockerSwitch:xxxxxxxx:xxxxxxxx:rockerswitchA"}
 
 // Virtuelle Items
-Switch MySwitch1Up "Switch 1 Up" <switch>
-Switch MySwitch1UpShortPress "Switch 1 Up: Short Press" <switch>
-Switch MySwitch1UpLongPress "Switch 1 Up: Long Press" <switch>
-Switch MySwitch1Down "Switch 1 Down" <switch>
-Switch MySwitch1DownShortPress "Switch 1 Down: Short Press" <switch>
-Switch MySwitch1DownLongPress "Switch 1 Down: Long Press" <switch>
+Switch MySwitch1Up "Schalter 1 oben" <switch>
+Switch MySwitch1UpShortPress "Schalter 1 oben: kurzer Druck" <switch>
+Switch MySwitch1UpLongPress "Schalter 1 oben: langer Druck" <switch>
+Switch MySwitch1Down "Schalter 1 unten" <switch>
+Switch MySwitch1DownShortPress "Schalter 1 unten: kurzer Druck" <switch>
+Switch MySwitch1DownLongPress "Schalter 1 unten: langer Druck" <switch>
 
-// Fuer switch_dimmer_light.py
+// Für switch_dimmer_light.py
 Color MyColorLight "Farblicht"

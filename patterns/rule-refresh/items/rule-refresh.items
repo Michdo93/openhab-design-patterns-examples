@@ -5,4 +5,4 @@ Group gDynamicTrigger
 // vom DSL-Trigger selbst aber nicht ausgewertet - siehe rule-refresh.rules)
 Switch DynamicTriggerItem1 (gDynamicTrigger) { triggerRule="watch" }
 
-Switch Reload_Item "Regel-Skript neu laden ausloesen"
+Switch Reload_Item "Regel-Skript neu laden auslösen"

@@ -3,7 +3,7 @@ from openhab.triggers import GroupStateChangeTrigger
 
 
 @rule(triggers=[GroupStateChangeTrigger("gSensors")])
-class ZugehoerigesItemUeberGruppenzugehoerigkeitFinden:
+class FindAssociatedItemViaGroupMembership:
     def execute(self, module, input):
         event = input.get("event")
         if not event:

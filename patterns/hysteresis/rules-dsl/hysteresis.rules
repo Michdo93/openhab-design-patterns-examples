@@ -1,4 +1,4 @@
-rule "Heizung mit Hysterese"
+rule "Heater with hysteresis"
 when
     Item MyTemp changed
 then
@@ -13,8 +13,8 @@ then
 
     if(newCommand != "STAY" && newCommand != MyHeater.state.toString) {
         MyHeater.sendCommand(newCommand)
-        logInfo("Hysterese", "Temp=" + temp + " -> Heizung=" + newCommand)
+        logInfo("Hysteresis", "Temp=" + temp + " -> heater=" + newCommand)
     } else {
-        logInfo("Hysterese", "Temp=" + temp + " -> keine Aenderung (Hysterese-Bereich oder bereits im Zielzustand)")
+        logInfo("Hysteresis", "Temp=" + temp + " -> no change (hysteresis band or already in target state)")
     }
 end

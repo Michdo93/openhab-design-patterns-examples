@@ -1,6 +1,6 @@
 # timer-management
 
-Zentrale Timer-Verwaltung ueber eine Map/ein Dictionary fuer generische, item-uebergreifende Regeln.
+Zentrale Timer-Verwaltung über eine Map/ein Dictionary für generische, item-übergreifende Regeln.
 
 ## Dateien in diesem Beispiel
 

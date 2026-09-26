@@ -56,7 +56,7 @@ openhab:update myObservation2 DAY
 openhab:update myObservation3 ON
 openhab:update myObservation4 OFF
 ```
-Erwartung: Log zeigt `Schlafwahrscheinlichkeit: 50.0%`, `mySleepSensor` bleibt `OFF`.
+Erwartung: Log zeigt `Sleep probability: 50.0%`, `mySleepSensor` bleibt `OFF`.
 
 Indizien nacheinander umschalten:
 ```
@@ -85,7 +85,7 @@ Reset-Test: `MotionDetector1` erneut auf `ON` setzen, bevor die 5 Minuten um sin
 ```
 openhab:send MotionDetector1 ON
 ```
-Erwartung: Log zeigt `MotionDetector1: Timer gestartet (300s)`. Nach 5 Minuten `OFF`-Befehl.
+Erwartung: Log zeigt `MotionDetector1: Timer started (300s)`. Nach 5 Minuten `OFF`-Befehl.
 
 ```
 openhab:send MotionDetector2 ON
@@ -106,7 +106,7 @@ Test A – durchlaufen lassen:
 ```
 openhab:send StartDimTrigger ON
 ```
-Erwartung: `DimLamp` steigt jede Sekunde um 1 %, bis 20 % erreicht sind, dann `Dimmen beendet bei 20%` im Log.
+Erwartung: `DimLamp` steigt jede Sekunde um 1 %, bis 20 % erreicht sind, dann `Dimming finished at 20%` im Log.
 
 Test B – mittendrin abbrechen:
 ```
@@ -118,7 +118,7 @@ Kurz warten, dann:
 ```
 openhab:send CancelDimTrigger ON
 ```
-Erwartung: Log zeigt `Dimmen wird abgebrochen`, spätestens eine Sekunde später `Dimmen beendet bei X%` – `DimLamp` steigt nicht weiter bis 80.
+Erwartung: Log zeigt `Dimming is being cancelled`, spätestens eine Sekunde später `Dimming finished at X%` – `DimLamp` steigt nicht weiter bis 80.
 
 ---
 
@@ -181,12 +181,12 @@ Erwartung: `Person1Presence` bleibt durchgehend `ON`, kein verzögertes `OFF` sc
 ```
 openhab:update Person1_PresenceSensors ON
 ```
-Erwartung: Log zeigt `Verzoegerung=0s`, `Person1_Present` sofort `ON`.
+Erwartung: Log zeigt `delay=0s`, `Person1_Present` sofort `ON`.
 
 ```
 openhab:update Person1_PresenceSensors OFF
 ```
-Erwartung: Log zeigt `Verzoegerung=120s`, `Person1_Present` bleibt 2 Minuten bei `ON`.
+Erwartung: Log zeigt `delay=120s`, `Person1_Present` bleibt 2 Minuten bei `ON`.
 
 `Person2_PresenceSensors` parallel ändern → eigener Timer, beeinflusst `Person1_Present` nicht.
 
@@ -231,7 +231,7 @@ Erwartung: `Room1_Thermostat -> 17`, `Room2_Thermostat -> 18`.
 ```
 openhab:update motionSensor ON
 ```
-Erwartung: Log zeigt `Bewegung erkannt - Licht einschalten`, `light` → `ON`. Nach 2s: `Debounce beendet - neue Events moeglich`.
+Erwartung: Log zeigt `Motion detected - turning light on`, `light` → `ON`. Nach 2s: `Debounce finished - new events possible`.
 
 Mehrere schnelle Events innerhalb 2s:
 ```
@@ -239,7 +239,7 @@ openhab:update motionSensor ON
 openhab:update motionSensor OFF
 openhab:update motionSensor ON
 ```
-Erwartung: Nur der erste Befehl löst aus, die folgenden zeigen `Event ignoriert - Timer laeuft noch`.
+Erwartung: Nur der erste Befehl löst aus, die folgenden zeigen `Event ignored - timer still running`.
 
 Nach Ablauf (>2s warten), dann:
 ```
@@ -254,13 +254,13 @@ Erwartung: Wird wieder akzeptiert.
 ```
 openhab:send StartMyTimerTrigger ON
 ```
-Erwartung: Log zeigt `MyTimer gestartet (5 Minuten)`, `MyTimer` → `ON`. Nach 5 Minuten automatisch `OFF` → `MyTimer abgelaufen - Code nach Ablauf wird ausgefuehrt`.
+Erwartung: Log zeigt `MyTimer started (5 minutes)`, `MyTimer` → `ON`. Nach 5 Minuten automatisch `OFF` → `MyTimer expired - running expiry code`.
 
 Neustart-Test (Timer verlängern):
 ```
 openhab:send StartMyTimerTrigger ON
 ```
-erneut, bevor 5 Minuten um sind. Erwartung: Log zeigt zusätzlich `Timer ist bereits aktiv - wird neu gestartet`.
+erneut, bevor 5 Minuten um sind. Erwartung: Log zeigt zusätzlich `Timer is already active - restarting`.
 
 ---
 
@@ -269,7 +269,7 @@ erneut, bevor 5 Minuten um sind. Erwartung: Log zeigt zusätzlich `Timer ist ber
 ```
 openhab:send WirelessController "433-send xxxxx 1 1"
 ```
-Erwartung: Log zeigt `Befehl in Warteschlange eingereiht: ...`, danach `433: ...` (Shell-Ausführung schlägt ohne echte Hardware erwartungsgemäß fehl, kein Absturz).
+Erwartung: Log zeigt `Command queued: ...`, danach `433: ...` (Shell-Ausführung schlägt ohne echte Hardware erwartungsgemäß fehl, kein Absturz).
 
 ```
 openhab:send Outlet_A ON
@@ -296,7 +296,7 @@ Erwartung: Kein Alarm (normaler Wert, kein `UNDEF`).
 ```
 openhab:update Item1Sensor1 UNDEF
 ```
-Erwartung: Log zeigt `Item1Sensor1 meldet sich nicht mehr (UNDEF) - Alarm/Meldung ausloesen`.
+Erwartung: Log zeigt `Item1Sensor1 stopped reporting (UNDEF) - raise alert/notification`.
 
 ```
 openhab:update Item2Sensor3 UNDEF
@@ -317,7 +317,7 @@ Konfiguration setzen:
 openhab:update RetryMaxAttempts 3
 openhab:update RetryInitialInterval 5
 openhab:update RetryMaxInterval 60
-openhab:update RetryAlternativeAction "Bitte manuell pruefen"
+openhab:update RetryAlternativeAction "Bitte manuell prüfen"
 ```
 
 Retry auslösen (Geräte-Items noch nie gesetzt = `NULL` = „offline"):
@@ -380,7 +380,7 @@ Voraussetzung: Map-Transformation-Add-on installiert, `admin.map` unter `$OPENHA
 ```
 openhab:update MyItem ON
 ```
-Erwartung: Log zeigt `Mein menschenlesbares Item ist jetzt ON` (übersetzter Name).
+Erwartung: Log zeigt `Mein menschenlesbares Item is now ON` (übersetzter Name).
 
 ### Variante: complex
 
@@ -389,7 +389,7 @@ Test A – Zustand bleibt stabil:
 openhab:update vNetwork_cerberos OFF
 openhab:update vNetwork_cerberos ON
 ```
-Erwartung: Nach 60s Log-Zeile `cerberos ist jetzt online`, `vNetwork_cerberos_Alerted` → `ON`.
+Erwartung: Nach 60s Log-Zeile `cerberos is now online`, `vNetwork_cerberos_Alerted` → `ON`.
 
 Test B – Flattern wird gefiltert:
 ```
@@ -410,22 +410,22 @@ Erwartung: Nur der letzte, stabil gebliebene Zustand wird nach 60s gemeldet, kei
 openhab:update MyHeater OFF
 openhab:update MyTemp 65
 ```
-Erwartung: Log zeigt `Temp=65.0 -> Heizung=ON`, `MyHeater` → `ON`.
+Erwartung: Log zeigt `Temp=65.0 -> heater=ON`, `MyHeater` → `ON`.
 
 ```
 openhab:update MyTemp 69
 ```
-Erwartung: `keine Aenderung` (Hysterese-Bereich), `MyHeater` bleibt `ON`.
+Erwartung: `no change` (Hysterese-Bereich), `MyHeater` bleibt `ON`.
 
 ```
 openhab:update MyTemp 71
 ```
-Erwartung: `Temp=71.0 -> Heizung=OFF`, `MyHeater` → `OFF`.
+Erwartung: `Temp=71.0 -> heater=OFF`, `MyHeater` → `OFF`.
 
 ```
 openhab:update MyTemp 69
 ```
-Erwartung: Wieder `keine Aenderung`, `MyHeater` bleibt `OFF`.
+Erwartung: Wieder `no change`, `MyHeater` bleibt `OFF`.
 
 Flatter-Test:
 ```
@@ -433,7 +433,7 @@ openhab:update MyTemp 67.9
 openhab:update MyTemp 68.1
 openhab:update MyTemp 67.9
 ```
-Erwartung: Nur beim ersten `67.9` wird `Heizung=ON` berechnet; danach keine unnötigen Wiederholbefehle, da Zielzustand schon erreicht.
+Erwartung: Nur beim ersten `67.9` wird `heater=ON` berechnet; danach keine unnötigen Wiederholbefehle, da Zielzustand schon erreicht.
 
 ---
 
@@ -477,9 +477,9 @@ openhab:update Irrigation_Zone_3_Time 1
 ```
 openhab:send Irrigation_Manual ON
 ```
-Erwartung: Log zeigt `Bewaesserung gestartet, Zone 1 aktiv`, `Zone Irrigation_Zone_1 an fuer 1 Minuten`, `Irrigation_Zone_1` → `ON`.
+Erwartung: Log zeigt `Irrigation started, zone 1 active`, `Zone Irrigation_Zone_1 on for 1 minutes`, `Irrigation_Zone_1` → `ON`.
 
-Nach ~1 Minute: `Zone Irrigation_Zone_1 aus`, `Irrigation_Zone_2 an`, usw. Nach der letzten Zone: `Bewaesserung abgeschlossen`, `Irrigation_Manual` → `OFF`.
+Nach ~1 Minute: `Zone Irrigation_Zone_1 off`, `Zone Irrigation_Zone_2 on`, usw. Nach der letzten Zone: `Irrigation finished`, `Irrigation_Manual` → `OFF`.
 
 Abbruch mitten in der Kaskade:
 ```
@@ -510,13 +510,13 @@ Erwartung: Log zeigt `MaxDim: 90%, DimPeriod: 20s`.
 openhab:update Light1 OFF
 openhab:update MotionSensor1 ON
 ```
-Erwartung: Log zeigt `Bewegung erkannt - Light1 eingeschaltet (10 Min. Timer)`, `Light1` → `ON`.
+Erwartung: Log zeigt `Motion detected - Light1 switched on (10 min timer)`, `Light1` → `ON`.
 
 ```
 openhab:update MotionSensor1 OFF
 openhab:update MotionSensor1 ON
 ```
-mit `Light1` bereits `ON`: Erwartung: `Bewegung erkannt, Light1 war aber bereits an`, kein neuer Timer.
+mit `Light1` bereits `ON`: Erwartung: `Motion detected, but Light1 was already on`, kein neuer Timer.
 
 ### Varianten: zeit / dynamisch
 
@@ -533,7 +533,7 @@ sofort danach (< 500 ms):
 ```
 openhab:update ButtonState OFF
 ```
-Erwartung: Log zeigt `Kurzer Druck (Xms) -> Toggle`, `TargetLight` schaltet um, `ButtonPressTime` zeigt Dauer.
+Erwartung: Log zeigt `Short press (Xms) -> Toggle`, `TargetLight` schaltet um, `ButtonPressTime` zeigt Dauer.
 
 ```
 openhab:update ButtonState ON
@@ -542,7 +542,7 @@ mind. 1 Sekunde warten, dann:
 ```
 openhab:update ButtonState OFF
 ```
-Erwartung: `Langer Druck (Xms) -> Dimmen`, `TargetLight` erhält `INCREASE`.
+Erwartung: `Long press (Xms) -> dimming`, `TargetLight` erhält `INCREASE`.
 
 Fallback-Mechanismus:
 ```
@@ -591,21 +591,21 @@ Erwartung: `DeadMansSwitch` durchläuft `RULE` → `MANUAL`, `WatchedItem1` wird
 ```
 openhab:send WatchedItem1 OFF
 ```
-Erwartung: `Element wurde manuell ausgeloest` (kein vorheriges `RULE`-Signal).
+Erwartung: `Item was triggered manually` (kein vorheriges `RULE`-Signal).
 
 ### Variante: proxy
 
 ```
 openhab:send HallLight_UI ON
 ```
-Erwartung: Log zeigt `Quelle=UI -> HallLight = ON`, `HallLight_Proxy`/`HallLight_Rules` werden aktualisiert, `HallLight_Device` erhält Befehl.
+Erwartung: Log zeigt `Source=UI -> HallLight = ON`, `HallLight_Proxy`/`HallLight_Rules` werden aktualisiert, `HallLight_Device` erhält Befehl.
 
 ### Variante: timestamp
 
 ```
 openhab:update vTimeOfDay DAY
 ```
-Erwartung: Log zeigt `vTimeOfDay=DAY -> Lichter angepasst`, `LightMorningRoom` → `ON`, `LightHallway` → `OFF`.
+Erwartung: Log zeigt `vTimeOfDay=DAY -> lights adjusted`, `LightMorningRoom` → `ON`, `LightHallway` → `OFF`.
 
 ---
 
@@ -614,13 +614,13 @@ Erwartung: Log zeigt `vTimeOfDay=DAY -> Lichter angepasst`, `LightMorningRoom` �
 ```
 openhab:send MySwitch ON
 ```
-Erwartung: Log zeigt `Ueberwachung gestartet, erwarte ON innerhalb 30s`. Da Autoupdate greift: kurz danach `Zustand hat sich geaendert, Ueberwachung wird abgebrochen`, kein Alarm.
+Erwartung: Log zeigt `supervision started, expecting ON within 30s`. Da Autoupdate greift: kurz danach `state changed, cancelling supervision`, kein Alarm.
 
 Alarm-Fall erzwingen (Item mit `autoupdate="false"`):
 ```
 openhab:send MySwitch ON
 ```
-Erwartung: Kein Zustandswechsel-Log, nach 30s: `MySwitch hat den Zustand ON nicht erreicht`.
+Erwartung: Kein Zustandswechsel-Log, nach 30s: `MySwitch did not reach state ON`.
 
 ---
 
@@ -633,19 +633,19 @@ openhab:update MotionSensor OFF
 openhab:update WindowSensor OPEN
 openhab:update LightSensor 50
 ```
-Erwartung: `Aggregierte Konfidenz: 0.0`, `Keine Anwesenheit.`
+Erwartung: `Aggregated confidence: 0.0`, `No presence.`
 
 ```
 openhab:update MotionSensor ON
 ```
-Erwartung: `0.7` → `Anwesenheit erkannt!`
+Erwartung: `0.7` → `Presence detected!`
 
 ```
 openhab:update MotionSensor OFF
 openhab:update WindowSensor CLOSED
 openhab:update LightSensor 150
 ```
-Erwartung: `0.8` → `Anwesenheit erkannt!`
+Erwartung: `0.8` → `Presence detected!`
 
 ### Bayes-Variante
 
@@ -654,14 +654,14 @@ openhab:update MotionSensor ON
 openhab:update WindowSensor CLOSED
 openhab:update LightSensor 150
 ```
-Erwartung: Wahrscheinlichkeit deutlich über 60 % → `Anwesenheit erkannt!`
+Erwartung: Wahrscheinlichkeit deutlich über 60 % → `Presence detected!`
 
 ```
 openhab:update MotionSensor OFF
 openhab:update WindowSensor OPEN
 openhab:update LightSensor 50
 ```
-Erwartung: Deutlich unter 60 % → `Keine Anwesenheit.`
+Erwartung: Deutlich unter 60 % → `No presence.`
 
 ---
 
@@ -675,12 +675,12 @@ Erwartung: Kein Log-Eintrag.
 ```
 openhab:update Temp2 27
 ```
-Erwartung (zwischen 9–21 Uhr Serverzeit): `Temp warn Temp2: 27.0 Grad C`.
+Erwartung (zwischen 9–21 Uhr Serverzeit): `Temp warn Temp2: 27.0 °C`.
 
 ```
 openhab:update Temp3 32
 ```
-Erwartung: `Temp alert Temp3: 32.0 Grad C` (zeitunabhängig).
+Erwartung: `Temp alert Temp3: 32.0 °C` (zeitunabhängig).
 
 ```
 openhab:update Temp4 31
@@ -718,7 +718,7 @@ openhab:update Sun_Set 2020-01-01T00:00:00
 openhab:update GLSM 0
 openhab:update LeftGarageDoor OPEN
 ```
-Erwartung: `Tor geoeffnet nach Sonnenuntergang -> Licht mit Timer an`, `GLSM` → `2`.
+Erwartung: `Door opened after sunset -> light on with timer`, `GLSM` → `2`.
 
 Gegentest (Sonnenuntergang in der Zukunft):
 ```
@@ -727,7 +727,7 @@ openhab:update GLSM 0
 openhab:update LeftGarageDoor CLOSED
 openhab:update LeftGarageDoor OPEN
 ```
-Erwartung: `kein Trigger (vor Sonnenuntergang...)`, `GLSM` bleibt `0`.
+Erwartung: `no trigger (before sunset...)`, `GLSM` bleibt `0`.
 
 ---
 
@@ -758,7 +758,7 @@ Erwartung: Kein Alarm, `Large_Garagedoor_Opener_Linked` erhält Befehl.
 openhab:update GarageControllerService OFF
 openhab:send Small_Garagedoor_Opener ON
 ```
-Erwartung: `AlertItem` erhält `Garagentor-Controller offline!`, zusätzlich wird trotzdem `Small_Garagedoor_Opener_Linked` angesteuert.
+Erwartung: `AlertItem` erhält `Garage door controller offline!`, zusätzlich wird trotzdem `Small_Garagedoor_Opener_Linked` angesteuert.
 
 ---
 
@@ -772,7 +772,7 @@ Erwartung: Log zeigt `Rate-limited action`.
 ```
 openhab:send RateLimitTrigger ON
 ```
-sofort nochmal: Erwartung: `Ereignis ignoriert, Sperrzeit laeuft noch`.
+sofort nochmal: Erwartung: `Event ignored, lockout period still running`.
 
 ---
 
@@ -795,7 +795,7 @@ Erwartung: Umgekehrt – „Christmas Lights" deaktiviert, „MBR Humidifier" ak
 ```
 openhab:send DummyExecTrigger ON
 ```
-Erwartung: `isRunningExampleRule` → `ON`, Log zeigt `Teil 1`/`Teil 2 der Regel wird ausgefuehrt`, danach `isRunningExampleRule` → `OFF`.
+Erwartung: `isRunningExampleRule` → `ON`, Log zeigt `Part 1`/`Part 2 of the rule is running`, danach `isRunningExampleRule` → `OFF`.
 
 ```
 openhab:send exampleRule OFF
@@ -822,12 +822,12 @@ Reihenfolge beachten: Items vor dem Skript laden.
 ```
 openhab:update DynamicTriggerItem1 ON
 ```
-Erwartung: Log zeigt `DynamicTriggerItem1 hat sich geaendert (dynamischer Trigger)`.
+Erwartung: Log zeigt `DynamicTriggerItem1 changed (dynamic trigger)`.
 
 ```
 openhab:send Reload_Item ON
 ```
-Erwartung: Log zeigt `Trigger werden beim naechsten Neuladen des Skripts aktualisiert`.
+Erwartung: Log zeigt `Triggers will be updated on the next script reload`.
 
 ---
 
@@ -862,17 +862,17 @@ Gleicher Testablauf, gleiches erwartetes Verhalten über `MyGroup`.
 ```
 openhab:update MyItem ON
 ```
-Erwartung: Log zeigt `Regelcode ausgefuehrt, gesperrt bis <Zeitpunkt in 24h>`.
+Erwartung: Log zeigt `Rule code executed, locked until <Zeitpunkt in 24h>`.
 
 ```
 openhab:update MyItem OFF
 ```
-Erwartung: `Event ignoriert, gesperrt bis <derselbe Zeitpunkt>`.
+Erwartung: `Event ignored, locked until <derselbe Zeitpunkt>`.
 
 ```
 openhab:update MyItem ON
 ```
-Erwartung: Wieder `Event ignoriert...` (Sperre gilt weiterhin).
+Erwartung: Wieder `Event ignored...` (Sperre gilt weiterhin).
 
 ---
 
@@ -922,7 +922,7 @@ Erwartung: `Someone came home`, `tPresent` sofort zurückgesetzt (Timer abgebroc
 ```
 openhab:update vTimeOfDay MORNING
 ```
-Erwartung: Log zeigt `vTimeOfDay=MORNING -> Lichtgruppen angesteuert`, entsprechende Lichter je nach Gruppenzugehörigkeit `ON`/`OFF`.
+Erwartung: Log zeigt `vTimeOfDay=MORNING -> light groups commanded`, entsprechende Lichter je nach Gruppenzugehörigkeit `ON`/`OFF`.
 
 ```
 openhab:update vTimeOfDay NIGHT
@@ -999,9 +999,9 @@ openhab:send callScriptItem SwitchOff_LightsStairs
 Erwartung: Alle `_TOGGLE` → `OFF`.
 
 ```
-openhab:send callScriptItem NichtVorhandeneSzene
+openhab:send callScriptItem NonExistentScene
 ```
-Erwartung: `Unbekannte Szene: NichtVorhandeneSzene`, kein Absturz.
+Erwartung: `Unknown scene: NonExistentScene`, kein Absturz.
 
 ---
 
@@ -1018,12 +1018,12 @@ Bis zu 60s warten, dann Log prüfen: Erwartung: `vTimeOfDay -> <erwartete Katego
 ```
 openhab:update FrontDoor OPEN
 ```
-Erwartung: Log zeigt `FrontDoor: Timer gestartet (1h)`.
+Erwartung: Log zeigt `FrontDoor: Timer started (1h)`.
 
 ```
 openhab:update FrontDoor CLOSED
 ```
-Erwartung: `FrontDoor: geschlossen, kein Timer noetig` (Timer abgebrochen).
+Erwartung: `FrontDoor: closed, no timer needed` (Timer abgebrochen).
 
 ```
 openhab:update FrontDoor OPEN
@@ -1062,12 +1062,12 @@ Erwartung: `modbusSwitchOut1` → `OFF`.
 ```
 openhab:send Notification_Proxy_Info "Testnachricht Info"
 ```
-Erwartung: Log zeigt `Info-Benachrichtigung: Testnachricht Info`.
+Erwartung: Log zeigt `Info notification: Testnachricht Info`.
 
 ```
 openhab:send Notification_Proxy_Alert "Testalarm"
 ```
-Erwartung: `Alarm-Benachrichtigung: Testalarm`.
+Erwartung: `Alert notification: Testalarm`.
 
 ### Variante: cloudy
 
@@ -1097,16 +1097,16 @@ openhab:update VT_Watering_Duration 10
 ```
 openhab:send SomeCondition ON
 ```
-Erwartung: `VT_Watering_Zone1` → `START`, triggert `WateringService` → Log zeigt `Starte Bewaesserung fuer Zone VT_Watering_Zone1 fuer 10 Sekunden`, `Zone1_Relay` → `ON`.
+Erwartung: `VT_Watering_Zone1` → `START`, triggert `WateringService` → Log zeigt `Starting watering for zone VT_Watering_Zone1 for 10 seconds`, `Zone1_Relay` → `ON`.
 
-Nach 10 Sekunden: Erwartung: `Beende Bewaesserung fuer Zone VT_Watering_Zone1`, `Zone1_Relay` → `OFF`.
+Nach 10 Sekunden: Erwartung: `Stopping watering for zone VT_Watering_Zone1`, `Zone1_Relay` → `OFF`.
 
 ```
 openhab:update VT_Watering_Zone2 START
 ```
 Erwartung: Eigener Timer, `Zone2_Relay` → `ON`, nach 10s → `OFF`, unabhängig von Zone 1.
 
-Schutzabfrage (Dauer nicht gesetzt): Bei frischem Zonen-Item ohne vorheriges `VT_Watering_Duration` sollte statt eines Absturzes nur `VT_Watering_Duration ist noch nicht gesetzt` im Log erscheinen.
+Schutzabfrage (Dauer nicht gesetzt): Bei frischem Zonen-Item ohne vorheriges `VT_Watering_Duration` sollte statt eines Absturzes nur `VT_Watering_Duration is not set yet` im Log erscheinen.
 
 ---
 

@@ -1,6 +1,6 @@
 # gruppenbasierte-persistenz
 
-Persistenz-Engine (mapdb/rrd4j/influxdb) ueber Gruppenzugehoerigkeit statt Einzel-Item-Konfiguration steuern.
+Persistenz-Engine (mapdb/rrd4j/influxdb) über Gruppenzugehörigkeit statt Einzel-Item-Konfiguration steuern.
 
 ## Dateien in diesem Beispiel
 

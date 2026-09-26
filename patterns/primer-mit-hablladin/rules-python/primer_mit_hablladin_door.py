@@ -20,6 +20,6 @@ class GLSMGarageDoorUpEventHandler:
 
         if after_sunset and state in (GLSM_OFF, GLSM_TIMED_ON, GLSM_TIMED_BLINK):
             Registry.getItem("GLSM").postUpdate(GLSM_TIMED_ON)
-            self.logger.info("Tor geoeffnet nach Sonnenuntergang -> Licht mit Timer an")
+            self.logger.info("Door opened after sunset -> light on with timer")
         else:
-            self.logger.info("Tor geoeffnet, aber kein Trigger (vor Sonnenuntergang oder Licht bereits dauerhaft an)")
+            self.logger.info("Door opened, but no trigger (before sunset or light already permanently on)")

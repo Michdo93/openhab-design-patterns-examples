@@ -1,5 +1,5 @@
 rules.JSRule({
-  name: "Heizung mit Hysterese",
+  name: "Heater with hysteresis",
   triggers: [triggers.ItemStateChangeTrigger("MyTemp")],
   execute: (event) => {
     const temp = parseFloat(items.getItem("MyTemp").state);

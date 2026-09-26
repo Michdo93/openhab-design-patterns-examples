@@ -10,7 +10,7 @@ when
     Item SomeRuleTrigger received command ON
 then
     DeadMansSwitch.sendCommand("RULE")
-    // Aktionen ausfuehren
+    // Aktionen ausführen
     WatchedItem1.sendCommand(ON)
     DeadMansSwitch.sendCommand("MANUAL")
 end
@@ -20,8 +20,8 @@ when
     Member of gWatchItems received update
 then
     if(DeadMansSwitch.state.toString == "MANUAL") {
-        logInfo("ManuelleTriggerErkennung", "Element wurde manuell ausgeloest")
+        logInfo("ManualTriggerDetection", "Item was triggered manually")
     } else {
-        logInfo("ManuelleTriggerErkennung", "Element wurde durch eine Regel ausgeloest (DeadMansSwitch=RULE)")
+        logInfo("ManualTriggerDetection", "Item was triggered by a rule (DeadMansSwitch=RULE)")
     }
 end

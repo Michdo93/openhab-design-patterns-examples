@@ -1,6 +1,6 @@
 var Timer irrigationTimer = null
 
-rule "Irrigation Reset bei Systemstart"
+rule "Irrigation reset on system start"
 when
     System started
 then
@@ -10,14 +10,14 @@ then
     Irrigation_Curr.postUpdate("OFF")
 end
 
-rule "Irrigation Start um 08:00"
+rule "Irrigation start at 08:00"
 when
     Time cron "0 0 8 * * ?" or
     Item Irrigation_Manual received command ON
 then
     if(Irrigation_Auto.state == ON || receivedCommand == ON){
         Irrigation_Manual.postUpdate(ON)
-        logInfo("Irrigation", "Bewaesserung gestartet, Zone 1 aktiv")
+        logInfo("Irrigation", "Irrigation started, zone 1 active")
         Irrigation_Curr.sendCommand(Irrigation_Zone_1.name)
     }
 end
@@ -34,7 +34,7 @@ then
         t | t.name == currValve.name+"_Time"
     ]
     if(currValveTimeItem === null || currValveTimeItem.state == NULL) {
-        logWarn("Irrigation", "Keine Zeit fuer " + currValve.name + " gesetzt")
+        logWarn("Irrigation", "No time set for " + currValve.name)
         return;
     }
     val currValveMins = currValveTimeItem.state as Number
@@ -47,14 +47,14 @@ then
     currValve.sendCommand(ON)
 
     irrigationTimer = createTimer(now.plusMinutes(currValveMins.intValue), [ |
-        logInfo("Irrigation", "Zone " + currValve.name + " aus")
+        logInfo("Irrigation", "Zone " + currValve.name + " off")
         currValve.sendCommand(OFF)
 
         if(nextValve !== null) {
-            logInfo("Irrigation", "Zone " + nextValve.name + " an")
+            logInfo("Irrigation", "Zone " + nextValve.name + " on")
             Irrigation_Curr.sendCommand(nextValve.name)
         } else {
-            logInfo("Irrigation", "Bewaesserung abgeschlossen")
+            logInfo("Irrigation", "Irrigation finished")
             Irrigation_Manual.sendCommand(OFF)
         }
         irrigationTimer = null

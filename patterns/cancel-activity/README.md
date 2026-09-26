@@ -1,6 +1,6 @@
 # cancel-activity
 
-Abbrechbare lang laufende Schleifen-Aktion (z.B. Dimmen) ueber ein Cancel-Flag.
+Abbrechbare lang laufende Schleifen-Aktion (z.B. Dimmen) über ein Cancel-Flag.
 
 ## Dateien in diesem Beispiel
 

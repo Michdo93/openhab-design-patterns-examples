@@ -1,4 +1,4 @@
-rule "Rate-Limit Beispiel"
+rule "Rate limit example"
 when
     Item RateLimitTrigger received command ON
 then
@@ -8,6 +8,6 @@ then
         logInfo("RateLimit", "Rate-limited action")
         privateCache.put("LastAction", now)
     } else {
-        logInfo("RateLimit", "Ereignis ignoriert, Sperrzeit laeuft noch")
+        logInfo("RateLimit", "Event ignored, lockout period still running")
     }
 end

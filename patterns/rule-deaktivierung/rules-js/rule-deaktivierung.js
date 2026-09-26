@@ -14,7 +14,7 @@ rules.JSRule({
       rules.setEnabled("mbr_humidifier", !christmasOn);
       console.log("vChristmas=" + christmasOn + " -> christmas_lights enabled=" + christmasOn + ", mbr_humidifier enabled=" + !christmasOn);
     } catch (e) {
-      console.warn("Konnte Regeln noch nicht umschalten (evtl. beim Start, Dummy-Regeln noch nicht geladen): " + e.message);
+      console.warn("Could not toggle rules yet (possibly during startup, dummy rules not loaded yet): " + e.message);
     }
   }
 });

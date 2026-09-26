@@ -37,4 +37,4 @@ class CallScene:
         if scene:
             scene()
         else:
-            self.logger.warn("Unbekannte Szene: " + scene_name)
+            self.logger.warn("Unknown scene: " + scene_name)

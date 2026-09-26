@@ -1,10 +1,10 @@
-rule "Button gedrueckt (mit Fallback)"
+rule "Button pressed (with fallback)"
 when
     Item ButtonState changed from OFF to ON
 then
     createTimer(now.plusSeconds(5), [ |
         if (ButtonState.state == ON) {
-            logInfo("LongPress", "Fallback: kein OFF-Signal erhalten, setze ButtonState manuell zurueck")
+            logInfo("LongPress", "Fallback: no OFF signal received, resetting ButtonState manually")
             ButtonState.postUpdate(OFF)
         }
     ])

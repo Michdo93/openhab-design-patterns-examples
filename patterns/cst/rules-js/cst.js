@@ -7,11 +7,11 @@ rules.JSRule({
     const presenceOn = items.getItem("presenceSensor").state === "ON";
 
     if (motionOn && presenceOn && hour >= 18 && hour <= 22) {
-      console.log("Alle Bedingungen erfuellt - starte Sequenz");
+      console.log("All conditions met - starting sequence");
       items.getItem("light").sendCommand("ON");
       // Weitere Aktionen in definierter Reihenfolge
     } else {
-      console.log("Bedingungen nicht erfuellt - Sequenz zuruecksetzen");
+      console.log("Conditions not met - resetting sequence");
       items.getItem("light").sendCommand("OFF");
       // optional: alle Zwischenschritte abbrechen
     }

@@ -1,6 +1,6 @@
 # switch-dimmer
 
-Kurzer/langer Tastendruck eines Rocker-Switches getrennt ueber virtuelle Items, inkl. Lichtsteuerung.
+Kurzer/langer Tastendruck eines Rocker-Switches getrennt über virtuelle Items, inkl. Lichtsteuerung.
 
 ## Dateien in diesem Beispiel
 

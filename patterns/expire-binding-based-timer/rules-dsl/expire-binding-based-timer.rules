@@ -1,11 +1,11 @@
-rule "Eine Regel, die den Timer startet"
+rule "A rule that starts the timer"
 when
     Item StartMyTimerTrigger received command ON
 then
-    // Arbeitsschritte ausfuehren
+    // Arbeitsschritte ausführen
 
     if(MyTimer.state == ON) {
-        logInfo("ExpireTimer", "Timer ist bereits aktiv - wird neu gestartet")
+        logInfo("ExpireTimer", "Timer is already active - restarting")
         // Aktion, falls Timer aktiv ist
     }
 
@@ -14,13 +14,13 @@ then
 
     // Timer starten
     MyTimer.sendCommand(ON)
-    logInfo("ExpireTimer", "MyTimer gestartet (5 Minuten)")
+    logInfo("ExpireTimer", "MyTimer started (5 minutes)")
 end
 
-rule "MyTimer abgelaufen"
+rule "MyTimer expired"
 when
     Item MyTimer received command OFF
 then
-    logInfo("ExpireTimer", "MyTimer abgelaufen - Code nach Ablauf wird ausgefuehrt")
-    // Code, der nach Ablauf ausgefuehrt werden soll
+    logInfo("ExpireTimer", "MyTimer expired - running expiry code")
+    // Code, der nach Ablauf ausgeführt werden soll
 end

@@ -9,14 +9,14 @@ import java.util.Map
 // UIDs der Test-Dummy-Regeln aus _test_dummy_christmas_lights.rules und
 // _test_dummy_mbr_humidifier.rules (Muster: <Dateiname ohne Endung>-<laufende
 // Nummer im File>). Bitte vor dem ersten Test in der UI unter
-// "Einstellungen -> Regeln" die tatsaechlichen UIDs gegenpruefen.
+// "Einstellungen -> Regeln" die tatsächlichen UIDs gegenprüfen.
 //
 // WICHTIG 2: Falls eure openHAB-Instanz API-Security aktiviert hat, braucht
 // der REST-Aufruf einen API-Token (Einstellungen -> Mein Konto -> API-Token
-// erzeugen). Unten als Platzhalter "DEIN_API_TOKEN" eingetragen - bitte
+// erzeugen). Unten als Platzhalter "YOUR_API_TOKEN" eingetragen - bitte
 // ersetzen. Ohne API-Security kann die "headers"-Zeile auch entfernt werden.
 
-val Map<String, String> authHeaders = newHashMap("Authorization" -> "Bearer DEIN_API_TOKEN")
+val Map<String, String> authHeaders = newHashMap("Authorization" -> "Bearer YOUR_API_TOKEN")
 
 rule "Christmas Mode"
 when

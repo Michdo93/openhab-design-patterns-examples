@@ -9,11 +9,11 @@ retry_counts = {}
 
 
 def send_alert(message):
-    # Lokale, immer verfuegbare Alternative (kein Zusatz-Add-on noetig)
+    # Lokale, immer verfügbare Alternative (kein Zusatz-Add-on nötig)
     try:
         Registry.getItem("NotificationItem").postUpdate(message)
     except Exception as ex:
-        logger.warn("Konnte NotificationItem nicht aktualisieren: " + str(ex))
+        logger.warn("Could not update NotificationItem: " + str(ex))
 
     # Cloud-Benachrichtigung nur, wenn der openHAB Cloud Connector installiert
     # und verbunden ist - sonst ist NotificationAction None
@@ -21,7 +21,7 @@ def send_alert(message):
         if NotificationAction is not None:
             NotificationAction.sendNotification("admin@example.com", message)
     except Exception as ex:
-        logger.warn("Cloud-Benachrichtigung nicht verfuegbar: " + str(ex))
+        logger.warn("Cloud notification not available: " + str(ex))
 
 
 def attempt(device, max_retries, initial_interval, max_interval, alt_action):

@@ -4,7 +4,7 @@ from openhab.triggers import GenericCronTrigger
 
 
 @rule(triggers=[GenericCronTrigger("0 0 6 * * ?")])
-class TimeOfDayMorningNurWochentage:
+class TimeOfDayMorningWeekdaysOnly:
     def execute(self, module, input):
         if Ephemeris.isWeekday():
             Registry.getItem("TimeOfDay").sendCommand("MORNING")

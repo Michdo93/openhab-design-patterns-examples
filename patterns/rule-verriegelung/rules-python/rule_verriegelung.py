@@ -12,9 +12,9 @@ class LatchedRule:
         global until
         now = datetime.now().astimezone()
         if until is not None and until > now:
-            logger.info("Event ignoriert, gesperrt bis " + str(until))
-            return  # Skip event if timer exists
+            logger.info("Event ignored, locked until " + str(until))
+            return  # Ereignis überspringen, solange die Sperre aktiv ist
 
         until = now + timedelta(days=1)
-        logger.info("Regelcode ausgefuehrt, gesperrt bis " + str(until))
-        # Regelcode ausfuehren
+        logger.info("Rule code executed, locked until " + str(until))
+        # Regelcode ausführen

@@ -12,7 +12,7 @@ rules.JSRule({
       const target = isNaN(parseInt(items.getItem("DimTarget").state)) ? 0 : parseInt(items.getItem("DimTarget").state);
 
       if (currLevel >= target || !continueDimming) {
-        console.log("Dimmen beendet");
+        console.log("Dimming finished");
         dimTimer = null;
         return;
       }

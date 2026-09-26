@@ -1,8 +1,8 @@
-sitemap RuleManager label="Rule Manager" {
-    Frame label="Rule Manager" {
-        Switch item=exampleRule label="Enable/Disable example rule"
-        Switch item=isRunningExampleRule label="Is example rule running?"
-        Switch item=secondExampleRule label="Enable/Disable second example rule"
-        Switch item=isRunningSecondExampleRule label="Is second example rule running?"
+sitemap RuleManager label="Regelverwaltung" {
+    Frame label="Regelverwaltung" {
+        Switch item=exampleRule label="Beispielregel aktivieren/deaktivieren"
+        Switch item=isRunningExampleRule label="Läuft die Beispielregel?"
+        Switch item=secondExampleRule label="Zweite Beispielregel aktivieren/deaktivieren"
+        Switch item=isRunningSecondExampleRule label="Läuft die zweite Beispielregel?"
     }
 }

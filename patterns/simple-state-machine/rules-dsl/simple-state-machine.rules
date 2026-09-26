@@ -1,4 +1,4 @@
-rule "TimeOfDay MORNING (nur Wochentage)"
+rule "TimeOfDay MORNING (weekdays only)"
 when
     Time cron "0 0 6 * * ?"
 then

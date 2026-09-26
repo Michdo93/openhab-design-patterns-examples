@@ -1,6 +1,6 @@
 # cst
 
-Aktionssequenz nur bei gleichzeitig erfuellten Mehrfachbedingungen ausloesen (Conditional Sequence Trigger).
+Aktionssequenz nur bei gleichzeitig erfüllten Mehrfachbedingungen auslösen (Conditional Sequence Trigger).
 
 ## Dateien in diesem Beispiel
 

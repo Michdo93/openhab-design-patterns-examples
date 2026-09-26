@@ -1,14 +1,14 @@
-// Gruppen fuer Persistenz
+// Gruppen für Persistenz
 Group gRestore   // RestoreOnStartup
-Group gChart     // fuer Diagramme
-Group gHistory   // fuer Historie
-Group gExternal  // fuer externe Analysen
+Group gChart     // für Diagramme
+Group gHistory   // für Historie
+Group gExternal  // für externe Analysen
 
-// Temperatur fuer Diagramm
-Number Weather_Temp_Min "Min Temp [%.1f C]" <temperature> (gChart)
+// Temperatur für Diagramm
+Number Weather_Temp_Min "Min. Temperatur [%.1f °C]" <temperature> (gChart)
 
-// Tuersensor fuer Historie
-Contact FrontDoor "Front Door [%s]" <frontdoor> (gHistory)
+// Türsensor für Historie
+Contact FrontDoor "Haustür [%s]" <frontdoor> (gHistory)
 
-// Garagentor fuer Fernzugriff und Historie
-Switch GarageDoor1 "Garage Door 1" <garagedoor> (gHistory, gExternal)
+// Garagentor für Fernzugriff und Historie
+Switch GarageDoor1 "Garagentor 1" <garagedoor> (gHistory, gExternal)

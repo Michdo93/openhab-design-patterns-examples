@@ -1,6 +1,6 @@
 # rule-refresh
 
-Dynamisch generierte Rule-Trigger (z.B. aus Metadaten), nur JS/Python moeglich.
+Dynamisch generierte Rule-Trigger (z.B. aus Metadaten), nur JS/Python möglich.
 
 ## Dateien in diesem Beispiel
 

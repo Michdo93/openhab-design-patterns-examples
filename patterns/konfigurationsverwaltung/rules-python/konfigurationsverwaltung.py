@@ -21,7 +21,7 @@ HAB_SETTINGS = {
 
 
 @rule(triggers=[ItemStateChangeTrigger("SomeLight")])
-class BeispielregelFuerRGBWLicht:
+class ExampleRuleForRGBWLight:
     def execute(self, module, input):
         max_dim = HAB_SETTINGS["RGBW"]["MaxDim"]
         dim_period = HAB_SETTINGS["RGBW"]["DimPeriod"]

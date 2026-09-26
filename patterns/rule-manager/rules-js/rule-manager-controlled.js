@@ -8,13 +8,13 @@ rules.JSRule({
     if (items.getItem("isRunningExampleRule").state === "ON") {
       // Teil 1 der Regel
     } else {
-      // Aenderungen rueckgaengig machen
+      // Änderungen rückgängig machen
     }
 
     if (items.getItem("isRunningExampleRule").state === "ON") {
       // Teil 2 der Regel
     } else {
-      // Aenderungen rueckgaengig machen
+      // Änderungen rückgängig machen
     }
 
     items.getItem("isRunningExampleRule").sendCommand("OFF");

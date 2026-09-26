@@ -17,7 +17,7 @@ const HABSettings = {
 };
 
 rules.JSRule({
-  name: "Beispielregel fuer RGBW-Licht",
+  name: "Example rule for RGBW light",
   triggers: [triggers.ItemStateChangeTrigger("SomeLight")],
   execute: (event) => {
     const maxDim = HABSettings.RGBW.MaxDim;

@@ -1,6 +1,6 @@
 # notifications-in-groups
 
-Warn-/Alarmschwellen fuer eine ganze Gruppe gleichartiger Sensoren (z.B. Temperaturen) statt Regel pro Sensor.
+Warn-/Alarmschwellen für eine ganze Gruppe gleichartiger Sensoren (z.B. Temperaturen) statt Regel pro Sensor.
 
 ## Dateien in diesem Beispiel
 

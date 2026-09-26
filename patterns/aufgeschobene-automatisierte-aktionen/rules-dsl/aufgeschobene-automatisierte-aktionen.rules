@@ -14,7 +14,7 @@ val Pattern timeOffset = Pattern.compile("^(?i)\\+((?:\\d+[hms])+)->(.*)")
 // Absolute Zeitangaben (ISO8601)
 val Pattern timeSpecific = Pattern.compile("^(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})->(.*)")
 
-rule "Timer setzen"
+rule "Set timer"
 when
     Member of gDeferredAction changed
 then
@@ -32,22 +32,22 @@ then
             if (matcher.matches()) {
                 triggerTime = ZonedDateTime.parse(matcher.group(1) + now.getOffset().getId())
             } else {
-                throw new RuntimeException("Ungültiges Timerformat [" + triggeringItem.state + "]")
+                throw new RuntimeException("Invalid timer format [" + triggeringItem.state + "]")
             }
         }
         val String command = matcher.group(matcher.groupCount())
 
         if (triggerTime.isBefore(now))
-            throw new RuntimeException("Zielzeit liegt in der Vergangenheit")
+            throw new RuntimeException("Target time is in the past")
 
         var Timer timer = timers.get(target)
         if (timer !== null) {
-            logInfo("DeferredAction", "Bestehenden Timer abbrechen [{}]", timer)
+            logInfo("DeferredAction", "Cancelling existing timer [{}]", timer)
             timer.cancel()
         }
 
         timer = createTimer(triggerTime, [|
-            logInfo("DeferredAction", "Ausführen verzögerter Aktion {} auf {}", command, targetItem)
+            logInfo("DeferredAction", "Executing deferred action {} on {}", command, targetItem)
             timers.remove(target)
             targetItem.sendCommand(command)
         ])
@@ -56,13 +56,13 @@ then
     }
 end
 
-rule "Timer entfernen"
+rule "Remove timer"
 when
     Member of gDeferredAction changed
 then
     val timer = timers.get(triggeringItem.name)
     if (timer !== null) {
-        logInfo("DeferredAction", "Timer für {} entfernen [{}]", triggeringItem.name, timer)
+        logInfo("DeferredAction", "Removing timer for {} [{}]", triggeringItem.name, timer)
         timer.cancel()
         timers.remove(triggeringItem.name)
     }

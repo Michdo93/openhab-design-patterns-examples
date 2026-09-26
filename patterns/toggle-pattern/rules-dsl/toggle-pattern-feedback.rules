@@ -1,4 +1,4 @@
-rule "Toggle Lampe mit Feedback"
+rule "Toggle lamp with feedback"
 when
     Item mqttSwitchIn2 received command OFF
 then

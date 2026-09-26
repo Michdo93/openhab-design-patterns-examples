@@ -1,4 +1,4 @@
-rule "Zugehöriges Item über Gruppenzugehörigkeit finden"
+rule "Find associated item via group membership"
 when
     Member of gSensors changed
 then

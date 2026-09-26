@@ -6,7 +6,7 @@ from openhab.triggers import ItemCommandTrigger
     ItemCommandTrigger("Large_Garagedoor_Opener"),
     ItemCommandTrigger("Small_Garagedoor_Opener"),
 ])
-class GaragentorController:
+class GarageDoorController:
     def execute(self, module, input):
         event = input.get("event")
         if not event:
@@ -14,7 +14,7 @@ class GaragentorController:
 
         if (str(Registry.getItem("GarageControllerComputer").getState()) != "ON"
                 or str(Registry.getItem("GarageControllerService").getState()) != "ON"):
-            Registry.getItem("AlertItem").sendCommand("Garagentor-Controller offline!")
+            Registry.getItem("AlertItem").sendCommand("Garage door controller offline!")
 
         item_name = event.getItemName()
         command = str(event.getItemCommand())

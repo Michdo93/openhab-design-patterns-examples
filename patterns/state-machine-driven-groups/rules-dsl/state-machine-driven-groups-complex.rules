@@ -8,9 +8,9 @@ then
             s | s.name == light.name + "_" + timeOfDay
         ]
         if(setting === null) {
-            // Keine Einstellung fuer diese Tageszeit vorgesehen - kein Fehler
+            // Keine Einstellung für diese Tageszeit vorgesehen - kein Fehler
         } else if(setting.state == NULL || setting.state == UNDEF) {
-            logWarn("StateMachineGroups", light.name + ": Sollwert fuer " + timeOfDay + " noch nicht gesetzt")
+            logWarn("StateMachineGroups", light.name + ": no setpoint set for " + timeOfDay + " yet")
         } else {
             light.sendCommand(setting.state.toString)
             logInfo("StateMachineGroups", light.name + " -> " + setting.state.toString)

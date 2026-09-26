@@ -40,9 +40,9 @@ class BayesianMultiSensorAggregation:
         total = prob_presence + prob_absence
         prob_presence /= total
 
-        self.logger.info("Bayes Anwesenheitswahrscheinlichkeit: {:.2f}".format(prob_presence))
+        self.logger.info("Bayes presence probability: {:.2f}".format(prob_presence))
 
         if prob_presence > 0.6:
-            self.logger.info("Anwesenheit erkannt!")
+            self.logger.info("Presence detected!")
         else:
-            self.logger.info("Keine Anwesenheit.")
+            self.logger.info("No presence.")

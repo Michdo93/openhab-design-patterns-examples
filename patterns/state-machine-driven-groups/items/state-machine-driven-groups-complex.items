@@ -3,10 +3,10 @@ Group gSettings
 
 String vTimeOfDay "Tageszeit [%s]"
 
-Switch aFrontLamp "Front Room Lamp" (gLights)
+Switch aFrontLamp "Lampe Vorderzimmer" (gLights)
 Switch aFrontLamp_MORNING (gSettings)
 Switch aFrontLamp_DAY (gSettings)
 
-Dimmer aFamilyLamp "Family Room Lamp" (gLights)
+Dimmer aFamilyLamp "Lampe Familienzimmer" (gLights)
 Dimmer aFamilyLamp_MORNING (gSettings)
 Dimmer aFamilyLamp_DAY (gSettings)

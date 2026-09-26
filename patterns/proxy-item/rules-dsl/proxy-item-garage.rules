@@ -1,6 +1,6 @@
 import org.openhab.core.model.script.ScriptServiceUtil
 
-rule "Garagentor Controller"
+rule "Garage door controller"
 when
     Member of gGarageDoorOpeners received command
 then
@@ -8,7 +8,7 @@ then
     val command = receivedCommand.toString
 
     if (GarageControllerComputer.state != ON || GarageControllerService.state != ON) {
-        AlertItem.sendCommand("Garagentor-Controller offline!")
+        AlertItem.sendCommand("Garage door controller offline!")
     }
     val linkedItemName = itemName + "_Linked"
     val linkedItem = ScriptServiceUtil.getItemRegistry().getItem(linkedItemName)

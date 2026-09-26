@@ -7,7 +7,7 @@ from openhab.triggers import ItemStateChangeTrigger
     ItemStateChangeTrigger("VT_Notify_Warn"),
     ItemStateChangeTrigger("VT_Notify_Alert"),
 ])
-class Benachrichtigungsservice:
+class NotificationService:
     def execute(self, module, input):
         event = input.get("event")
         if not event:

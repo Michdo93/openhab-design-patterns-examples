@@ -25,6 +25,6 @@ rules.JSRule({
     console.log("scene: " + sceneName);
     const scene = scenes[sceneName];
     if (scene) scene();
-    else console.warn("Unbekannte Szene: " + sceneName);
+    else console.warn("Unknown scene: " + sceneName);
   }
 });

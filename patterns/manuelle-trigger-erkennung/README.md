@@ -1,6 +1,6 @@
 # manuelle-trigger-erkennung
 
-Manuelle vs. regelgesteuerte Item-Aenderungen unterscheiden: Totmannschalter, Zeitstempel, Proxy-Items.
+Manuelle vs. regelgesteuerte Item-Änderungen unterscheiden: Totmannschalter, Zeitstempel, Proxy-Items.
 
 ## Dateien in diesem Beispiel
 

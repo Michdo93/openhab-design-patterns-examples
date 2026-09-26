@@ -1,6 +1,6 @@
 # human-readable-names
 
-Technische Item-Namen per MAP-Transformation in lesbare Namen fuer Alarme/Logs umwandeln.
+Technische Item-Namen per MAP-Transformation in lesbare Namen für Alarme/Logs umwandeln.
 
 ## Dateien in diesem Beispiel
 

@@ -12,10 +12,10 @@ then
 
     supervisionTimers.get(itemName)?.cancel
 
-    logInfo("MQTTSupervision", itemName + ": Ueberwachung gestartet, erwarte " + expectedState + " innerhalb " + T_RB + "s")
+    logInfo("MQTTSupervision", itemName + ": supervision started, expecting " + expectedState + " within " + T_RB + "s")
 
     supervisionTimers.put(itemName, createTimer(now.plusSeconds(T_RB), [|
-        logWarn("MQTTSupervision", itemName + " hat den Zustand " + expectedState + " nicht erreicht")
+        logWarn("MQTTSupervision", itemName + " did not reach state " + expectedState)
         // z. B. Benachrichtigung senden
         supervisionTimers.remove(itemName)
     ]))
@@ -26,7 +26,7 @@ when
     Item MySwitch changed
 then
     val itemName = "MySwitch"
-    logInfo("MQTTSupervision", itemName + ": Zustand hat sich geaendert, Ueberwachung wird abgebrochen")
+    logInfo("MQTTSupervision", itemName + ": state changed, cancelling supervision")
     supervisionTimers.get(itemName)?.cancel
     supervisionTimers.remove(itemName)
 end

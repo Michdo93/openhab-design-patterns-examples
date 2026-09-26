@@ -11,16 +11,16 @@ then
 
     if(zoneState == "START") {
         if(VT_Watering_Duration.state == NULL) {
-            logWarn("Watering", "VT_Watering_Duration ist noch nicht gesetzt")
+            logWarn("Watering", "VT_Watering_Duration is not set yet")
             return;
         }
         val duration = VT_Watering_Duration.state as Number
 
-        logInfo("Watering", "Starte Bewaesserung fuer Zone " + zone + " fuer " + duration + " Sekunden")
+        logInfo("Watering", "Starting watering for zone " + zone + " for " + duration + " seconds")
         sendCommand(zone.replace("VT_Watering_", "") + "_Relay", ON)
 
         wateringTimers.put(zone, createTimer(now.plusSeconds(duration.intValue), [|
-            logInfo("Watering", "Beende Bewaesserung fuer Zone " + zone)
+            logInfo("Watering", "Stopping watering for zone " + zone)
             sendCommand(zone.replace("VT_Watering_", "") + "_Relay", OFF)
             wateringTimers.remove(zone)
         ]))

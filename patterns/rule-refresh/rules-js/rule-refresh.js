@@ -10,28 +10,28 @@ function buildTriggersFromMetadata() {
 function createDynamicRule() {
   const dynamicTriggers = buildTriggersFromMetadata();
   if (dynamicTriggers.length === 0) {
-    console.warn("Keine passenden Items gefunden, Regel wird nicht erstellt");
+    console.warn("No matching items found, rule not created");
     return;
   }
 
   rules.JSRule({
     id: DYNAMIC_RULE_ID,
-    name: "Dynamische Metadaten-Regel",
+    name: "Dynamic metadata rule",
     triggers: dynamicTriggers,
     overwrite: true,
     execute: (event) => {
-      console.log(event.itemName + " hat sich geaendert (dynamischer Trigger)");
+      console.log(event.itemName + " changed (dynamic trigger)");
     }
   });
 }
 
 rules.JSRule({
-  name: "Reload dynamische Regel",
+  name: "Reload dynamic rule",
   triggers: [triggers.ItemCommandTrigger("Reload_Item", "ON")],
   execute: (event) => {
     createDynamicRule();
   }
 });
 
-// Beim ersten Laden des Skripts einmal ausfuehren
+// Beim ersten Laden des Skripts einmal ausführen
 createDynamicRule();

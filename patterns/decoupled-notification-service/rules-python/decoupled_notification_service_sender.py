@@ -5,4 +5,4 @@ from openhab.triggers import ItemStateChangeTrigger
 @rule(triggers=[ItemStateChangeTrigger("SomeCondition", state="ON")])
 class InfoNotification:
     def execute(self, module, input):
-        Registry.getItem("VT_Notify_Info").postUpdate("Information: Zustand geaendert")
+        Registry.getItem("VT_Notify_Info").postUpdate("Information: state changed")

@@ -13,7 +13,7 @@ class OneToTwoThreeRuleStructure:
         bar = str(Registry.getItem("Bar").getState())
         baz = str(Registry.getItem("Baz").getState())
 
-        # 1. Pruefen, ob Regel laufen muss
+        # 1. Prüfen, ob Regel laufen muss
         if "NULL" in (foo, bar, baz):
             self.logger.warn("One of the Items is NULL")
             return
@@ -22,6 +22,6 @@ class OneToTwoThreeRuleStructure:
         on_count = [foo, bar, baz].count("ON")
         new_state = "ON" if on_count >= 2 else "OFF"
 
-        # 3. Ausfuehren
+        # 3. Ausführen
         Registry.getItem("Buzz").sendCommand(new_state)
         self.logger.info("on_count={} -> Buzz={}".format(on_count, new_state))

@@ -7,14 +7,14 @@ press_start = None
 
 
 @rule(triggers=[ItemStateChangeTrigger("ButtonState", state="ON", previous_state="OFF")])
-class ButtonGedrueckt:
+class ButtonPressed:
     def execute(self, module, input):
         global press_start
         press_start = datetime.now().astimezone()
 
 
 @rule(triggers=[ItemStateChangeTrigger("ButtonState", state="OFF", previous_state="ON")])
-class ButtonLosgelassen:
+class ButtonReleased:
     def execute(self, module, input):
         global press_start
         if press_start is None:
@@ -25,9 +25,9 @@ class ButtonLosgelassen:
         light = Registry.getItem("TargetLight")
         if press_duration < 500:
             light.sendCommand("OFF" if str(light.getState()) == "ON" else "ON")
-            self.logger.info("Kurzer Druck ({:.0f}ms) -> Toggle".format(press_duration))
+            self.logger.info("Short press ({:.0f}ms) -> Toggle".format(press_duration))
         else:
             light.sendCommand("INCREASE")
-            self.logger.info("Langer Druck ({:.0f}ms) -> Dimmen".format(press_duration))
+            self.logger.info("Long press ({:.0f}ms) -> dimming".format(press_duration))
 
         Registry.getItem("ButtonPressTime").postUpdate(press_duration)

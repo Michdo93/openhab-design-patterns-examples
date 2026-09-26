@@ -11,23 +11,23 @@ def build_triggers_from_metadata():
     return triggers
 
 
-@rule(name="Dynamische Metadaten-Regel")
-class DynamischeMetadatenRegel:
+@rule(name="Dynamic metadata rule")
+class DynamicMetadataRule:
     def buildTriggers(self):
         found = build_triggers_from_metadata()
         if not found:
-            self.logger.warn("Keine passenden Items gefunden")
+            self.logger.warn("No matching items found")
         return found
 
     def execute(self, module, input):
         event = input.get("event")
-        item_name = event.getItemName() if event else "unbekannt"
-        self.logger.info(item_name + " hat sich geaendert (dynamischer Trigger)")
+        item_name = event.getItemName() if event else "unknown"
+        self.logger.info(item_name + " changed (dynamic trigger)")
 
 
 @rule(triggers=[ItemCommandTrigger("Reload_Item", "ON")])
-class ReloadDynamischeRegel:
+class ReloadDynamicRule:
     def execute(self, module, input):
         # Ein erneuter Aufruf von buildTriggers() erfolgt automatisch,
         # sobald das Skript neu geladen wird (z. B. durch Speichern der Datei).
-        self.logger.info("Trigger werden beim naechsten Neuladen des Skripts aktualisiert")
+        self.logger.info("Triggers will be updated on the next script reload")

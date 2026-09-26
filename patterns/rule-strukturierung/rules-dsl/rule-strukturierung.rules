@@ -4,7 +4,7 @@ when
     Item Bar changed or
     Item Baz changed
 then
-    // 1. Pruefen, ob Regel laufen muss
+    // 1. Prüfen, ob Regel laufen muss
     if(Foo.state == NULL || Bar.state == NULL || Baz.state == NULL){
         logWarn("Test", "One of the Items is NULL")
         return;
@@ -17,6 +17,6 @@ then
     if(Baz.state == ON) onCount = onCount + 1
     val newState = if(onCount >= 2) ON else OFF
 
-    // 3. Ausfuehren
+    // 3. Ausführen
     Buzz.sendCommand(newState)
 end

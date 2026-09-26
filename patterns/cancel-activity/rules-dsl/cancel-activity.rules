@@ -12,7 +12,7 @@ then
         var target = if(DimTarget.state != NULL) (DimTarget.state as Number).intValue else 0
 
         if (currLevel >= target || !continueDimming) {
-            logInfo("CancelActivity", "Dimmen beendet")
+            logInfo("CancelActivity", "Dimming finished")
             dimTimer = null
         } else {
             DimLamp.sendCommand(currLevel + 1)

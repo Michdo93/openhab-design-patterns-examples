@@ -9,19 +9,19 @@ then
     if(offItems !== null) {
         offItems.members.filter[ l | l.state != OFF ].forEach[ SwitchItem l |
             l.sendCommand(OFF)
-            logInfo("ManuelleTriggerErkennung", l.name + " -> OFF")
+            logInfo("ManualTriggerDetection", l.name + " -> OFF")
         ]
     } else {
-        logWarn("ManuelleTriggerErkennung", "Keine OFF-Gruppe fuer " + timeOfDay + " gefunden")
+        logWarn("ManualTriggerDetection", "No OFF group found for " + timeOfDay)
     }
 
     val GroupItem onItems = gLights_ON.members.filter[ g | g.name == "gLights_ON_" + timeOfDay ].head as GroupItem
     if(onItems !== null) {
         onItems.members.filter[ l | l.state != ON ].forEach[ SwitchItem l |
             l.sendCommand(ON)
-            logInfo("ManuelleTriggerErkennung", l.name + " -> ON")
+            logInfo("ManualTriggerDetection", l.name + " -> ON")
         ]
     } else {
-        logWarn("ManuelleTriggerErkennung", "Keine ON-Gruppe fuer " + timeOfDay + " gefunden")
+        logWarn("ManualTriggerDetection", "No ON group found for " + timeOfDay)
     }
 end

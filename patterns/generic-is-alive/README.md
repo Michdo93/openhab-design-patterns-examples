@@ -1,6 +1,6 @@
 # generic-is-alive
 
-Geraete-Ausfallerkennung ueber Expire Binding statt aktiver Abfrage.
+Geräte-Ausfallerkennung über Expire Binding statt aktiver Abfrage.
 
 ## Dateien in diesem Beispiel
 

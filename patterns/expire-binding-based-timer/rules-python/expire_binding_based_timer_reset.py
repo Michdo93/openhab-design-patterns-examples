@@ -3,13 +3,13 @@ from openhab.triggers import SystemStartlevelTrigger
 
 
 @rule(
-    name="Expire-Timer neu starten",
-    description="Aktiviert alle Expire-Timer nach Systemstart",
+    name="Restart expire timers",
+    description="Reactivates all expire timers after system start",
     triggers=[SystemStartlevelTrigger(100)],
 )
-class ExpireTimerNeuStarten:
+class RestartExpireTimers:
     def execute(self, module, input):
-        self.logger.info("Expire-Timer werden neu gestartet")
+        self.logger.info("Restarting expire timers")
         for timer in Registry.getItem("gResetExpire").getAllMembers():
             self.logger.info(timer.getName() + " -> " + str(timer.getState()))
             timer.sendCommand(str(timer.getState()))

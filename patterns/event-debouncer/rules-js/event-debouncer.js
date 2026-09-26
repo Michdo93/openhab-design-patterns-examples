@@ -5,18 +5,18 @@ rules.JSRule({
   triggers: [triggers.ItemStateChangeTrigger("motionSensor")],
   execute: (event) => {
     if (debounceTimer === null) {
-      console.log("Bewegung erkannt - Licht einschalten");
+      console.log("Motion detected - turning light on");
       items.getItem("light").sendCommand("ON");
 
       debounceTimer = actions.ScriptExecution.createTimer(
         time.ZonedDateTime.now().plusSeconds(2),
         () => {
           debounceTimer = null;
-          console.log("Debounce beendet - neue Events moeglich");
+          console.log("Debounce finished - new events possible");
         }
       );
     } else {
-      console.log("Event ignoriert - Timer laeuft noch");
+      console.log("Event ignored - timer still running");
     }
   }
 });

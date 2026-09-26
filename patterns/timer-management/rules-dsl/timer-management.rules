@@ -14,13 +14,13 @@ then
     timer?.cancel
     timers.put(itemName, null)
 
-    // Timer neu erstellen, wenn Tuer geoeffnet wurde
+    // Timer neu erstellen, wenn Tür geöffnet wurde
     if(itemState == OPEN) {
-        logInfo("TimerManagement", itemName + ": Timer gestartet (1h)")
+        logInfo("TimerManagement", itemName + ": Timer started (1h)")
         timers.put(itemName, createTimer(now.plusMinutes(60))[ |
             Alert.sendCommand(itemName + " is still open!")
         ])
     } else {
-        logInfo("TimerManagement", itemName + ": geschlossen, kein Timer noetig")
+        logInfo("TimerManagement", itemName + ": closed, no timer needed")
     }
 end

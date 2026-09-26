@@ -9,7 +9,7 @@ rules.JSRule({
       members
         .filter((t) => parseFloat(t.state) >= 25 && parseFloat(t.state) < 30)
         .forEach((r) => {
-          console.log("Temp warn " + r.name + ": " + r.state + " Grad C");
+          console.log("Temp warn " + r.name + ": " + r.state + " °C");
           // Weitere Benachrichtigungen
         });
     }
@@ -17,7 +17,7 @@ rules.JSRule({
     members
       .filter((t) => parseFloat(t.state) >= 30)
       .forEach((r) => {
-        console.log("Temp alert " + r.name + ": " + r.state + " Grad C");
+        console.log("Temp alert " + r.name + ": " + r.state + " °C");
         // Weitere Benachrichtigungen
       });
   }

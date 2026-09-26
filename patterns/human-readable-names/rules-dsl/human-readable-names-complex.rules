@@ -26,7 +26,7 @@ then
             var stateName = transform("MAP", "admin.map", origStateStr)
             if(stateName == "") stateName = origStateStr
 
-            logInfo("StatusAlert", name + " ist jetzt " + stateName)
+            logInfo("StatusAlert", name + " is now " + stateName)
             postUpdate(itemName + "_Alerted", "ON")
             logInfo("StatusAlert", itemName + "_Alerted -> ON")
         }

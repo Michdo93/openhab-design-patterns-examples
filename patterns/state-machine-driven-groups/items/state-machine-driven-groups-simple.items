@@ -11,16 +11,16 @@ Group:Switch:OR(ON, OFF) gLights_OFF_NIGHT
 
 String vTimeOfDay "Tageszeit [%s]"
 
-Switch aFrontLamp   "Front Room Lamp"
+Switch aFrontLamp   "Lampe Vorderzimmer"
        (gLights_ON_MORNING, gLights_OFF_DAY, gLights_ON_AFTERNOON,
         gLights_ON_EVENING, gLights_OFF_NIGHT)
 
-Switch aFamilyLamp  "Family Room Lamp"
+Switch aFamilyLamp  "Lampe Familienzimmer"
        (gLights_ON_MORNING, gLights_OFF_DAY, gLights_ON_AFTERNOON,
         gLights_ON_EVENING, gLights_OFF_NIGHT)
 
-Switch aPorchLight  "Front Porch"
+Switch aPorchLight  "Veranda"
        (gLights_OFF_MORNING, gLights_OFF_DAY, gLights_ON_AFTERNOON,
         gLights_ON_EVENING, gLights_OFF_NIGHT)
 
-Switch aMBR_Lights  "Master Bedroom Lights" (gLights_ON_EVENING)
+Switch aMBR_Lights  "Licht Elternschlafzimmer" (gLights_ON_EVENING)

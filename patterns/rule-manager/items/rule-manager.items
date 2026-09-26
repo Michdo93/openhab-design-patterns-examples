@@ -1,9 +1,9 @@
-Group RuleManager "Rule Manager"
+Group RuleManager "Regelverwaltung"
 
-Switch exampleRule "Enable/Disable example rule" (RuleManager)
-Switch isRunningExampleRule "Is example rule running?" (RuleManager)
-Switch secondExampleRule "Enable/Disable second example rule" (RuleManager)
-Switch isRunningSecondExampleRule "Is second example rule running?" (RuleManager)
+Switch exampleRule "Beispielregel aktivieren/deaktivieren" (RuleManager)
+Switch isRunningExampleRule "Läuft die Beispielregel?" (RuleManager)
+Switch secondExampleRule "Zweite Beispielregel aktivieren/deaktivieren" (RuleManager)
+Switch isRunningSecondExampleRule "Läuft die zweite Beispielregel?" (RuleManager)
 
-// Nur fuer Tests benoetigt
-Switch DummyExecTrigger "Ausloeser fuer die 'kontrollierte Regel'"
+// Nur für Tests benötigt
+Switch DummyExecTrigger "Auslöser für die 'kontrollierte Regel'"

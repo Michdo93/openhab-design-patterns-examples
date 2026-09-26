@@ -12,10 +12,10 @@ class ConditionalSequenceTrigger:
         presence_on = str(Registry.getItem("presenceSensor").getState()) == "ON"
 
         if motion_on and presence_on and 18 <= hour <= 22:
-            self.logger.info("Alle Bedingungen erfuellt - starte Sequenz")
+            self.logger.info("All conditions met - starting sequence")
             Registry.getItem("light").sendCommand("ON")
             # Weitere Aktionen in definierter Reihenfolge
         else:
-            self.logger.info("Bedingungen nicht erfuellt - Sequenz zuruecksetzen")
+            self.logger.info("Conditions not met - resetting sequence")
             Registry.getItem("light").sendCommand("OFF")
             # optional: alle Zwischenschritte abbrechen

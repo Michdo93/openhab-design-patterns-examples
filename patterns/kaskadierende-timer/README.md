@@ -1,6 +1,6 @@
 # kaskadierende-timer
 
-Sequenzielle Mehrzonen-Bewaesserung mit zeitversetzten Timern (Kaskade).
+Sequenzielle Mehrzonen-Bewässerung mit zeitversetzten Timern (Kaskade).
 
 ## Dateien in diesem Beispiel
 

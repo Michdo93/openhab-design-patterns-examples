@@ -1,6 +1,6 @@
 # Expire-Binding-basierter Countdown-Timer
 
-Timer-basierter Countdown auf Basis eines Number-Items mit Expire Binding: Start, Verlaengerung, Abbruch und Ablauf ueber Kommandos steuern.
+Timer-basierter Countdown auf Basis eines Number-Items mit Expire Binding: Start, Verlängerung, Abbruch und Ablauf über Kommandos steuern.
 
 ## Dateien in diesem Beispiel
 

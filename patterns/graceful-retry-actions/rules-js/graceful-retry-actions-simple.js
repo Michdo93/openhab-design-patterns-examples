@@ -11,26 +11,26 @@ rules.JSRule({
     const attempt = () => {
       try {
         items.getItem("LightSwitch").sendCommand("ON");
-        console.log("Command erfolgreich gesendet!");
+        console.log("Command sent successfully!");
         if (retryTimer !== null) retryTimer.cancel();
       } catch (e) {
         retryCount++;
-        console.warn("Fehler beim Senden, Versuch #" + retryCount);
+        console.warn("Error while sending, attempt #" + retryCount);
         if (retryCount < MAX_RETRIES) {
           retryTimer.reschedule(time.ZonedDateTime.now().plusSeconds(RETRY_INTERVAL));
         } else {
-          console.error("Maximale Anzahl an Versuchen erreicht!");
+          console.error("Maximum number of attempts reached!");
           try {
-            items.getItem("NotificationItem").postUpdate("LightSwitch konnte nicht eingeschaltet werden");
+            items.getItem("NotificationItem").postUpdate("LightSwitch could not be switched ON");
           } catch (notifyItemEx) {
-            console.warn("Konnte NotificationItem nicht aktualisieren: " + notifyItemEx.message);
+            console.warn("Could not update NotificationItem: " + notifyItemEx.message);
           }
           try {
             if (actions.NotificationAction) {
-              actions.NotificationAction.sendNotification("admin@example.com", "LightSwitch konnte nicht eingeschaltet werden");
+              actions.NotificationAction.sendNotification("admin@example.com", "LightSwitch could not be switched ON");
             }
           } catch (notifyEx) {
-            console.warn("Cloud-Benachrichtigung nicht verfuegbar: " + notifyEx.message);
+            console.warn("Cloud notification not available: " + notifyEx.message);
           }
         }
       }

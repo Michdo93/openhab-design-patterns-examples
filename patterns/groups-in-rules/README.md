@@ -1,6 +1,6 @@
 # groups-in-rules
 
-Generische, gruppenbasierte Regel fuer mehrere Tuersensoren statt Code-Duplikation pro Item.
+Generische, gruppenbasierte Regel für mehrere Türsensoren statt Code-Duplikation pro Item.
 
 ## Dateien in diesem Beispiel
 

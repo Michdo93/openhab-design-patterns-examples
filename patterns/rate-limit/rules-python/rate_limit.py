@@ -6,7 +6,7 @@ from scope import cache
 
 
 @rule(triggers=[ItemCommandTrigger("RateLimitTrigger", "ON")])
-class RateLimitBeispiel:
+class RateLimitExample:
     def execute(self, module, input):
         last_action = cache.privateCache.get("LastAction")
         now = datetime.now().astimezone()
@@ -15,4 +15,4 @@ class RateLimitBeispiel:
             self.logger.info("Rate-limited action")
             cache.privateCache.put("LastAction", now)
         else:
-            self.logger.info("Ereignis ignoriert, Sperrzeit laeuft noch")
+            self.logger.info("Event ignored, lockout period still running")

@@ -16,7 +16,7 @@ def step():
     target = int(target_state) if target_state not in ("NULL", "UNDEF") else 0
 
     if curr_level >= target or not continue_dimming:
-        logger.info("Dimmen beendet bei {}%".format(curr_level))
+        logger.info("Dimming finished at {}%".format(curr_level))
         dim_timer = None
         return
 
@@ -30,7 +30,7 @@ class StartDimming:
     def execute(self, module, input):
         global continue_dimming
         continue_dimming = True
-        self.logger.info("Dimmen gestartet")
+        self.logger.info("Dimming started")
         step()
 
 
@@ -39,4 +39,4 @@ class CancelDimming:
     def execute(self, module, input):
         global continue_dimming
         continue_dimming = False
-        self.logger.info("Dimmen wird abgebrochen")
+        self.logger.info("Dimming is being cancelled")

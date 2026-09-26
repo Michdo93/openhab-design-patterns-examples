@@ -12,7 +12,7 @@ AWAY_TARGETS = {
 
 
 @rule(triggers=[ItemStateChangeTrigger("vPresent")])
-class ZieltemperaturenAnwenden:
+class ApplyTargetTemperatures:
     def execute(self, module, input):
         targets = PRESENT_TARGETS if str(Registry.getItem("vPresent").getState()) == "ON" else AWAY_TARGETS
         for name, temp in targets.items():

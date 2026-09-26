@@ -1,6 +1,6 @@
 # rule-strukturierung
 
-1-2-3-Regelstruktur (Pruefen/Berechnen/Handeln) statt verschachtelter if-Ketten, plus Gruppen-Variante.
+1-2-3-Regelstruktur (Prüfen/Berechnen/Handeln) statt verschachtelter if-Ketten, plus Gruppen-Variante.
 
 ## Dateien in diesem Beispiel
 

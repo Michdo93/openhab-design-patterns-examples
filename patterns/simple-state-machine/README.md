@@ -1,6 +1,6 @@
 # simple-state-machine
 
-Ereignis-zu-Zustand-Uebergaenge, optional mit Ephemeris-Bedingung (Wochentag/Feiertag).
+Ereignis-zu-Zustand-Übergänge, optional mit Ephemeris-Bedingung (Wochentag/Feiertag).
 
 ## Dateien in diesem Beispiel
 

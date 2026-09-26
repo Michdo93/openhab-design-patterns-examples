@@ -10,7 +10,7 @@ rules.JSRule({
     const bar = items.getItem("Bar").state;
     const baz = items.getItem("Baz").state;
 
-    // 1. Pruefen, ob Regel laufen muss
+    // 1. Prüfen, ob Regel laufen muss
     if (foo === "NULL" || bar === "NULL" || baz === "NULL") {
       console.warn("One of the Items is NULL");
       return;
@@ -20,7 +20,7 @@ rules.JSRule({
     const onCount = [foo, bar, baz].filter((s) => s === "ON").length;
     const newState = onCount >= 2 ? "ON" : "OFF";
 
-    // 3. Ausfuehren
+    // 3. Ausführen
     items.getItem("Buzz").sendCommand(newState);
   }
 });

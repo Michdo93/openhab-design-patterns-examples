@@ -26,4 +26,4 @@ class AMotionDetectorTriggered:
         t = threading.Timer(TIMEOUT_SECONDS, turn_off)
         t.start()
         timers[item_name] = t
-        self.logger.info(item_name + ": Timer gestartet (" + str(TIMEOUT_SECONDS) + "s)")
+        self.logger.info(item_name + ": Timer started (" + str(TIMEOUT_SECONDS) + "s)")

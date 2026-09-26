@@ -8,7 +8,7 @@ const awayTargets = {
 };
 
 rules.JSRule({
-  name: "Zieltemperaturen anwenden",
+  name: "Apply target temperatures",
   triggers: [triggers.ItemStateChangeTrigger("vPresent")],
   execute: (event) => {
     const targets = items.getItem("vPresent").state === "ON" ? presentTargets : awayTargets;

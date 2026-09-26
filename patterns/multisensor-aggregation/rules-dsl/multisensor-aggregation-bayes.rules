@@ -39,11 +39,11 @@ then
     val total = probPresence + probAbsence
     probPresence = probPresence / total
 
-    logInfo("MultiSensorBayes", "Bayes Anwesenheitswahrscheinlichkeit: " + probPresence)
+    logInfo("MultiSensorBayes", "Bayes presence probability: " + probPresence)
 
     if (probPresence > 0.6) {
-        logInfo("MultiSensorBayes", "Anwesenheit erkannt!")
+        logInfo("MultiSensorBayes", "Presence detected!")
     } else {
-        logInfo("MultiSensorBayes", "Keine Anwesenheit.")
+        logInfo("MultiSensorBayes", "No presence.")
     }
 end

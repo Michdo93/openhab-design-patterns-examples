@@ -3,7 +3,7 @@ from openhab.triggers import ItemStateChangeTrigger
 
 
 @rule(triggers=[ItemStateChangeTrigger("SomeSensor")])
-class SensorHatEinUpdate:
+class SensorReceivedAnUpdate:
     def execute(self, module, input):
         event = input.get("event")
         if not event:
@@ -13,7 +13,7 @@ class SensorHatEinUpdate:
 
         equipment = sensor.getSemantic().getEquipment()
         if not equipment:
-            self.logger.warn("Kein Equipment für " + sensor.getName() + " gefunden")
+            self.logger.warn("No equipment found for " + sensor.getName())
             return
 
         members = equipment.getAllMembers()
@@ -26,7 +26,7 @@ class SensorHatEinUpdate:
         )
 
         if not status_item:
-            self.logger.warn("Kein Status-Item im Equipment " + equipment.getName() + " gefunden")
+            self.logger.warn("No status item found in equipment " + equipment.getName())
             return
 
         status_item.postUpdate(sensor.getState())

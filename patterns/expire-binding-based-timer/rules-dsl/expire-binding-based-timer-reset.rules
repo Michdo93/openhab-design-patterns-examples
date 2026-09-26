@@ -1,8 +1,8 @@
-rule "Expire-Timer neu starten"
+rule "Restart expire timers"
 when
     System started
 then
-    logInfo("ExpireReset", "Expire-Timer werden neu gestartet")
+    logInfo("ExpireReset", "Restarting expire timers")
     gResetExpire.members.forEach[ timer |
         logInfo("ExpireReset", timer.name + " -> " + timer.state.toString)
         timer.sendCommand(timer.state.toString)

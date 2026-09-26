@@ -1,22 +1,22 @@
-// Hinweis: Rules DSL hat keinen Python/JS-aequivalenten "buildTriggers()"-
-// Hook, der beim Laden Code ausfuehrt, um die Trigger-Menge dynamisch aus
+// Hinweis: Rules DSL hat keinen Python/JS-äquivalenten "buildTriggers()"-
+// Hook, der beim Laden Code ausführt, um die Trigger-Menge dynamisch aus
 // einem Metadaten-Scan zu berechnen. Als praktikabler Ersatz: Items melden
-// sich stattdessen ueber Mitgliedschaft in einer echten Gruppe an - neue
+// sich stattdessen über Mitgliedschaft in einer echten Gruppe an - neue
 // Mitglieder werden dank "Member of" auch ohne Neuladen der Regel erfasst.
 
-rule "Dynamische Gruppen-Regel"
+rule "Dynamic group rule"
 when
     Member of gDynamicTrigger changed
 then
     val itemName = triggeringItem.name
-    logInfo("RuleRefresh", itemName + " hat sich geaendert (dynamischer Trigger)")
+    logInfo("RuleRefresh", itemName + " changed (dynamic trigger)")
 end
 
-rule "Reload Hinweis"
+rule "Reload notice"
 when
     Item Reload_Item received command ON
 then
     // Anders als bei Python/JS gibt es hier nichts "neu zu berechnen" -
     // neue gDynamicTrigger-Mitglieder wirken sofort, ohne Regel-Reload.
-    logInfo("RuleRefresh", "Neue Items wirken sofort, sobald sie Mitglied von gDynamicTrigger sind - kein Neuladen noetig")
+    logInfo("RuleRefresh", "New items take effect immediately once they are members of gDynamicTrigger - no reload needed")
 end

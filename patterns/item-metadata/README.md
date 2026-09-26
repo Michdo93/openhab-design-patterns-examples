@@ -1,6 +1,6 @@
 # item-metadata
 
-Konfigurationswerte und Alert-Flags als Item-Metadaten statt zusaetzlicher Items. Kein DSL-Beispiel (DSL kann Metadaten nicht lesen/schreiben).
+Konfigurationswerte und Alert-Flags als Item-Metadaten statt zusätzlicher Items. Kein DSL-Beispiel (DSL kann Metadaten nicht lesen/schreiben).
 
 ## Dateien in diesem Beispiel
 

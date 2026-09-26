@@ -12,9 +12,9 @@ rules.JSRule({
       } else {
         actions.NotificationAction.sendBroadcastNotification(message);
       }
-      console.log(event.itemName + " -> Cloud-Benachrichtigung gesendet: " + message);
+      console.log(event.itemName + " -> cloud notification sent: " + message);
     } catch (e) {
-      console.warn("Cloud-Benachrichtigung nicht verfuegbar (" + event.itemName + "): " + e.message + " - Nachricht: " + message);
+      console.warn("Cloud notification not available (" + event.itemName + "): " + e.message + " - message: " + message);
     }
   }
 });

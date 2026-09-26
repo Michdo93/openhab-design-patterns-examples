@@ -12,7 +12,7 @@ then
     val commands = commandsObj as Queue<String>
 
     commands.add(receivedCommand.toString)
-    logInfo("433", "Befehl in Warteschlange eingereiht: " + receivedCommand.toString)
+    logInfo("433", "Command queued: " + receivedCommand.toString)
 
     if(timer === null) {
         timer = createTimer(now, [ |

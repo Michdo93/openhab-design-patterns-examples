@@ -19,7 +19,7 @@ rules.JSRule({
           const name = actions.Transformation.transform("MAP", "admin.map", itemName) || itemName;
           const stateName = actions.Transformation.transform("MAP", "admin.map", origState) || origState;
 
-          console.log(name + " ist jetzt " + stateName);
+          console.log(name + " is now " + stateName);
           items.getItem(itemName + "_Alerted").postUpdate("ON");
         }
       }

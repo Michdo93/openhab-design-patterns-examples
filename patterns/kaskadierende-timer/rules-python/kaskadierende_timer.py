@@ -18,7 +18,7 @@ def item_exists(name):
 
 
 @rule(triggers=[SystemStartlevelTrigger(100)])
-class IrrigationResetBeiSystemstart:
+class IrrigationResetOnSystemStart:
     def execute(self, module, input):
         for valve in Registry.getItem("gIrrigation").getAllMembers():
             if str(valve.getState()) != "OFF":
@@ -30,14 +30,14 @@ class IrrigationResetBeiSystemstart:
     GenericCronTrigger("0 0 8 * * ?"),
     ItemCommandTrigger("Irrigation_Manual", "ON"),
 ])
-class IrrigationStartUm0800:
+class IrrigationStartAt0800:
     def execute(self, module, input):
         event = input.get("event")
         received = str(event.getItemCommand()) if event and hasattr(event, "getItemCommand") else None
 
         if str(Registry.getItem("Irrigation_Auto").getState()) == "ON" or received == "ON":
             Registry.getItem("Irrigation_Manual").postUpdate("ON")
-            self.logger.info("Bewaesserung gestartet, Zone 1 aktiv")
+            self.logger.info("Irrigation started, zone 1 active")
             Registry.getItem("Irrigation_Curr").sendCommand("Irrigation_Zone_1")
 
 
@@ -56,18 +56,18 @@ class IrrigationCascade:
         next_valve_name = "Irrigation_Zone_" + str(curr_valve_num + 1)
 
         curr_valve.sendCommand("ON")
-        self.logger.info("Zone " + curr_valve_name + " an fuer " + str(curr_valve_mins) + " Minuten")
+        self.logger.info("Zone " + curr_valve_name + " on for " + str(curr_valve_mins) + " minutes")
 
         def on_expire():
             global irrigation_timer
-            self.logger.info("Zone " + curr_valve_name + " aus")
+            self.logger.info("Zone " + curr_valve_name + " off")
             curr_valve.sendCommand("OFF")
 
             if item_exists(next_valve_name):
-                self.logger.info("Zone " + next_valve_name + " an")
+                self.logger.info("Zone " + next_valve_name + " on")
                 Registry.getItem("Irrigation_Curr").sendCommand(next_valve_name)
             else:
-                self.logger.info("Bewaesserung abgeschlossen")
+                self.logger.info("Irrigation finished")
                 Registry.getItem("Irrigation_Manual").sendCommand("OFF")
             irrigation_timer = None
 

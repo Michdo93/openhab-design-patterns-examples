@@ -37,5 +37,5 @@ class CeilingFanControl:
         global ceiling_timer
         if ceiling_timer is not None:
             return
-        self.logger.info("Schleife gestartet")
+        self.logger.info("Loop started")
         loop()

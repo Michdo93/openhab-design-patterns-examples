@@ -1,6 +1,6 @@
 # rate-limit
 
-Aktion hoechstens einmal pro Zeitfenster ausfuehren, ueber den eingebauten Script-Cache.
+Aktion höchstens einmal pro Zeitfenster ausführen, über den eingebauten Script-Cache.
 
 ## Dateien in diesem Beispiel
 

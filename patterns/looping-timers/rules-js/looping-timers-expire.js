@@ -3,7 +3,7 @@ rules.JSRule({
   triggers: [triggers.ItemStateChangeTrigger("MotionSensor", undefined, "ON")],
   execute: (event) => {
     if (items.getItem("CeilingFanTimer").state !== "ON") {
-      console.log("Schleife gestartet");
+      console.log("Loop started");
       items.getItem("CeilingFanTimer").sendCommand("OFF"); // Timer starten
     }
   }

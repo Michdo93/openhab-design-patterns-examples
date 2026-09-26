@@ -1,5 +1,5 @@
-# Reine Test-Hilfsdatei, um "rule_deaktivierung.py" testen zu koennen -
-# im echten Einsatz waere das eure tatsaechliche Luftbefeuchter-Regel.
+# Reine Test-Hilfsdatei, um "rule_deaktivierung.py" testen zu können -
+# im echten Einsatz wäre das eure tatsächliche Luftbefeuchter-Regel.
 from openhab import rule
 from openhab.triggers import ItemCommandTrigger
 

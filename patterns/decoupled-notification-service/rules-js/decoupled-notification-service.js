@@ -1,5 +1,5 @@
 rules.JSRule({
-  name: "Benachrichtigungsservice",
+  name: "Notification service",
   triggers: [
     triggers.ItemStateChangeTrigger("VT_Notify_Info"),
     triggers.ItemStateChangeTrigger("VT_Notify_Warn"),

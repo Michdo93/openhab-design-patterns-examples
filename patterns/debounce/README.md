@@ -1,6 +1,6 @@
 # debounce
 
-Rohsignal ueber ein Proxy-Item entprellen, einzeln und generisch fuer mehrere Items.
+Rohsignal über ein Proxy-Item entprellen, einzeln und generisch für mehrere Items.
 
 ## Dateien in diesem Beispiel
 

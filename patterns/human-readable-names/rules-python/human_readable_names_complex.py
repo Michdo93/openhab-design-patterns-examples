@@ -30,7 +30,7 @@ class StatusAlert:
                 name = Transformation.transform("MAP", "admin.map", item_name) or item_name
                 state_name = Transformation.transform("MAP", "admin.map", orig_state) or orig_state
 
-                self.logger.info(name + " ist jetzt " + state_name)
+                self.logger.info(name + " is now " + state_name)
                 Registry.getItem(item_name + "_Alerted").postUpdate("ON")
 
         t = threading.Timer(60, on_expire)

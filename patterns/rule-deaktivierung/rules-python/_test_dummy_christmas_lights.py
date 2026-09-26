@@ -1,5 +1,5 @@
-# Reine Test-Hilfsdatei, um "rule_deaktivierung.py" testen zu koennen -
-# im echten Einsatz waeren das eure tatsaechlichen Weihnachtslicht-Regeln.
+# Reine Test-Hilfsdatei, um "rule_deaktivierung.py" testen zu können -
+# im echten Einsatz wären das eure tatsächlichen Weihnachtslicht-Regeln.
 from openhab import rule
 from openhab.triggers import ItemCommandTrigger
 

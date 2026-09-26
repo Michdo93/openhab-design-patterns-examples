@@ -1,6 +1,6 @@
 # primer-mit-hablladin
 
-Vollstaendiges Zustandsmaschinen-Beispiel: Garagenlicht mit Timer, Vorwarn-Blinken und manueller Ueberschreibung.
+Vollständiges Zustandsmaschinen-Beispiel: Garagenlicht mit Timer, Vorwarn-Blinken und manueller Überschreibung.
 
 ## Dateien in diesem Beispiel
 

@@ -12,9 +12,9 @@ rules.JSRule({
       timers.delete(itemName);
     }
 
-    // Timer neu erstellen, wenn Tuer geoeffnet wurde
+    // Timer neu erstellen, wenn Tür geöffnet wurde
     if (items.getItem(itemName).state === "OPEN") {
-      console.log(itemName + ": Timer gestartet (1h)");
+      console.log(itemName + ": Timer started (1h)");
       const t = actions.ScriptExecution.createTimer(
         time.ZonedDateTime.now().plusMinutes(60),
         () => {
@@ -23,7 +23,7 @@ rules.JSRule({
       );
       timers.set(itemName, t);
     } else {
-      console.log(itemName + ": geschlossen, kein Timer noetig");
+      console.log(itemName + ": closed, no timer needed");
     }
   }
 });

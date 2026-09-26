@@ -1,10 +1,10 @@
-Switch GarageLightsProxy "Garage Lights Proxy"
-Switch GarageLights      "Garage Lights"
+Switch GarageLightsProxy "Garagenlicht (Proxy)"
+Switch GarageLights      "Garagenlicht"
 
-Number GLSM "Garage Lights State Machine State [%d]"
+Number GLSM "Zustand der Garagenlicht-State-Machine [%d]"
 
-Contact LeftGarageDoor  "Left Garage Door [%s]"
-Contact RightGarageDoor "Right Garage Door [%s]"
+Contact LeftGarageDoor  "Linkes Garagentor [%s]"
+Contact RightGarageDoor "Rechtes Garagentor [%s]"
 
 // Unbound Test-Item statt echter Astro-Binding-Anbindung
 DateTime Sun_Set "Sonnenuntergang [%1$tH:%1$tM]"

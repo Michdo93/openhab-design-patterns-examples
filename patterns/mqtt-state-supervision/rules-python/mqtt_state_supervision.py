@@ -7,7 +7,7 @@ T_RB_SECONDS = 30
 
 
 def alert(item_name, expected_state):
-    logger.warn(item_name + " hat den Zustand " + expected_state + " nicht erreicht")
+    logger.warn(item_name + " did not reach state " + expected_state)
     # z. B. Benachrichtigung senden
 
 
@@ -20,7 +20,7 @@ class MQTTStateSupervision:
 
         expected_state = str(event.getItemCommand())
         item_name = event.getItemName()
-        logger.info(item_name + ": Ueberwachung gestartet, erwarte " + expected_state + " innerhalb " + str(T_RB_SECONDS) + "s")
+        logger.info(item_name + ": supervision started, expecting " + expected_state + " within " + str(T_RB_SECONDS) + "s")
         supervise_state(item_name, expected_state, alert, T_RB_SECONDS)
 
 
@@ -32,5 +32,5 @@ class MQTTStateUpdate:
             return
 
         item_name = event.getItemName()
-        logger.info(item_name + ": Zustand hat sich geaendert, Ueberwachung wird abgebrochen")
+        logger.info(item_name + ": state changed, cancelling supervision")
         cancel_supervision(item_name)

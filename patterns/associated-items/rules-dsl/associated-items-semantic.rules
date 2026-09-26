@@ -1,10 +1,10 @@
-rule "Sensor hat ein Update"
+rule "Sensor received an update"
 when
     Item SomeSensor changed
 then
     val equipmentItem = Semantics.getEquipment(SomeSensor)
     if(equipmentItem === null || !(equipmentItem instanceof GroupItem)) {
-        logWarn("AssociatedItems", "Kein Equipment für SomeSensor gefunden")
+        logWarn("AssociatedItems", "No equipment found for SomeSensor")
         return;
     }
     val equipment = equipmentItem as GroupItem
@@ -25,7 +25,7 @@ then
     ]
 
     if(byMulti === null) {
-        logWarn("AssociatedItems", "Kein Status-Item im Equipment " + equipment.name + " gefunden")
+        logWarn("AssociatedItems", "No status item found in equipment " + equipment.name)
         return;
     }
     byMulti.postUpdate(SomeSensor.state.toString)

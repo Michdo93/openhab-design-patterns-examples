@@ -1,5 +1,5 @@
 rules.JSRule({
-  name: "Toggle Lampe",
+  name: "Toggle lamp",
   triggers: [triggers.ItemCommandTrigger("mqttSwitchIn2", "OFF")],
   execute: (event) => {
     if (items.getItem("modbusSwitchOut1").state !== "ON") {

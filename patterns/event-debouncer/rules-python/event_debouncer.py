@@ -12,15 +12,15 @@ class DebouncedMotionSensor:
         global debounce_timer
 
         if debounce_timer is None:
-            self.logger.info("Bewegung erkannt - Licht einschalten")
+            self.logger.info("Motion detected - turning light on")
             Registry.getItem("light").sendCommand("ON")
 
             def reset_timer():
                 global debounce_timer
                 debounce_timer = None
-                self.logger.info("Debounce beendet - neue Events moeglich")
+                self.logger.info("Debounce finished - new events possible")
 
             debounce_timer = threading.Timer(2, reset_timer)
             debounce_timer.start()
         else:
-            self.logger.info("Event ignoriert - Timer laeuft noch")
+            self.logger.info("Event ignored - timer still running")

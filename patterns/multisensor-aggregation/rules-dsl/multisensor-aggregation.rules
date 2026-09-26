@@ -10,12 +10,12 @@ then
 
     var Number aggregatedConfidence = motionConfidence + windowConfidence + lightConfidence
 
-    logInfo("MultiSensor", "Aggregierte Konfidenz: " + aggregatedConfidence)
+    logInfo("MultiSensor", "Aggregated confidence: " + aggregatedConfidence)
 
     if(aggregatedConfidence > 0.6) {
-        logInfo("MultiSensor", "Anwesenheit erkannt!")
+        logInfo("MultiSensor", "Presence detected!")
         // LightSwitch.sendCommand(ON)
     } else {
-        logInfo("MultiSensor", "Keine Anwesenheit.")
+        logInfo("MultiSensor", "No presence.")
     }
 end

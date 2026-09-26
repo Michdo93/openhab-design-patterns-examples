@@ -1,6 +1,6 @@
 # bewegungssensor-timer
 
-Geraet fuer X Minuten nach letzter Bewegung eingeschaltet halten, per Expire Binding oder Timer, auch fuer mehrere Sensoren.
+Gerät für X Minuten nach letzter Bewegung eingeschaltet halten, per Expire Binding oder Timer, auch für mehrere Sensoren.
 
 ## Dateien in diesem Beispiel
 

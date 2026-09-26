@@ -1,6 +1,6 @@
 # toggle-pattern
 
-Zustand eines Geraets per Tastendruck umschalten (Toggle), inkl. UI-Feedback-Variante.
+Zustand eines Geräts per Tastendruck umschalten (Toggle), inkl. UI-Feedback-Variante.
 
 ## Dateien in diesem Beispiel
 

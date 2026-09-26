@@ -1,4 +1,4 @@
-rule "Benachrichtigungsservice"
+rule "Notification service"
 when
     Member of gNotify changed
 then

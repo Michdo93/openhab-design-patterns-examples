@@ -3,7 +3,7 @@ from openhab.triggers import GroupStateChangeTrigger
 
 
 @rule(triggers=[GroupStateChangeTrigger("gSensors")])
-class ZugehoerigesItemUeberNamenskonventionFinden:
+class FindAssociatedItemViaNamingConvention:
     def execute(self, module, input):
         event = input.get("event")
         if not event:
@@ -19,7 +19,7 @@ class ZugehoerigesItemUeberNamenskonventionFinden:
         try:
             status_item = Registry.getItem(item_name + "_Status")
         except Exception:
-            logger.warn("Kein zugehoeriges Status-Item fuer " + item_name + " gefunden")
+            logger.warn("No associated status item found for " + item_name)
             return
 
         # Den tatsächlichen neuen Zustand des Sensors übernehmen,

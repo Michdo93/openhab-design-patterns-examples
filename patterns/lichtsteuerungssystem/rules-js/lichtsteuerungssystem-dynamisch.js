@@ -5,10 +5,10 @@ rules.JSRule({
     const hour = time.ZonedDateTime.now().hour();
     if (hour >= 18 && hour < 22) {
       items.getItem("Light1_Dimmer").sendCommand(80); // Helligkeit auf 80%
-      console.log("Stunde=" + hour + " -> Light1_Dimmer 80%");
+      console.log("Hour=" + hour + " -> Light1_Dimmer 80%");
     } else {
       items.getItem("Light1_Dimmer").sendCommand(20); // Helligkeit auf 20%
-      console.log("Stunde=" + hour + " -> Light1_Dimmer 20%");
+      console.log("Hour=" + hour + " -> Light1_Dimmer 20%");
     }
   }
 });

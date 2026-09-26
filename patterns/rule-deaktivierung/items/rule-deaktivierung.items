@@ -1,4 +1,4 @@
 Switch vChristmas "Weihnachtsmodus [%s]"
 
-// Nur fuer die Test-Dummy-Regeln benoetigt (nie wirklich ausgeloest)
+// Nur für die Test-Dummy-Regeln benötigt (nie wirklich ausgelöst)
 Switch DummyRuleTrigger "Nie benutzter Dummy-Trigger"

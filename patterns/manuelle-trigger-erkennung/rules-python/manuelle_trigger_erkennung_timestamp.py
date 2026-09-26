@@ -29,4 +29,4 @@ class SetLightsBasedOnTimeOfDay:
                 if str(light.getState()) != "ON":
                     light.sendCommand("ON")
 
-        self.logger.info("vTimeOfDay=" + time_of_day + " -> Lichter angepasst")
+        self.logger.info("vTimeOfDay=" + time_of_day + " -> lights adjusted")

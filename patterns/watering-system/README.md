@@ -1,6 +1,6 @@
 # watering-system
 
-Konfigurierbares Mehrzonen-Bewaesserungssystem mit entkoppeltem zentralem Service und Timer pro Zone.
+Konfigurierbares Mehrzonen-Bewässerungssystem mit entkoppeltem zentralem Service und Timer pro Zone.
 
 ## Dateien in diesem Beispiel
 

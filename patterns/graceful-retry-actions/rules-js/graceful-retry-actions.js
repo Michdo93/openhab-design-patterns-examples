@@ -8,7 +8,7 @@ rules.JSRule({
     if (["RetryMaxAttempts", "RetryInitialInterval", "RetryMaxInterval"].some(
       (n) => items.getItem(n).state === "NULL" || items.getItem(n).state === "UNDEF"
     )) {
-      console.warn("Konfiguration (RetryMaxAttempts/RetryInitialInterval/RetryMaxInterval) noch nicht gesetzt");
+      console.warn("Configuration (RetryMaxAttempts/RetryInitialInterval/RetryMaxInterval) not set yet");
       return;
     }
 
@@ -46,14 +46,14 @@ rules.JSRule({
             try {
               items.getItem("NotificationItem").postUpdate(message);
             } catch (notifyItemEx) {
-              console.warn("Konnte NotificationItem nicht aktualisieren: " + notifyItemEx.message);
+              console.warn("Could not update NotificationItem: " + notifyItemEx.message);
             }
             try {
               if (actions.NotificationAction) {
                 actions.NotificationAction.sendNotification("admin@example.com", message);
               }
             } catch (notifyEx) {
-              console.warn("Cloud-Benachrichtigung nicht verfuegbar: " + notifyEx.message);
+              console.warn("Cloud notification not available: " + notifyEx.message);
             }
           }
         }

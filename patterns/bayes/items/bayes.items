@@ -1,7 +1,7 @@
 Switch mySleepSensor "Schlafsensor [%s]"
 Number mySleepProbability "Schlafwahrscheinlichkeit [%.0f %%]"
 
-Switch myObservation1 "Presence Sensor"
-String myObservation2 "Time of Day"
-Switch myObservation3 "Lights"
-Switch myObservation4 "Mobile DND"
+Switch myObservation1 "Anwesenheitssensor"
+String myObservation2 "Tageszeit"
+Switch myObservation3 "Lichter"
+Switch myObservation4 "Handy: Nicht stören"

@@ -33,5 +33,5 @@ class BayesianSleepSensor:
         Registry.getItem("mySleepSensor").sendCommand("ON" if prob >= THRESHOLD else "OFF")
 
         self.logger.info(
-            "Schlafwahrscheinlichkeit: {:.1f}% (Schwelle: {:.0f}%)".format(prob * 100, THRESHOLD * 100)
+            "Sleep probability: {:.1f}% (threshold: {:.0f}%)".format(prob * 100, THRESHOLD * 100)
         )

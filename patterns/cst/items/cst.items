@@ -1,4 +1,4 @@
-Group gCST "Conditional Sequence Trigger"
+Group gCST "Bedingter Sequenz-Trigger"
 
 Switch motionSensor "Bewegungssensor" (gCST)
 Switch presenceSensor "Anwesenheitssensor" (gCST)

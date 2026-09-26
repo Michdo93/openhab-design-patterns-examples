@@ -2,8 +2,8 @@ Group gWateringZones
 
 String VT_Watering_Zone1 (gWateringZones)
 String VT_Watering_Zone2 (gWateringZones)
-Number VT_Watering_Duration "Bewaesserungsdauer [%d s]"
-Number VT_Watering_Interval "Bewaesserungsintervall [%d Tage]"
+Number VT_Watering_Duration "Bewässerungsdauer [%d s]"
+Number VT_Watering_Interval "Bewässerungsintervall [%d Tage]"
 
 Switch SomeCondition
 

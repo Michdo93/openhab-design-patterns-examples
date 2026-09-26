@@ -13,13 +13,13 @@ rules.JSRule({
 
     const aggregatedConfidence = motionConfidence + windowConfidence + lightConfidence;
 
-    console.log("Aggregierte Konfidenz: " + aggregatedConfidence);
+    console.log("Aggregated confidence: " + aggregatedConfidence);
 
     if (aggregatedConfidence > 0.6) {
-      console.log("Anwesenheit erkannt!");
+      console.log("Presence detected!");
       // items.getItem("LightSwitch").sendCommand("ON");
     } else {
-      console.log("Keine Anwesenheit.");
+      console.log("No presence.");
     }
   }
 });

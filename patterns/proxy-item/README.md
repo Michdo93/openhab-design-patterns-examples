@@ -1,6 +1,6 @@
 # proxy-item
 
-Virtuelles Steuer-Item zwischen Sitemap/Benutzer und dem eigentlich gebundenen Geraet-Item, inkl. Garagentor-Beispiel mit Alert.
+Virtuelles Steuer-Item zwischen Sitemap/Benutzer und dem eigentlich gebundenen Gerät-Item, inkl. Garagentor-Beispiel mit Alert.
 
 ## Dateien in diesem Beispiel
 

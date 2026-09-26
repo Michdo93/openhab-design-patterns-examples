@@ -1,6 +1,6 @@
 # expire-binding-based-timer
 
-Timer-Ersatz ueber das Expire Binding statt klassischer createTimer-Objekte.
+Timer-Ersatz über das Expire Binding statt klassischer createTimer-Objekte.
 
 ## Dateien in diesem Beispiel
 

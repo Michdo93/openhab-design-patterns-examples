@@ -17,7 +17,7 @@ class WarningsAndAlertsForTemperature:
                     continue
                 temp = float(state)
                 if 25 <= temp < 30:
-                    self.logger.info("Temp warn {}: {} Grad C".format(r.getName(), temp))
+                    self.logger.info("Temp warn {}: {} °C".format(r.getName(), temp))
                     # Weitere Benachrichtigungen
 
         for r in members:
@@ -26,5 +26,5 @@ class WarningsAndAlertsForTemperature:
                 continue
             temp = float(state)
             if temp >= 30:
-                self.logger.info("Temp alert {}: {} Grad C".format(r.getName(), temp))
+                self.logger.info("Temp alert {}: {} °C".format(r.getName(), temp))
                 # Weitere Benachrichtigungen

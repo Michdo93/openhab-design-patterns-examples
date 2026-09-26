@@ -1,4 +1,4 @@
-rule "Countdown-Verwaltung"
+rule "Countdown management"
 when
     Item myCounter received command
 then
@@ -29,28 +29,28 @@ then
     }
 end
 
-rule "6 Minuten starten"
+rule "Start 6 minutes"
 when
     Item test6 received command
 then
     myCounter.sendCommand(6)
 end
 
-rule "3 Minuten starten"
+rule "Start 3 minutes"
 when
     Item test3 received command
 then
     myCounter.sendCommand(3)
 end
 
-rule "auf 2 Minuten setzen"
+rule "Set to 2 minutes"
 when
     Item test2 received command
 then
     myCounter.sendCommand(-2)
 end
 
-rule "Countdown abbrechen"
+rule "Cancel countdown"
 when
     Item testabort received command
 then

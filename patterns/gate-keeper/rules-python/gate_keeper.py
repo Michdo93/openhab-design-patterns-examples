@@ -34,7 +34,7 @@ class Controller433MHz:
             return
 
         commands.put(str(event.getItemCommand()))
-        self.logger.info("Befehl in Warteschlange eingereiht: " + str(event.getItemCommand()))
+        self.logger.info("Command queued: " + str(event.getItemCommand()))
 
         if gate_timer is None:
             process_queue()

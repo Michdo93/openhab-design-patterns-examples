@@ -1,5 +1,5 @@
 rules.JSRule({
-  name: "Countdown-Verwaltung",
+  name: "Countdown management",
   triggers: [triggers.ItemCommandTrigger("myCounter")],
   execute: (event) => {
     const cmmd = parseInt(event.receivedCommand);
@@ -28,25 +28,25 @@ rules.JSRule({
 });
 
 rules.JSRule({
-  name: "6 Minuten starten",
+  name: "Start 6 minutes",
   triggers: [triggers.ItemCommandTrigger("test6")],
   execute: (event) => { items.getItem("myCounter").sendCommand(6); }
 });
 
 rules.JSRule({
-  name: "3 Minuten starten",
+  name: "Start 3 minutes",
   triggers: [triggers.ItemCommandTrigger("test3")],
   execute: (event) => { items.getItem("myCounter").sendCommand(3); }
 });
 
 rules.JSRule({
-  name: "auf 2 Minuten setzen",
+  name: "Set to 2 minutes",
   triggers: [triggers.ItemCommandTrigger("test2")],
   execute: (event) => { items.getItem("myCounter").sendCommand(-2); }
 });
 
 rules.JSRule({
-  name: "Countdown abbrechen",
+  name: "Cancel countdown",
   triggers: [triggers.ItemCommandTrigger("testabort")],
   execute: (event) => { items.getItem("myCounter").sendCommand(0); }
 });

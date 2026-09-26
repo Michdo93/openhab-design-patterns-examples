@@ -2,14 +2,14 @@ import java.time.Duration
 
 var ZonedDateTime pressStart = null
 
-rule "Button gedrueckt"
+rule "Button pressed"
 when
     Item ButtonState changed from OFF to ON
 then
     pressStart = now
 end
 
-rule "Button losgelassen"
+rule "Button released"
 when
     Item ButtonState changed from ON to OFF
 then
@@ -20,11 +20,11 @@ then
     if (pressDuration < 500) {
         // kurzer Druck
         TargetLight.sendCommand(if(TargetLight.state == ON) OFF else ON)
-        logInfo("LongPress", "Kurzer Druck (" + pressDuration + "ms) -> Toggle")
+        logInfo("LongPress", "Short press (" + pressDuration + "ms) -> Toggle")
     } else {
         // langer Druck
         TargetLight.sendCommand(INCREASE)
-        logInfo("LongPress", "Langer Druck (" + pressDuration + "ms) -> Dimmen")
+        logInfo("LongPress", "Long press (" + pressDuration + "ms) -> dimming")
     }
     ButtonPressTime.postUpdate(pressDuration)
 end

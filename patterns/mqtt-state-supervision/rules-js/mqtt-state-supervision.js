@@ -12,12 +12,12 @@ rules.JSRule({
       supervisionTimers.get(itemName).cancel();
     }
 
-    console.log(itemName + ": Ueberwachung gestartet, erwarte " + expectedState + " innerhalb " + T_RB_SECONDS + "s");
+    console.log(itemName + ": supervision started, expecting " + expectedState + " within " + T_RB_SECONDS + "s");
 
     const t = actions.ScriptExecution.createTimer(
       time.ZonedDateTime.now().plusSeconds(T_RB_SECONDS),
       () => {
-        console.warn(itemName + " hat den Zustand " + expectedState + " nicht erreicht");
+        console.warn(itemName + " did not reach state " + expectedState);
         // z. B. Benachrichtigung senden
         supervisionTimers.delete(itemName);
       }
@@ -33,7 +33,7 @@ rules.JSRule({
     if (supervisionTimers.has(event.itemName)) {
       supervisionTimers.get(event.itemName).cancel();
       supervisionTimers.delete(event.itemName);
-      console.log(event.itemName + ": Zustand hat sich geaendert, Ueberwachung wird abgebrochen");
+      console.log(event.itemName + ": state changed, cancelling supervision");
     }
   }
 });

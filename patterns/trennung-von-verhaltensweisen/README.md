@@ -1,6 +1,6 @@
 # trennung-von-verhaltensweisen
 
-Proxy-Item als zentrale Schnittstelle fuer geteilte Logik (Alarme, Bewoelkung).
+Proxy-Item als zentrale Schnittstelle für geteilte Logik (Alarme, Bewölkung).
 
 ## Dateien in diesem Beispiel
 

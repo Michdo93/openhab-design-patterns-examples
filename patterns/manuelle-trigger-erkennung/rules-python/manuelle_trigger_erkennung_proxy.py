@@ -30,4 +30,4 @@ class LightControlReceivedCommand:
         if str(device.getState()) != command:
             device.sendCommand(command)
 
-        self.logger.info("Quelle=" + source + " -> " + light_name + " = " + command)
+        self.logger.info("Source=" + source + " -> " + light_name + " = " + command)

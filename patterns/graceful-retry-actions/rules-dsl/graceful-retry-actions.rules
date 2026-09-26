@@ -10,7 +10,7 @@ when
     Item RetryTrigger changed to ON
 then
     if(RetryMaxAttempts.state == NULL || RetryInitialInterval.state == NULL || RetryMaxInterval.state == NULL) {
-        logWarn("DynamicRetryDSL", "Konfiguration (RetryMaxAttempts/RetryInitialInterval/RetryMaxInterval) noch nicht gesetzt")
+        logWarn("DynamicRetryDSL", "Configuration (RetryMaxAttempts/RetryInitialInterval/RetryMaxInterval) not set yet")
         return;
     }
 
@@ -21,10 +21,10 @@ then
 
         val Timer t = createTimer(now, [ |
             // Werte werden HIER frisch aus den Items gelesen statt aus dem
-            // aeusseren Regel-Scope erfasst - verschachtelte Timer-Closures
+            // äußeren Regel-Scope erfasst - verschachtelte Timer-Closures
             // (createTimer innerhalb von forEach) verlieren in dieser Engine
-            // zuverlaessig nur Variablen aus dem AEUSSERSTEN Scope, nicht aus
-            // der unmittelbar umschliessenden Closure (device funktioniert).
+            // zuverlässig nur Variablen aus dem ÄUSSERSTEN Scope, nicht aus
+            // der unmittelbar umschließenden Closure (device funktioniert).
             val maxRetries = (RetryMaxAttempts.state as Number).intValue
             val initialInterval = (RetryInitialInterval.state as Number).intValue
             val maxInterval = (RetryMaxInterval.state as Number).intValue
@@ -54,11 +54,11 @@ then
                                    else device + " could not be switched ON!"
                     postUpdate(NotificationItem, message)
                     // Hinweis: sendNotification() (Cloud Connector) konnte in
-                    // dieser DSL-Ausfuehrungsumgebung innerhalb verschachtelter
-                    // Timer-Closures nicht als Name aufgeloest werden - das ist
-                    // ein Namensauflösungsfehler, kein try/catch-faehiger
+                    // dieser DSL-Ausführungsumgebung innerhalb verschachtelter
+                    // Timer-Closures nicht als Name aufgelöst werden - das ist
+                    // ein Namensauflösungsfehler, kein try/catch-fähiger
                     // Laufzeitfehler, daher hier bewusst weggelassen. Die lokale
-                    // NotificationItem-Aktualisierung bleibt als zuverlaessiger
+                    // NotificationItem-Aktualisierung bleibt als zuverlässiger
                     // Kanal bestehen.
                 }
             }

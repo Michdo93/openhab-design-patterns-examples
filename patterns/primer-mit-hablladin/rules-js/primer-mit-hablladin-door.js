@@ -15,9 +15,9 @@ rules.JSRule({
 
     if (afterSunset && (state === GLSM_OFF || state === GLSM_TIMED_ON || state === GLSM_TIMED_BLINK)) {
       items.getItem("GLSM").postUpdate(GLSM_TIMED_ON);
-      console.log("Tor geoeffnet nach Sonnenuntergang -> Licht mit Timer an");
+      console.log("Door opened after sunset -> light on with timer");
     } else {
-      console.log("Tor geoeffnet, aber kein Trigger (vor Sonnenuntergang oder Licht bereits dauerhaft an)");
+      console.log("Door opened, but no trigger (before sunset or light already permanently on)");
     }
   }
 });

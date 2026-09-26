@@ -16,10 +16,10 @@ class MultiSensorConfidenceAggregation:
 
         aggregated_conf = motion_conf + window_conf + light_conf
 
-        self.logger.info("Aggregierte Konfidenz: {}".format(aggregated_conf))
+        self.logger.info("Aggregated confidence: {}".format(aggregated_conf))
 
         if aggregated_conf > 0.6:
-            self.logger.info("Anwesenheit erkannt!")
+            self.logger.info("Presence detected!")
             # Registry.getItem("LightSwitch").sendCommand("ON")
         else:
-            self.logger.info("Keine Anwesenheit.")
+            self.logger.info("No presence.")

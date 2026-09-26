@@ -18,7 +18,7 @@ val Map<String, Map<String, Integer>> HABSettings = newHashMap(
     )
 )
 
-rule "Beispielregel fuer RGBW-Licht"
+rule "Example rule for RGBW light"
 when
     Item SomeLight changed
 then

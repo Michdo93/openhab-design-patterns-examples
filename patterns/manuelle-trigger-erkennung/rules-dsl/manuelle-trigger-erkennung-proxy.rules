@@ -15,7 +15,7 @@ then
     }
 
     if(proxy === null || device === null || ui === null || rulesItem === null) {
-        logWarn("ManuelleTriggerErkennung", "Nicht alle Proxy-Items fuer " + lightName + " gefunden (Quelle: " + source + ")")
+        logWarn("ManualTriggerDetection", "Not all proxy items found for " + lightName + " (source: " + source + ")")
         return;
     }
 
@@ -26,5 +26,5 @@ then
     if(rulesItem.state.toString != commandStr) rulesItem.postUpdate(commandStr)
     if(device.state.toString != commandStr) device.sendCommand(commandStr)
 
-    logInfo("ManuelleTriggerErkennung", "Quelle=" + source + " -> " + lightName + " = " + commandStr)
+    logInfo("ManualTriggerDetection", "Source=" + source + " -> " + lightName + " = " + commandStr)
 end

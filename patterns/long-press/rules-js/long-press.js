@@ -1,7 +1,7 @@
 let pressStart = null;
 
 rules.JSRule({
-  name: "Button gedrueckt",
+  name: "Button pressed",
   triggers: [triggers.ItemStateChangeTrigger("ButtonState", "OFF", "ON")],
   execute: (event) => {
     pressStart = time.ZonedDateTime.now();
@@ -9,7 +9,7 @@ rules.JSRule({
 });
 
 rules.JSRule({
-  name: "Button losgelassen",
+  name: "Button released",
   triggers: [triggers.ItemStateChangeTrigger("ButtonState", "ON", "OFF")],
   execute: (event) => {
     if (pressStart === null) return;
@@ -20,11 +20,11 @@ rules.JSRule({
       // kurzer Druck
       const newState = items.getItem("TargetLight").state === "ON" ? "OFF" : "ON";
       items.getItem("TargetLight").sendCommand(newState);
-      console.log("Kurzer Druck (" + pressDuration + "ms) -> Toggle (" + newState + ")");
+      console.log("Short press (" + pressDuration + "ms) -> Toggle (" + newState + ")");
     } else {
       // langer Druck
       items.getItem("TargetLight").sendCommand("INCREASE");
-      console.log("Langer Druck (" + pressDuration + "ms) -> Dimmen");
+      console.log("Long press (" + pressDuration + "ms) -> dimming");
     }
     items.getItem("ButtonPressTime").postUpdate(pressDuration);
   }

@@ -13,18 +13,18 @@ rules.JSRule({
     if (items.getItem(zone).state === "START") {
       const durationState = items.getItem("VT_Watering_Duration").state;
       if (durationState === "NULL" || durationState === "UNDEF") {
-        console.warn("VT_Watering_Duration ist noch nicht gesetzt");
+        console.warn("VT_Watering_Duration is not set yet");
         return;
       }
       const duration = parseInt(durationState);
 
-      console.log("Starte Bewaesserung fuer Zone " + zone + " fuer " + duration + " Sekunden");
+      console.log("Starting watering for zone " + zone + " for " + duration + " seconds");
       items.getItem(relayName).sendCommand("ON");
 
       const t = actions.ScriptExecution.createTimer(
         time.ZonedDateTime.now().plusSeconds(duration),
         () => {
-          console.log("Beende Bewaesserung fuer Zone " + zone);
+          console.log("Stopping watering for zone " + zone);
           items.getItem(relayName).sendCommand("OFF");
           wateringTimers.delete(zone);
         }

@@ -7,9 +7,9 @@ then
 
     if (itemName == "Notification_Proxy_Info") {
         // Info-Benachrichtigung senden
-        logInfo("Notify", "Info-Benachrichtigung: " + message)
+        logInfo("Notify", "Info notification: " + message)
     } else {
         // Alarm-Benachrichtigung senden
-        logInfo("Notify", "Alarm-Benachrichtigung: " + message)
+        logInfo("Notify", "Alert notification: " + message)
     }
 end

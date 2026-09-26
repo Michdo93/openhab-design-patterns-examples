@@ -3,7 +3,7 @@ when
     Item callScriptItem received command
 then
     val sceneName = receivedCommand.toString
-    logInfo("Szenenmanagement", "scene: " + sceneName)
+    logInfo("SceneManagement", "scene: " + sceneName)
 
     switch (sceneName) {
         case "SwitchOff_LightsStairs": {
@@ -44,7 +44,7 @@ then
             sendCommand("F2WL_TOGGLE", "ON")
         }
         default: {
-            logWarn("Szenenmanagement", "Unbekannte Szene: " + sceneName)
+            logWarn("SceneManagement", "Unknown scene: " + sceneName)
         }
     }
 end

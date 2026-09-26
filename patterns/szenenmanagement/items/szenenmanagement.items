@@ -1,6 +1,6 @@
 String callScriptItem ""
 
-// Treppenlicht-Zonen fuer die Szenen
+// Treppenlicht-Zonen für die Szenen
 Dimmer FEDL_DIMM "Erdgeschoss Dimmwert [%d %%]"
 Switch FEDL_TOGGLE "Erdgeschoss Ein/Aus [%s]"
 

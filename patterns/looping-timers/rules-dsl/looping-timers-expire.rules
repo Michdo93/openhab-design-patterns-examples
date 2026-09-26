@@ -3,7 +3,7 @@ when
     Item MotionSensor changed to ON
 then
     if (CeilingFanTimer.state != ON) {
-        logInfo("LoopingTimers", "Schleife gestartet")
+        logInfo("LoopingTimers", "Loop started")
         CeilingFanTimer.sendCommand(OFF) // Timer starten
     }
 end

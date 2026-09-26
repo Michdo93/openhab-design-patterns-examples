@@ -7,7 +7,7 @@ rules.JSRule({
       rules.setEnabled("example_rule_uid", enable);
       console.log("example_rule_uid -> enabled=" + enable);
     } catch (e) {
-      console.warn("Konnte example_rule_uid nicht umschalten: " + e.message);
+      console.warn("Could not toggle example_rule_uid: " + e.message);
     }
   }
 });

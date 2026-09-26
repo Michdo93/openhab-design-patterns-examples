@@ -19,18 +19,18 @@ class WateringService:
         zone = event.getItemName()
         duration_state = str(Registry.getItem("VT_Watering_Duration").getState())
         if duration_state in ("NULL", "UNDEF"):
-            self.logger.warn("VT_Watering_Duration ist noch nicht gesetzt")
+            self.logger.warn("VT_Watering_Duration is not set yet")
             return
         duration = int(duration_state)
 
         relay_name = zone.replace("VT_Watering_", "") + "_Relay"
 
         if str(Registry.getItem(zone).getState()) == "START":
-            self.logger.info("Starte Bewaesserung fuer Zone {} fuer {} Sekunden".format(zone, duration))
+            self.logger.info("Starting watering for zone {} for {} seconds".format(zone, duration))
             Registry.getItem(relay_name).sendCommand("ON")
 
             def turn_off(z=zone, relay=relay_name):
-                self.logger.info("Beende Bewaesserung fuer Zone " + z)
+                self.logger.info("Stopping watering for zone " + z)
                 Registry.getItem(relay).sendCommand("OFF")
                 del watering_timers[z]
 

@@ -3,7 +3,7 @@ import java.util.Map
 val Map<String, Number> presentTargets = newHashMap()
 val Map<String, Number> awayTargets = newHashMap()
 
-rule "Werte initialisieren"
+rule "Initialize values"
 when
     System started
 then
@@ -13,7 +13,7 @@ then
     awayTargets.put("Room2_Thermostat", 18)
 end
 
-rule "Zieltemperaturen anwenden"
+rule "Apply target temperatures"
 when
     Item vPresent changed
 then

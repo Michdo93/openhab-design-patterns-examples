@@ -14,7 +14,7 @@ rules.JSRule({
       () => {
         if (items.getItem("Person1Presence").state !== sensorState) {
           items.getItem("Person1Presence").postUpdate(sensorState);
-          console.log("Person1Presence uebernimmt " + sensorState + " (Verzoegerung=" + delaySeconds + "s)");
+          console.log("Person1Presence set to " + sensorState + " (delay=" + delaySeconds + "s)");
         }
         timer = null;
       }

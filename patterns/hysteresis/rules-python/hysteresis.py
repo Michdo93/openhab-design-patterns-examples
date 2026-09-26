@@ -3,7 +3,7 @@ from openhab.triggers import ItemStateChangeTrigger
 
 
 @rule(triggers=[ItemStateChangeTrigger("MyTemp")])
-class HeizungMitHysterese:
+class HeaterWithHysteresis:
     def execute(self, module, input):
         temp = float(str(Registry.getItem("MyTemp").getState()))
         new_command = "STAY"
@@ -16,6 +16,6 @@ class HeizungMitHysterese:
         heater = Registry.getItem("MyHeater")
         if new_command != "STAY" and new_command != str(heater.getState()):
             heater.sendCommand(new_command)
-            self.logger.info("Temp={} -> Heizung={}".format(temp, new_command))
+            self.logger.info("Temp={} -> heater={}".format(temp, new_command))
         else:
-            self.logger.info("Temp={} -> keine Aenderung (Hysterese-Bereich oder bereits im Zielzustand)".format(temp))
+            self.logger.info("Temp={} -> no change (hysteresis band or already in target state)".format(temp))

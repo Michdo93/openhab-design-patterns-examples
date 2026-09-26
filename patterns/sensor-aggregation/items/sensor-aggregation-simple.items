@@ -1,4 +1,4 @@
-Group:Switch:AND(OFF,ON) gPresent "Presence [%s]"
+Group:Switch:AND(OFF,ON) gPresent "Anwesenheit [%s]"
 
 Switch Sensor1 (gPresent)
 Switch Sensor2 (gPresent)

@@ -1,6 +1,6 @@
 # time-of-last-update
 
-Zeitstempel-Item per openHAB-Profil (timestamp-update/-change). Kein Rule-Beispiel noetig.
+Zeitstempel-Item per openHAB-Profil (timestamp-update/-change). Kein Rule-Beispiel nötig.
 
 ## Dateien in diesem Beispiel
 

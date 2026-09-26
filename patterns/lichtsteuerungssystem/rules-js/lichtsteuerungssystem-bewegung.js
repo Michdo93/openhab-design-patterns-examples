@@ -4,12 +4,12 @@ rules.JSRule({
   execute: (event) => {
     if (items.getItem("Light1").state === "OFF") {
       items.getItem("Light1").sendCommand("ON");
-      console.log("Bewegung erkannt - Light1 eingeschaltet (10 Min. Timer)");
+      console.log("Motion detected - Light1 switched on (10 min timer)");
       actions.ScriptExecution.createTimer(time.ZonedDateTime.now().plusMinutes(10), () => {
         items.getItem("Light1").sendCommand("OFF");
       });
     } else {
-      console.log("Bewegung erkannt, Light1 war aber bereits an");
+      console.log("Motion detected, but Light1 was already on");
     }
   }
 });

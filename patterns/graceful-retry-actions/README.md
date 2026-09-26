@@ -1,6 +1,6 @@
 # graceful-retry-actions
 
-Befehle mit Wiederholung (fest/exponentiell) und optionalem Online-Check erneut senden, konfigurierbar fuer beliebig viele Geraete ueber eine Gruppe.
+Befehle mit Wiederholung (fest/exponentiell) und optionalem Online-Check erneut senden, konfigurierbar für beliebig viele Geräte über eine Gruppe.
 
 ## Dateien in diesem Beispiel
 
