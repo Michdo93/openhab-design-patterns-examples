@@ -27,7 +27,7 @@ function setDeferred(target, rawState) {
     command = match[2];
   } else {
     match = TIME_SPECIFIC.exec(rawState);
-    if (!match) throw new Error("Ungueltiges Timerformat [" + rawState + "]");
+    if (!match) throw new Error("Ungültiges Timerformat [" + rawState + "]");
     triggerTime = time.ZonedDateTime.parse(match[1] + time.ZonedDateTime.now().offset().id());
     command = match[2];
   }
@@ -39,7 +39,7 @@ function setDeferred(target, rawState) {
   cancelDeferred(target);
 
   const t = actions.ScriptExecution.createTimer(triggerTime, () => {
-    console.log("Ausfuehren verzoegerter Aktion " + command + " auf " + target);
+    console.log("Ausführen verzögerter Aktion " + command + " auf " + target);
     timers.delete(target);
     items.getItem(target).sendCommand(command);
   });
