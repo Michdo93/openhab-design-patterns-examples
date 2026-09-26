@@ -22,7 +22,7 @@ class ZugehoerigesItemUeberNamenskonventionFinden:
             logger.warn("Kein zugehoeriges Status-Item fuer " + item_name + " gefunden")
             return
 
-        # Den tatsaechlichen neuen Zustand des Sensors uebernehmen,
+        # Den tatsächlichen neuen Zustand des Sensors übernehmen,
         # statt ihn fest auf ON zu setzen
         new_state = event.getItemState()
         status_item.postUpdate(new_state)
