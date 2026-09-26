@@ -4,7 +4,7 @@ when
 then
     val equipmentItem = Semantics.getEquipment(SomeSensor)
     if(equipmentItem === null || !(equipmentItem instanceof GroupItem)) {
-        logWarn("AssociatedItems", "Kein Equipment fuer SomeSensor gefunden")
+        logWarn("AssociatedItems", "Kein Equipment für SomeSensor gefunden")
         return;
     }
     val equipment = equipmentItem as GroupItem
@@ -19,7 +19,7 @@ then
     // Ansatz: Item-Tag
     val byTag = equipment.members.findFirst[i | i.tags.contains("Status")]
 
-    // Ansatz: mehrere Kriterien (robust, unabhaengig vom Equipment-Namen)
+    // Ansatz: mehrere Kriterien (robust, unabhängig vom Equipment-Namen)
     val byMulti = equipment.members.findFirst[i |
         i.tags.contains("Status") && i.name.endsWith("_Status")
     ]
