@@ -1,5 +1,5 @@
 rules.JSRule({
-  name: "Zugehoeriges Item ueber Namenskonvention finden",
+  name: "Zugehöriges Item über Namenskonvention finden",
   triggers: [triggers.GroupStateChangeTrigger("gSensors")],
   execute: (event) => {
     if (event.itemName.endsWith("_Status")) {
